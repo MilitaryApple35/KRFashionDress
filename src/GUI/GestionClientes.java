@@ -8,12 +8,12 @@ package GUI;
  *
  * @author Adrián Ortiz
  */
-public class Ventana_2 extends javax.swing.JFrame {
+public class GestionClientes extends javax.swing.JFrame {
 
     /**
-     * Creates new form Ventana_2
+     * Creates new form GestionClientes
      */
-    public Ventana_2() {
+    public GestionClientes() {
         initComponents();
     }
 
@@ -26,62 +26,72 @@ public class Ventana_2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Empleados = new javax.swing.JLabel();
-        btnCrearRenta = new javax.swing.JButton();
-        btnCatalogo = new javax.swing.JButton();
-        btnGestionclientes = new javax.swing.JButton();
+        gestionClientes = new javax.swing.JLabel();
+        btnLista = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        btnAlta = new javax.swing.JButton();
+        btnBaja = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Empleados.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        Empleados.setText("EMPLEADOS");
+        gestionClientes.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        gestionClientes.setText("GESTIÓN DE CLIENTES");
 
-        btnCrearRenta.setText("CREAR RENTA");
-
-        btnCatalogo.setText("CATALOGO");
-
-        btnGestionclientes.setText("GESTIÓN CLIENTES");
+        btnLista.setText("LISTA DE CLIENTES");
 
         btnSalir.setText("SALIR");
+
+        btnAlta.setText("DAR DE ALTA");
+        btnAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAltaActionPerformed(evt);
+            }
+        });
+
+        btnBaja.setText("DAR DE BAJA");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Empleados, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCrearRenta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(btnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(14, 14, 14)
-                        .addComponent(btnGestionclientes)
+                        .addComponent(btnLista)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnCatalogo))
+                        .addComponent(btnBaja))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
+                        .addContainerGap()
+                        .addComponent(gestionClientes))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(170, 170, 170)
                         .addComponent(btnSalir)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Empleados)
+                .addComponent(gestionClientes)
                 .addGap(87, 87, 87)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCrearRenta)
-                    .addComponent(btnGestionclientes)
-                    .addComponent(btnCatalogo))
+                    .addComponent(btnAlta)
+                    .addComponent(btnLista)
+                    .addComponent(btnBaja))
                 .addGap(18, 18, 18)
                 .addComponent(btnSalir)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAltaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -100,28 +110,28 @@ public class Ventana_2 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Ventana_2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Ventana_2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Ventana_2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Ventana_2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Ventana_2().setVisible(true);
+                new GestionClientes().setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Empleados;
-    private javax.swing.JButton btnCatalogo;
-    private javax.swing.JButton btnCrearRenta;
-    private javax.swing.JButton btnGestionclientes;
+    private javax.swing.JButton btnAlta;
+    private javax.swing.JButton btnBaja;
+    private javax.swing.JButton btnLista;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JLabel gestionClientes;
     // End of variables declaration//GEN-END:variables
 }

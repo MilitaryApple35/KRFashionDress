@@ -1,21 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Codigo;
 
-/**
- *
- * @author asder
- */
-public class KRFashionDress {
+import GUI.Login;
 
-    /**
-     * @param args the command line arguments
-     */
+public class KRFashionDress {
     public static void main(String[] args) {
-        // TODO code application logic here
+        Login log= new Login();
+        log.setLayout(null);
+        log.setLocationRelativeTo(null);
+        log.setVisible(true);
     }
     
 }

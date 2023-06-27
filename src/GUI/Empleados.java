@@ -8,12 +8,12 @@ package GUI;
  *
  * @author Adrián Ortiz
  */
-public class Ventana_5 extends javax.swing.JFrame {
+public class Empleados extends javax.swing.JFrame {
 
     /**
-     * Creates new form Ventana_5
+     * Creates new form Empleados
      */
-    public Ventana_5() {
+    public Empleados() {
         initComponents();
     }
 
@@ -26,30 +26,24 @@ public class Ventana_5 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ListaClientes = new javax.swing.JLabel();
+        Empleados = new javax.swing.JLabel();
+        btnCrearRenta = new javax.swing.JButton();
+        btnCatalogo = new javax.swing.JButton();
+        btnGestionclientes = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        jspTablaClientes = new javax.swing.JScrollPane();
-        tblListaClientes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        ListaClientes.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        ListaClientes.setText("LISTA DE CLIENTES");
+        Empleados.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        Empleados.setText("EMPLEADOS");
+
+        btnCrearRenta.setText("CREAR RENTA");
+
+        btnCatalogo.setText("CATALOGO");
+
+        btnGestionclientes.setText("GESTIÓN CLIENTES");
 
         btnSalir.setText("SALIR");
-
-        tblListaClientes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Nombre(s)", "Apellidos", "Teléfono", "Fecha de nacimiento"
-            }
-        ));
-        jspTablaClientes.setViewportView(tblListaClientes);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -57,27 +51,33 @@ public class Ventana_5 extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnSalir)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Empleados, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCrearRenta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(ListaClientes)
-                        .addGap(320, 320, 320)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jspTablaClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addGap(14, 14, 14)
+                        .addComponent(btnGestionclientes)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCatalogo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(btnSalir)))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ListaClientes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addComponent(jspTablaClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Empleados)
+                .addGap(87, 87, 87)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCrearRenta)
+                    .addComponent(btnGestionclientes)
+                    .addComponent(btnCatalogo))
+                .addGap(18, 18, 18)
                 .addComponent(btnSalir)
-                .addContainerGap())
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         pack();
@@ -100,27 +100,28 @@ public class Ventana_5 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Ventana_5.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Empleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Ventana_5.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Empleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Ventana_5.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Empleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Ventana_5.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Empleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Ventana_5().setVisible(true);
+                new Empleados().setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel ListaClientes;
+    private javax.swing.JLabel Empleados;
+    private javax.swing.JButton btnCatalogo;
+    private javax.swing.JButton btnCrearRenta;
+    private javax.swing.JButton btnGestionclientes;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JScrollPane jspTablaClientes;
-    private javax.swing.JTable tblListaClientes;
     // End of variables declaration//GEN-END:variables
 }
