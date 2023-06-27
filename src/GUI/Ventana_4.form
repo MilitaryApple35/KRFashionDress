@@ -113,10 +113,8 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="FechaNac" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tfDia" alignment="0" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="tfDia" alignment="0" max="32767" attributes="0"/>
+                  <Component id="FechaNac" min="-2" max="-2" attributes="0"/>
                   <Component id="tfAnio" alignment="0" pref="22" max="32767" attributes="0"/>
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="tfMes" alignment="3" pref="22" max="32767" attributes="0"/>

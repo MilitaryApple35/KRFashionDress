@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Diseño;
+package GUI;
 
 /**
  *
@@ -152,9 +152,8 @@ public class Ventana_4 extends javax.swing.JFrame {
                     .addComponent(tfCalleYNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(FechaNac)
-                        .addComponent(tfDia))
+                    .addComponent(tfDia)
+                    .addComponent(FechaNac)
                     .addComponent(tfAnio, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(tfMes, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
