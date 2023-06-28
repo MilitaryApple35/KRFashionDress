@@ -26,15 +26,14 @@ public class ListaClientes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ListaClientes = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
         jspTablaClientes = new javax.swing.JScrollPane();
         tblListaClientes = new javax.swing.JTable();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        ListaClientes.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        ListaClientes.setText("LISTA DE CLIENTES");
+        ListaClientes = new javax.swing.JLabel();
+        btnSalir1 = new javax.swing.JButton();
+        jspTablaClientes1 = new javax.swing.JScrollPane();
+        tblListaClientes1 = new javax.swing.JTable();
+        ListaClientes1 = new javax.swing.JLabel();
 
         btnSalir.setText("SALIR");
 
@@ -51,33 +50,55 @@ public class ListaClientes extends javax.swing.JFrame {
         ));
         jspTablaClientes.setViewportView(tblListaClientes);
 
+        ListaClientes.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        ListaClientes.setText("LISTA DE CLIENTES");
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        btnSalir1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnSalir1.setText("SALIR");
+
+        tblListaClientes1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        tblListaClientes1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"scas", "casc", " c cvx", "dsv"},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Nombre(s)", "Apellidos", "Teléfono", "Fecha de nacimiento"
+            }
+        ));
+        jspTablaClientes1.setViewportView(tblListaClientes1);
+
+        ListaClientes1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        ListaClientes1.setText("LISTA DE CLIENTES");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(138, 138, 138)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnSalir)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(ListaClientes)
-                        .addGap(320, 320, 320)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jspTablaClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addComponent(btnSalir1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(ListaClientes1)
+                        .addComponent(jspTablaClientes1, javax.swing.GroupLayout.PREFERRED_SIZE, 1652, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ListaClientes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addComponent(jspTablaClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSalir)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(ListaClientes1)
+                .addGap(18, 18, 18)
+                .addComponent(jspTablaClientes1, javax.swing.GroupLayout.DEFAULT_SIZE, 748, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnSalir1)
+                .addGap(120, 120, 120))
         );
 
         pack();
@@ -119,8 +140,12 @@ public class ListaClientes extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ListaClientes;
+    private javax.swing.JLabel ListaClientes1;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JButton btnSalir1;
     private javax.swing.JScrollPane jspTablaClientes;
+    private javax.swing.JScrollPane jspTablaClientes1;
     private javax.swing.JTable tblListaClientes;
+    private javax.swing.JTable tblListaClientes1;
     // End of variables declaration//GEN-END:variables
 }
