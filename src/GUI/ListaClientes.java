@@ -34,6 +34,7 @@ public class ListaClientes extends javax.swing.JFrame {
         jspTablaClientes1 = new javax.swing.JScrollPane();
         tblListaClientes1 = new javax.swing.JTable();
         ListaClientes1 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         btnSalir.setText("SALIR");
 
@@ -76,27 +77,37 @@ public class ListaClientes extends javax.swing.JFrame {
         ListaClientes1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         ListaClientes1.setText("LISTA DE CLIENTES");
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/LogoChico.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(138, 138, 138)
+                .addContainerGap(65, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnSalir1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ListaClientes1)
-                        .addComponent(jspTablaClientes1, javax.swing.GroupLayout.PREFERRED_SIZE, 1652, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(130, Short.MAX_VALUE))
+                        .addGap(1221, 1221, 1221)))
+                .addContainerGap(97, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(106, 106, 106)
+                .addComponent(jspTablaClientes1, javax.swing.GroupLayout.PREFERRED_SIZE, 1652, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(ListaClientes1)
-                .addGap(18, 18, 18)
-                .addComponent(jspTablaClientes1, javax.swing.GroupLayout.DEFAULT_SIZE, 748, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ListaClientes1)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jspTablaClientes1, javax.swing.GroupLayout.DEFAULT_SIZE, 727, Short.MAX_VALUE)
+                .addGap(61, 61, 61)
                 .addComponent(btnSalir1)
                 .addGap(120, 120, 120))
         );
@@ -143,6 +154,7 @@ public class ListaClientes extends javax.swing.JFrame {
     private javax.swing.JLabel ListaClientes1;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnSalir1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jspTablaClientes;
     private javax.swing.JScrollPane jspTablaClientes1;
     private javax.swing.JTable tblListaClientes;

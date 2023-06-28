@@ -64,7 +64,7 @@ public class Empleados extends javax.swing.JFrame {
             }
         });
 
-        btnSalir.setBackground(new java.awt.Color(164, 55, 123));
+        btnSalir.setBackground(new java.awt.Color(240, 0, 0));
         btnSalir.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnSalir.setText("SALIR");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -159,7 +159,7 @@ public class Empleados extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCatalogoActionPerformed
@@ -171,7 +171,7 @@ public class Empleados extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGestionclientesActionPerformed
 
     private void btnCrearRentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearRentaActionPerformed
-        CrearRenta rent= new CrearRenta();
+        CrearRenta rent  = new CrearRenta();
         rent.setLayout(null);
         rent.setLocationRelativeTo(null);
         rent.setVisible(true);
