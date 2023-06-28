@@ -171,7 +171,11 @@ public class Empleados extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGestionclientesActionPerformed
 
     private void btnCrearRentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearRentaActionPerformed
-        // TODO add your handling code here:
+        CrearRenta rent= new CrearRenta();
+        rent.setLayout(null);
+        rent.setLocationRelativeTo(null);
+        rent.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnCrearRentaActionPerformed
 
     /**

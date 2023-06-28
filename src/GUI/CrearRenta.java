@@ -30,48 +30,369 @@ public class CrearRenta extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         imgLogo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        lbNombres = new javax.swing.JLabel();
+        lbApellidos = new javax.swing.JLabel();
+        lbCalleYNum = new javax.swing.JLabel();
+        lbColonia = new javax.swing.JLabel();
+        lbFechaRenta = new javax.swing.JLabel();
+        lbFechaEntrega = new javax.swing.JLabel();
+        lbTelefono = new javax.swing.JLabel();
+        lbListaActual = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblListaActual = new javax.swing.JTable();
+        lbAnotaciones = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        tfNombres = new javax.swing.JTextField();
+        tfApellidos = new javax.swing.JTextField();
+        tfCalleYNumero = new javax.swing.JTextField();
+        tfColonia = new javax.swing.JTextField();
+        tfTelefono = new javax.swing.JTextField();
+        spnDiaFR = new javax.swing.JSpinner();
+        spnMesFR = new javax.swing.JSpinner();
+        spnAnioFR = new javax.swing.JSpinner();
+        lbSlash = new javax.swing.JLabel();
+        lbSlash1 = new javax.swing.JLabel();
+        lbSlash2 = new javax.swing.JLabel();
+        lbSlash3 = new javax.swing.JLabel();
+        spnDiaFE = new javax.swing.JSpinner();
+        spnMesFE = new javax.swing.JSpinner();
+        spnAnioFE = new javax.swing.JSpinner();
+        jPanel4 = new javax.swing.JPanel();
+        lbListaVestidos = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        lbTotal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(164, 55, 123));
 
         imgLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/LogoChico.png"))); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("CREAR RENTA");
 
         org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(imgLogo)
+            .add(jPanel2Layout.createSequentialGroup()
+                .add(imgLogo)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 373, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(imgLogo)
+            .add(jPanel2Layout.createSequentialGroup()
+                .add(14, 14, 14)
+                .add(jLabel1))
         );
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jLabel1.setText("CREAR RENTA");
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        lbNombres.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbNombres.setText("Nombre(s)");
+
+        lbApellidos.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbApellidos.setText("Apellidos");
+
+        lbCalleYNum.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbCalleYNum.setText("Calle y Numero");
+
+        lbColonia.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbColonia.setText("Colonia");
+
+        lbFechaRenta.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbFechaRenta.setText("Fecha de Renta");
+
+        lbFechaEntrega.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbFechaEntrega.setText("Fecha de Entrega");
+
+        lbTelefono.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbTelefono.setText("Telefono");
+
+        lbListaActual.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbListaActual.setText("Lista Actual");
+
+        tblListaActual.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblListaActual);
+
+        lbAnotaciones.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbAnotaciones.setText("Anotaciones");
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
+
+        tfNombres.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        tfApellidos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        tfCalleYNumero.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        tfColonia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        tfTelefono.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        spnDiaFR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        spnMesFR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        spnAnioFR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        lbSlash.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbSlash.setText("/");
+
+        lbSlash1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbSlash1.setText("/");
+
+        lbSlash2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbSlash2.setText("/");
+
+        lbSlash3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbSlash3.setText("/");
+
+        spnDiaFE.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        spnMesFE.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        spnAnioFE.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        org.jdesktop.layout.GroupLayout jPanel3Layout = new org.jdesktop.layout.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jPanel3Layout.createSequentialGroup()
+                        .add(lbAnotaciones)
+                        .add(808, 808, 808))
+                    .add(jPanel3Layout.createSequentialGroup()
+                        .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jScrollPane1)
+                            .add(jPanel3Layout.createSequentialGroup()
+                                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(lbApellidos)
+                                    .add(lbCalleYNum)
+                                    .add(lbColonia)
+                                    .add(lbFechaRenta)
+                                    .add(lbFechaEntrega)
+                                    .add(lbTelefono)
+                                    .add(lbListaActual)
+                                    .add(lbNombres))
+                                .add(18, 18, 18)
+                                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(tfNombres)
+                                    .add(tfApellidos)
+                                    .add(tfCalleYNumero)
+                                    .add(tfColonia)
+                                    .add(tfTelefono)
+                                    .add(jPanel3Layout.createSequentialGroup()
+                                        .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                            .add(spnDiaFR, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 65, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                            .add(spnDiaFE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 65, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                        .add(40, 40, 40)
+                                        .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                            .add(lbSlash)
+                                            .add(lbSlash2))
+                                        .add(41, 41, 41)
+                                        .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                                            .add(jPanel3Layout.createSequentialGroup()
+                                                .add(spnMesFE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 65, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .add(lbSlash3))
+                                            .add(jPanel3Layout.createSequentialGroup()
+                                                .add(spnMesFR, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 65, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                                .add(38, 38, 38)
+                                                .add(lbSlash1)))
+                                        .add(38, 38, 38)
+                                        .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                            .add(spnAnioFR, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 130, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                            .add(spnAnioFE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 130, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                        .add(0, 0, Short.MAX_VALUE))))
+                            .add(jScrollPane2))
+                        .addContainerGap())))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(lbNombres, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(tfNombres))
+                .add(18, 18, 18)
+                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(lbApellidos, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(tfApellidos))
+                .add(18, 18, 18)
+                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(lbCalleYNum, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(tfCalleYNumero))
+                .add(18, 18, 18)
+                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(lbColonia, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(tfColonia))
+                .add(18, 18, 18)
+                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(lbFechaRenta, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, spnDiaFR)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, spnAnioFR)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .add(0, 0, Short.MAX_VALUE)
+                        .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, spnMesFR, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, lbSlash)
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, lbSlash1))))
+                .add(18, 18, 18)
+                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(lbFechaEntrega)
+                    .add(lbSlash2)
+                    .add(lbSlash3)
+                    .add(spnDiaFE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .add(spnMesFE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(spnAnioFE))
+                .add(18, 18, 18)
+                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(lbTelefono, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(tfTelefono))
+                .add(40, 40, 40)
+                .add(lbListaActual)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 239, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(lbAnotaciones)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 124, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(129, 129, 129))
+        );
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+
+        lbListaVestidos.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbListaVestidos.setText("Lista Vestidos");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable1);
+
+        jButton1.setText("jButton1");
+
+        jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jPanel5.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        lbTotal.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbTotal.setText("$$");
+
+        org.jdesktop.layout.GroupLayout jPanel5Layout = new org.jdesktop.layout.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(lbTotal, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(lbTotal, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        org.jdesktop.layout.GroupLayout jPanel4Layout = new org.jdesktop.layout.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jScrollPane3)
+                    .add(jPanel4Layout.createSequentialGroup()
+                        .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(lbListaVestidos)
+                            .add(jPanel4Layout.createSequentialGroup()
+                                .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(18, 18, 18)
+                                .add(jButton2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 160, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 160, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                        .add(0, 434, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(lbListaVestidos)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 662, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(18, 18, 18)
+                .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                        .add(jButton2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 42, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 42, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel1Layout.createSequentialGroup()
-                .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jLabel1)
-                .add(0, 1514, Short.MAX_VALUE))
+                .add(jPanel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel1Layout.createSequentialGroup()
                 .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(0, 1023, Short.MAX_VALUE))
-            .add(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jLabel1)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(18, 18, 18)
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(jPanel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(jPanel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(0, 0, Short.MAX_VALUE))
         );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
@@ -87,6 +408,14 @@ public class CrearRenta extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Empleados emp= new Empleados();
+        emp.setLayout(null);
+        emp.setLocationRelativeTo(null);
+        emp.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -124,8 +453,45 @@ public class CrearRenta extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel imgLogo;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel lbAnotaciones;
+    private javax.swing.JLabel lbApellidos;
+    private javax.swing.JLabel lbCalleYNum;
+    private javax.swing.JLabel lbColonia;
+    private javax.swing.JLabel lbFechaEntrega;
+    private javax.swing.JLabel lbFechaRenta;
+    private javax.swing.JLabel lbListaActual;
+    private javax.swing.JLabel lbListaVestidos;
+    private javax.swing.JLabel lbNombres;
+    private javax.swing.JLabel lbSlash;
+    private javax.swing.JLabel lbSlash1;
+    private javax.swing.JLabel lbSlash2;
+    private javax.swing.JLabel lbSlash3;
+    private javax.swing.JLabel lbTelefono;
+    private javax.swing.JLabel lbTotal;
+    private javax.swing.JSpinner spnAnioFE;
+    private javax.swing.JSpinner spnAnioFR;
+    private javax.swing.JSpinner spnDiaFE;
+    private javax.swing.JSpinner spnDiaFR;
+    private javax.swing.JSpinner spnMesFE;
+    private javax.swing.JSpinner spnMesFR;
+    private javax.swing.JTable tblListaActual;
+    private javax.swing.JTextField tfApellidos;
+    private javax.swing.JTextField tfCalleYNumero;
+    private javax.swing.JTextField tfColonia;
+    private javax.swing.JTextField tfNombres;
+    private javax.swing.JTextField tfTelefono;
     // End of variables declaration//GEN-END:variables
 }
