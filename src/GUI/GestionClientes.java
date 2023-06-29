@@ -145,7 +145,11 @@ public class GestionClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaActionPerformed
-        // TODO add your handling code here:
+        ListaClientes LisCli  = new ListaClientes();
+        LisCli.setLayout(null);
+        LisCli.setLocationRelativeTo(null);
+        LisCli.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnListaActionPerformed
 
     private void btnBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaActionPerformed

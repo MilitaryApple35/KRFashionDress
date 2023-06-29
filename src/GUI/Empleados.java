@@ -152,15 +152,23 @@ public class Empleados extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        
+        System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCatalogoActionPerformed
-        // TODO add your handling code here:
+        CatalogoVentana Catalogo  = new CatalogoVentana();
+        Catalogo.setLayout(null);
+        Catalogo.setLocationRelativeTo(null);
+        Catalogo.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnCatalogoActionPerformed
 
     private void btnGestionclientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionclientesActionPerformed
-        // TODO add your handling code here:
+        GestionClientes GesCli = new GestionClientes();
+        GesCli.setLayout(null);
+        GesCli.setLocationRelativeTo(null);
+        GesCli.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnGestionclientesActionPerformed
 
     private void btnCrearRentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearRentaActionPerformed
