@@ -203,6 +203,7 @@ public class GestionEmpleados extends javax.swing.JFrame {
             emp.setLayout(null);
             emp.setLocationRelativeTo(null);
             emp.setVisible(true);
+            emp.setPrivileges(privileges);
             this.setVisible(false);
         }
         else if(getPrivileges()==2){
@@ -216,15 +217,30 @@ public class GestionEmpleados extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnAltaEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaEmpleadosActionPerformed
-        // TODO add your handling code here:
+        AltaEmpleados altemp= new AltaEmpleados();
+        altemp.setLayout(null);
+        altemp.setLocationRelativeTo(null);
+        altemp.setVisible(true);
+        altemp.setPrivileges(privileges);
+        this.setVisible(false);
     }//GEN-LAST:event_btnAltaEmpleadosActionPerformed
 
     private void btnBajaEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaEmpleadosActionPerformed
-        // TODO add your handling code here:
+        BajaEmpleados bajemp= new BajaEmpleados();
+        bajemp.setLayout(null);
+        bajemp.setLocationRelativeTo(null);
+        bajemp.setVisible(true);
+        bajemp.setPrivileges(privileges);
+        this.setVisible(false);
     }//GEN-LAST:event_btnBajaEmpleadosActionPerformed
 
     private void btnListaEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaEmpleadosActionPerformed
-        // TODO add your handling code here:
+        ListaEmpleados lisemp= new ListaEmpleados();
+        lisemp.setLayout(null);
+        lisemp.setLocationRelativeTo(null);
+        lisemp.setVisible(true);
+        lisemp.setPrivileges(privileges);
+        this.setVisible(false);
     }//GEN-LAST:event_btnListaEmpleadosActionPerformed
 
     /**

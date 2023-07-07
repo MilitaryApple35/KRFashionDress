@@ -316,11 +316,11 @@ public class AltaEmpleados extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        Gerente ger = new Gerente();
-        ger.setLayout(null);
-        ger.setLocationRelativeTo(null);
-        ger.setVisible(true);
-        ger.setPrivileges(privileges);
+        GestionEmpleados emple = new GestionEmpleados();
+        emple.setLayout(null);
+        emple.setLocationRelativeTo(null);
+        emple.setVisible(true);
+        emple.setPrivileges(privileges);
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 

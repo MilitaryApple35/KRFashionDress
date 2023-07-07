@@ -16,6 +16,15 @@ public class BajaEmpleados extends javax.swing.JFrame {
     public BajaEmpleados() {
         initComponents();
     }
+    private int privileges;
+
+    public int getPrivileges() {
+        return privileges;
+    }
+
+    public void setPrivileges(int privileges) {
+        this.privileges = privileges;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,7 +44,7 @@ public class BajaEmpleados extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -80,10 +89,15 @@ public class BajaEmpleados extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel4.setText("RFC:");
 
-        jButton1.setBackground(new java.awt.Color(240, 0, 0));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Cancelar");
+        btnCancelar.setBackground(new java.awt.Color(240, 0, 0));
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(51, 204, 0));
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -98,7 +112,7 @@ public class BajaEmpleados extends javax.swing.JFrame {
                 .addGap(47, 47, 47)
                 .addComponent(jButton2)
                 .addGap(95, 95, 95)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(120, Short.MAX_VALUE)
@@ -129,7 +143,7 @@ public class BajaEmpleados extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
@@ -166,6 +180,15 @@ public class BajaEmpleados extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        GestionEmpleados emple = new GestionEmpleados();
+        emple.setLayout(null);
+        emple.setLocationRelativeTo(null);
+        emple.setVisible(true);
+        emple.setPrivileges(privileges);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -201,7 +224,7 @@ public class BajaEmpleados extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
