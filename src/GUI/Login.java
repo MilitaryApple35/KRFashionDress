@@ -4,6 +4,11 @@
  */
 package GUI;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Adrián Ortiz
@@ -14,6 +19,18 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
     }
+    
+    private int privileges;
+
+    public int getPrivileges() {
+        return privileges;
+    }
+
+    public void setPrivileges(int privileges) {
+        this.privileges = privileges;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -51,12 +68,43 @@ public class Login extends javax.swing.JFrame {
         lbUsuario.setText("USUARIO");
 
         tfUsuario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        tfUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfUsuarioActionPerformed(evt);
+            }
+        });
+        tfUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfUsuarioFocusGained(evt);
+            }
+        });
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel3.setText("CONTRASEÑA");
 
         pssContrasenia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        pssContrasenia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pssContraseniaActionPerformed(evt);
+            }
+        });
+        pssContrasenia.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                pssContraseniaFocusGained(evt);
+            }
+        });
+        pssContrasenia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                pssContraseniaKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                pssContraseniaKeyReleased(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                pssContraseniaKeyPressed(evt);
+            }
+        });
 
         btnSIG.setBackground(new java.awt.Color(164, 55, 123));
         btnSIG.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -179,16 +227,62 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSIGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSIGActionPerformed
-        Empleados emp = new Empleados();
-        emp.setLayout(null);
-        emp.setLocationRelativeTo(null);
-        emp.setVisible(true);
-        this.setVisible(false);
+        if(tfUsuario.getText().compareTo("empleado")==0 && pssContrasenia.getText().compareTo("cisco123")==0){
+            Empleados emp = new Empleados();
+            emp.setLayout(null);
+            emp.setLocationRelativeTo(null);
+            emp.setVisible(true);
+            setPrivileges(1);
+            emp.setPrivileges(privileges);
+            this.setVisible(false);
+        }
+        else if(tfUsuario.getText().compareTo("admin")==0 && pssContrasenia.getText().compareTo("cisco123")==0){
+            Gerente ger = new Gerente();
+            ger.setLayout(null);
+            ger.setLocationRelativeTo(null);
+            ger.setVisible(true);
+            setPrivileges(2);
+            ger.setPrivileges(privileges);
+            this.setVisible(false);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Introduzca un usuario y contraseña correctos");
+        }
     }//GEN-LAST:event_btnSIGActionPerformed
 
     private void btnSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir1ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnSalir1ActionPerformed
+
+    private void tfUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfUsuarioActionPerformed
+
+    private void pssContraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pssContraseniaActionPerformed
+        
+    }//GEN-LAST:event_pssContraseniaActionPerformed
+
+    private void pssContraseniaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pssContraseniaKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pssContraseniaKeyReleased
+
+    private void pssContraseniaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pssContraseniaKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pssContraseniaKeyTyped
+
+    private void pssContraseniaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pssContraseniaFocusGained
+        
+    }//GEN-LAST:event_pssContraseniaFocusGained
+
+    private void tfUsuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfUsuarioFocusGained
+        
+    }//GEN-LAST:event_tfUsuarioFocusGained
+
+    private void pssContraseniaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pssContraseniaKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            btnSIG.doClick();
+        }
+    }//GEN-LAST:event_pssContraseniaKeyPressed
 
     /**
      * @param args the command line arguments

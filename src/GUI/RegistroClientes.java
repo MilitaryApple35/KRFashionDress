@@ -16,6 +16,16 @@ public class RegistroClientes extends javax.swing.JFrame {
     public RegistroClientes() {
         initComponents();
     }
+    
+    private int privileges;
+
+    public int getPrivileges() {
+        return privileges;
+    }
+
+    public void setPrivileges(int privileges) {
+        this.privileges = privileges;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -195,13 +205,13 @@ public class RegistroClientes extends javax.swing.JFrame {
                         .addComponent(tfDia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(Slash1)
                         .addComponent(tfMes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Slash2)
-                        .addComponent(tfAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(tfAnio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Slash2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Colonia)
-                    .addComponent(CalleyNumero))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CalleyNumero)
+                    .addComponent(Colonia))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tfColonia, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
@@ -340,19 +350,10 @@ public class RegistroClientes extends javax.swing.JFrame {
     private javax.swing.JLabel Slash2;
     private javax.swing.JButton btnAlta;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JLabel imgLogo;
-    private javax.swing.JLabel imgLogo1;
-    private javax.swing.JLabel imgLogo2;
     private javax.swing.JLabel imgLogo3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JTextField tfAnio;
     private javax.swing.JTextField tfApellidos;

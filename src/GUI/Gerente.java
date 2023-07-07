@@ -1,4 +1,4 @@
-package javaapplication2;
+package GUI;
 
 /*
  * To change this template, choose Tools | Templates
@@ -17,6 +17,15 @@ public class Gerente extends javax.swing.JFrame {
     public Gerente() {
         initComponents();
     }
+    private int privileges;
+
+    public int getPrivileges() {
+        return privileges;
+    }
+
+    public void setPrivileges(int privileges) {
+        this.privileges = privileges;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,11 +40,11 @@ public class Gerente extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jButton5 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        btnHistorialRentas = new javax.swing.JButton();
+        btnGestionEmpleados = new javax.swing.JButton();
+        btnCatalogo = new javax.swing.JButton();
+        btnCrearRenta = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -64,31 +73,56 @@ public class Gerente extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton5.setBackground(new java.awt.Color(240, 0, 0));
-        jButton5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("Salir");
+        btnSalir.setBackground(new java.awt.Color(240, 0, 0));
+        btnSalir.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
-        jButton4.setBackground(new java.awt.Color(164, 55, 123));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Historial de Rentas");
+        btnHistorialRentas.setBackground(new java.awt.Color(164, 55, 123));
+        btnHistorialRentas.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnHistorialRentas.setForeground(new java.awt.Color(255, 255, 255));
+        btnHistorialRentas.setText("Historial de Rentas");
+        btnHistorialRentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHistorialRentasActionPerformed(evt);
+            }
+        });
 
-        jButton3.setBackground(new java.awt.Color(164, 55, 123));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Gestion de Empleados");
-        jButton3.setPreferredSize(new java.awt.Dimension(271, 60));
+        btnGestionEmpleados.setBackground(new java.awt.Color(164, 55, 123));
+        btnGestionEmpleados.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnGestionEmpleados.setForeground(new java.awt.Color(255, 255, 255));
+        btnGestionEmpleados.setText("Gestion de Empleados");
+        btnGestionEmpleados.setPreferredSize(new java.awt.Dimension(271, 60));
+        btnGestionEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGestionEmpleadosActionPerformed(evt);
+            }
+        });
 
-        jButton2.setBackground(new java.awt.Color(164, 55, 123));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Catalogo");
+        btnCatalogo.setBackground(new java.awt.Color(164, 55, 123));
+        btnCatalogo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnCatalogo.setForeground(new java.awt.Color(255, 255, 255));
+        btnCatalogo.setText("Catalogo");
+        btnCatalogo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCatalogoActionPerformed(evt);
+            }
+        });
 
-        jButton1.setBackground(new java.awt.Color(164, 55, 123));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Crear Renta");
+        btnCrearRenta.setBackground(new java.awt.Color(164, 55, 123));
+        btnCrearRenta.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnCrearRenta.setForeground(new java.awt.Color(255, 255, 255));
+        btnCrearRenta.setText("Crear Renta");
+        btnCrearRenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearRentaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -97,28 +131,28 @@ public class Gerente extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGestionEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCrearRenta, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnHistorialRentas, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(89, 89, 89)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 11, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnGestionEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(62, 62, 62)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCrearRenta, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnHistorialRentas, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                .addComponent(jButton5)
+                .addComponent(btnSalir)
                 .addGap(30, 30, 30))
         );
 
@@ -167,6 +201,51 @@ public class Gerente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        Login log= new Login();
+        log.setLayout(null);
+        log.setLocationRelativeTo(null);
+        log.setVisible(true);
+        log.setPrivileges(privileges);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCatalogoActionPerformed
+        CatalogoVentana cata = new CatalogoVentana();
+        cata.setLayout(null);
+        cata.setLocationRelativeTo(null);
+        cata.setVisible(true);
+        cata.setPrivileges(privileges);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCatalogoActionPerformed
+
+    private void btnGestionEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionEmpleadosActionPerformed
+        GestionEmpleados emple = new GestionEmpleados();
+        emple.setLayout(null);
+        emple.setLocationRelativeTo(null);
+        emple.setVisible(true);
+        emple.setPrivileges(privileges);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnGestionEmpleadosActionPerformed
+
+    private void btnCrearRentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearRentaActionPerformed
+        CrearRenta rent= new CrearRenta();
+        rent.setLayout(null);
+        rent.setLocationRelativeTo(null);
+        rent.setVisible(true);
+        rent.setPrivileges(privileges);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCrearRentaActionPerformed
+
+    private void btnHistorialRentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialRentasActionPerformed
+        HistorialRentas histrent= new HistorialRentas();
+        histrent.setLayout(null);
+        histrent.setLocationRelativeTo(null);
+        histrent.setVisible(true);
+        histrent.setPrivileges(privileges);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnHistorialRentasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -202,11 +281,11 @@ public class Gerente extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton btnCatalogo;
+    private javax.swing.JButton btnCrearRenta;
+    private javax.swing.JButton btnGestionEmpleados;
+    private javax.swing.JButton btnHistorialRentas;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

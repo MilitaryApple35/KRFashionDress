@@ -16,7 +16,15 @@ public class CrearRenta extends javax.swing.JFrame {
     public CrearRenta() {
         initComponents();
     }
+    private int privileges;
 
+    public int getPrivileges() {
+        return privileges;
+    }
+
+    public void setPrivileges(int privileges) {
+        this.privileges = privileges;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

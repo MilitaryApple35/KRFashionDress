@@ -16,6 +16,15 @@ public class HistorialRentas extends javax.swing.JFrame {
     public HistorialRentas() {
         initComponents();
     }
+    private int privileges;
+
+    public int getPrivileges() {
+        return privileges;
+    }
+
+    public void setPrivileges(int privileges) {
+        this.privileges = privileges;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -16,6 +16,15 @@ public class Empleados extends javax.swing.JFrame {
     public Empleados() {
         initComponents();
     }
+    private int privileges;
+
+    public int getPrivileges() {
+        return privileges;
+    }
+
+    public void setPrivileges(int privileges) {
+        this.privileges = privileges;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -160,7 +169,11 @@ public class Empleados extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        System.exit(0);
+        Login log= new Login();
+        log.setLayout(null);
+        log.setLocationRelativeTo(null);
+        log.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCatalogoActionPerformed

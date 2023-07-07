@@ -16,6 +16,15 @@ public class CatalogoVentana extends javax.swing.JFrame {
     public CatalogoVentana() {
         initComponents();
     }
+    private int privileges;
+
+    public int getPrivileges() {
+        return privileges;
+    }
+
+    public void setPrivileges(int privileges) {
+        this.privileges = privileges;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

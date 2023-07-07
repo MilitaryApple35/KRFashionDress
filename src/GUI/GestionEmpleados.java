@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package javaapplication2;
+package GUI;
 
 /**
  *
@@ -15,6 +15,15 @@ public class GestionEmpleados extends javax.swing.JFrame {
      */
     public GestionEmpleados() {
         initComponents();
+    }
+    private int privileges;
+
+    public int getPrivileges() {
+        return privileges;
+    }
+
+    public void setPrivileges(int privileges) {
+        this.privileges = privileges;
     }
 
     /**
