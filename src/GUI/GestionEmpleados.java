@@ -38,10 +38,10 @@ public class GestionEmpleados extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        btnAltaEmpleados = new javax.swing.JButton();
+        btnListaEmpleados = new javax.swing.JButton();
+        btnBajaEmpleados = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -56,25 +56,45 @@ public class GestionEmpleados extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
-        jButton5.setBackground(new java.awt.Color(164, 55, 123));
-        jButton5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("Dar de Alta");
+        btnAltaEmpleados.setBackground(new java.awt.Color(164, 55, 123));
+        btnAltaEmpleados.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnAltaEmpleados.setForeground(new java.awt.Color(255, 255, 255));
+        btnAltaEmpleados.setText("Dar de Alta");
+        btnAltaEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAltaEmpleadosActionPerformed(evt);
+            }
+        });
 
-        jButton6.setBackground(new java.awt.Color(164, 55, 123));
-        jButton6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Lista de Empleados");
+        btnListaEmpleados.setBackground(new java.awt.Color(164, 55, 123));
+        btnListaEmpleados.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnListaEmpleados.setForeground(new java.awt.Color(255, 255, 255));
+        btnListaEmpleados.setText("Lista de Empleados");
+        btnListaEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListaEmpleadosActionPerformed(evt);
+            }
+        });
 
-        jButton7.setBackground(new java.awt.Color(164, 55, 123));
-        jButton7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(255, 255, 255));
-        jButton7.setText("Dar de Baja");
+        btnBajaEmpleados.setBackground(new java.awt.Color(164, 55, 123));
+        btnBajaEmpleados.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnBajaEmpleados.setForeground(new java.awt.Color(255, 255, 255));
+        btnBajaEmpleados.setText("Dar de Baja");
+        btnBajaEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBajaEmpleadosActionPerformed(evt);
+            }
+        });
 
-        jButton8.setBackground(new java.awt.Color(240, 0, 0));
-        jButton8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(255, 255, 255));
-        jButton8.setText("Salir");
+        btnSalir.setBackground(new java.awt.Color(240, 0, 0));
+        btnSalir.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -83,30 +103,30 @@ public class GestionEmpleados extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton6)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnListaEmpleados)
+                    .addComponent(btnAltaEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(149, 149, 149))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnBajaEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(71, 71, 71)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAltaEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnBajaEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnListaEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                .addComponent(jButton8)
+                .addComponent(btnSalir)
                 .addGap(35, 35, 35))
         );
 
@@ -177,6 +197,36 @@ public class GestionEmpleados extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        if(getPrivileges()==1){
+            Empleados emp= new Empleados();
+            emp.setLayout(null);
+            emp.setLocationRelativeTo(null);
+            emp.setVisible(true);
+            this.setVisible(false);
+        }
+        else if(getPrivileges()==2){
+            Gerente ger = new Gerente();
+            ger.setLayout(null);
+            ger.setLocationRelativeTo(null);
+            ger.setVisible(true);
+            ger.setPrivileges(privileges);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnAltaEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaEmpleadosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAltaEmpleadosActionPerformed
+
+    private void btnBajaEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaEmpleadosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBajaEmpleadosActionPerformed
+
+    private void btnListaEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaEmpleadosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnListaEmpleadosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -212,10 +262,10 @@ public class GestionEmpleados extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
+    private javax.swing.JButton btnAltaEmpleados;
+    private javax.swing.JButton btnBajaEmpleados;
+    private javax.swing.JButton btnListaEmpleados;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

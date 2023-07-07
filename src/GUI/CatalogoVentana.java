@@ -270,7 +270,21 @@ public class CatalogoVentana extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarVestidosActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        // TODO add your handling code here:
+        if(getPrivileges()==1){
+            Empleados emp= new Empleados();
+            emp.setLayout(null);
+            emp.setLocationRelativeTo(null);
+            emp.setVisible(true);
+            this.setVisible(false);
+        }
+        else if(getPrivileges()==2){
+            Gerente ger = new Gerente();
+            ger.setLayout(null);
+            ger.setLocationRelativeTo(null);
+            ger.setVisible(true);
+            ger.setPrivileges(privileges);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     /**

@@ -247,6 +247,8 @@ public class Login extends javax.swing.JFrame {
         }
         else{
             JOptionPane.showMessageDialog(null, "Introduzca un usuario y contraseña correctos");
+            tfUsuario.setText("");
+            pssContrasenia.setText("");
         }
     }//GEN-LAST:event_btnSIGActionPerformed
 
