@@ -181,6 +181,7 @@ public class Empleados extends javax.swing.JFrame {
         Catalogo.setLayout(null);
         Catalogo.setLocationRelativeTo(null);
         Catalogo.setVisible(true);
+        Catalogo.setPrivileges(privileges);
         this.setVisible(false);
     }//GEN-LAST:event_btnCatalogoActionPerformed
 
@@ -189,6 +190,7 @@ public class Empleados extends javax.swing.JFrame {
         GesCli.setLayout(null);
         GesCli.setLocationRelativeTo(null);
         GesCli.setVisible(true);
+        GesCli.setPrivileges(privileges);
         this.setVisible(false);
     }//GEN-LAST:event_btnGestionclientesActionPerformed
 
@@ -197,6 +199,7 @@ public class Empleados extends javax.swing.JFrame {
         rent.setLayout(null);
         rent.setLocationRelativeTo(null);
         rent.setVisible(true);
+        rent.setPrivileges(privileges);
         this.setVisible(false);
     }//GEN-LAST:event_btnCrearRentaActionPerformed
 
