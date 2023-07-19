@@ -1,5 +1,8 @@
 package GUI;
 
+import Codigo.Conexion;
+import java.sql.Connection;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -10,7 +13,9 @@ package GUI;
  * @author ignee
  */
 public class Gerente extends javax.swing.JFrame {
-
+    
+    Conexion cc=new Conexion();
+    Connection con= cc.conexion();
     /**
      * Creates new form Gerente
      */
@@ -45,6 +50,7 @@ public class Gerente extends javax.swing.JFrame {
         btnGestionEmpleados = new javax.swing.JButton();
         btnCatalogo = new javax.swing.JButton();
         btnCrearRenta = new javax.swing.JButton();
+        btnAltaClientes = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -124,6 +130,16 @@ public class Gerente extends javax.swing.JFrame {
             }
         });
 
+        btnAltaClientes.setBackground(new java.awt.Color(164, 55, 123));
+        btnAltaClientes.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnAltaClientes.setForeground(new java.awt.Color(255, 255, 255));
+        btnAltaClientes.setText("Alta Clientes");
+        btnAltaClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAltaClientesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -137,7 +153,8 @@ public class Gerente extends javax.swing.JFrame {
                     .addComponent(btnHistorialRentas, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(89, 89, 89)
-                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAltaClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 11, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -145,13 +162,15 @@ public class Gerente extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(btnCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
+                .addGap(24, 24, 24)
                 .addComponent(btnGestionEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
+                .addGap(23, 23, 23)
                 .addComponent(btnCrearRenta, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
+                .addGap(25, 25, 25)
                 .addComponent(btnHistorialRentas, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnAltaClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addComponent(btnSalir)
                 .addGap(30, 30, 30))
         );
@@ -184,7 +203,7 @@ public class Gerente extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -246,6 +265,15 @@ public class Gerente extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnHistorialRentasActionPerformed
 
+    private void btnAltaClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaClientesActionPerformed
+        RegistroClientes altClien = new RegistroClientes();
+        altClien.setLayout(null);
+        altClien.setLocationRelativeTo(null);
+        altClien.setVisible(true);
+        altClien.setPrivileges(privileges);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnAltaClientesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -281,6 +309,7 @@ public class Gerente extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAltaClientes;
     private javax.swing.JButton btnCatalogo;
     private javax.swing.JButton btnCrearRenta;
     private javax.swing.JButton btnGestionEmpleados;

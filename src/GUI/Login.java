@@ -10,6 +10,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JOptionPane;
 import Codigo.Conexion;
+import java.sql.Connection;
 /**
  *
  * @author Adrián Ortiz
@@ -17,6 +18,8 @@ import Codigo.Conexion;
 public class Login extends javax.swing.JFrame {
     
     Conexion cc=new Conexion();
+    Connection con= cc.conexion();
+    
 
     public Login() {
         initComponents();
@@ -232,6 +235,8 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSIGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSIGActionPerformed
+        cc.setUser("root");
+        cc.setPassword("Ademir12");
         if(tfUsuario.getText().compareTo("empleado")==0 && pssContrasenia.getText().compareTo("cisco123")==0){
             Empleados emp = new Empleados();
             emp.setLayout(null);

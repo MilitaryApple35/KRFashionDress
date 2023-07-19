@@ -262,7 +262,12 @@ public class CatalogoVentana extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void btnAltaVestidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaVestidosActionPerformed
-        // TODO add your handling code here:
+        AltaVestidos altves= new AltaVestidos();
+        altves.setLayout(null);
+        altves.setLocationRelativeTo(null);
+        altves.setPrivileges(privileges);
+        altves.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnAltaVestidosActionPerformed
 
     private void btnEliminarVestidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarVestidosActionPerformed

@@ -4,12 +4,22 @@
  */
 package GUI;
 
+import Codigo.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Adrián Ortiz
  */
 public class RegistroClientes extends javax.swing.JFrame {
-
+    
+    Conexion cc=new Conexion();
+    Connection con= cc.conexion();
     /**
      * Creates new form RegistroClientes
      */
@@ -105,6 +115,11 @@ public class RegistroClientes extends javax.swing.JFrame {
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("CANCELAR");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnAlta.setBackground(new java.awt.Color(51, 204, 0));
         btnAlta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -298,12 +313,50 @@ public class RegistroClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_tfNombresActionPerformed
 
     private void btnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaActionPerformed
-        // TODO add your handling code here:
+        try {
+            try {
+                String SQL="call busquedaColonias(?)";
+                PreparedStatement pst= con.prepareStatement(SQL);
+                pst.setString(1, tfColonia.getText());
+                ResultSet res= pst.executeQuery();
+            } catch (Exception e) {
+                
+            }
+            try {
+                String SQL="call altaColonias(?)";
+                PreparedStatement pst= con.prepareStatement(SQL);
+                pst.setString(1, tfColonia.getText());
+                pst.execute();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(AltaVestidos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (Exception e) {
+               
+        }
     }//GEN-LAST:event_btnAltaActionPerformed
 
     private void tfColoniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfColoniaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfColoniaActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        if(getPrivileges()==1){
+            Empleados emp= new Empleados();
+            emp.setLayout(null);
+            emp.setLocationRelativeTo(null);
+            emp.setVisible(true);
+            this.setVisible(false);
+        }
+        else if(getPrivileges()==2){
+            Gerente ger = new Gerente();
+            ger.setLayout(null);
+            ger.setLocationRelativeTo(null);
+            ger.setVisible(true);
+            ger.setPrivileges(privileges);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
