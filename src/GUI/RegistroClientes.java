@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -108,6 +109,11 @@ public class RegistroClientes extends javax.swing.JFrame {
         tfColonia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfColoniaActionPerformed(evt);
+            }
+        });
+        tfColonia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfColoniaKeyReleased(evt);
             }
         });
 
@@ -319,20 +325,54 @@ public class RegistroClientes extends javax.swing.JFrame {
                 PreparedStatement pst= con.prepareStatement(SQL);
                 pst.setString(1, tfColonia.getText());
                 ResultSet res= pst.executeQuery();
+                if(res==null){
+                    try {
+                        SQL="call altaColonias(?)";
+                        pst= con.prepareStatement(SQL);
+                        pst.setString(1, tfColonia.getText());
+                        pst.execute();
+
+                    } catch (SQLException ex) {
+                        Logger.getLogger(AltaVestidos.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
             } catch (Exception e) {
-                
+                JOptionPane.showMessageDialog(null, "Error en la Colonia " + e.getMessage());
             }
             try {
-                String SQL="call altaColonias(?)";
-                PreparedStatement pst= con.prepareStatement(SQL);
-                pst.setString(1, tfColonia.getText());
-                pst.execute();
-
-            } catch (SQLException ex) {
-                Logger.getLogger(AltaVestidos.class.getName()).log(Level.SEVERE, null, ex);
+                String SQL="call altaClientes(?,?,?,?)";
+                PreparedStatement ppst= con.prepareStatement(SQL);
+                ppst.setString(1, tfColonia.getText());
+                ppst.setString(2, tfColonia.getText());
+                ppst.setString(3, tfColonia.getText());
+                int idCol;
+                String miniSQL="call getIdColonia(?)";
+                PreparedStatement pmst= con.prepareStatement(miniSQL);
+                pmst.setString(1, tfColonia.getText());
+                idCol= pmst.executeQuery().getInt(1);
+                ppst.setInt(4, idCol);
+                ppst.execute();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error en la alta " + e.getMessage());
             }
+            
+            if(getPrivileges()==1){
+                Empleados emp= new Empleados();
+                emp.setLayout(null);
+                emp.setLocationRelativeTo(null);
+                emp.setVisible(true);
+                this.setVisible(false);
+            }
+            else if(getPrivileges()==2){
+                Gerente ger = new Gerente();
+                ger.setLayout(null);
+                ger.setLocationRelativeTo(null);
+                ger.setVisible(true);
+                ger.setPrivileges(privileges);
+                this.setVisible(false);
+        }
         } catch (Exception e) {
-               
+            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
         }
     }//GEN-LAST:event_btnAltaActionPerformed
 
@@ -357,6 +397,18 @@ public class RegistroClientes extends javax.swing.JFrame {
             this.setVisible(false);
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void tfColoniaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfColoniaKeyReleased
+        try {
+            String SQL="call obtenerColonias(?)";
+            PreparedStatement pst= con.prepareStatement(SQL);
+            pst.setString(1, tfColonia.getText());
+            ResultSet res= pst.executeQuery();
+            
+        } catch (Exception e) {
+
+        }
+    }//GEN-LAST:event_tfColoniaKeyReleased
 
     /**
      * @param args the command line arguments
