@@ -122,13 +122,13 @@ public class ListaEmpleados extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre(s)", "Apellidos", "Telefono", "NSS", "RFC"
+                "Nombre(s)", "Apellidos", "Telefono", "Calle y numero", "Colonia", "NSS", "RFC"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
