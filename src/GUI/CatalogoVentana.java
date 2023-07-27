@@ -4,20 +4,49 @@
  */
 package GUI;
 
+import Codigo.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Peraz
  */
 public class CatalogoVentana extends javax.swing.JFrame {
-
+    Conexion cc=new Conexion();
+    Connection con= cc.conexion();
     /**
      * Creates new form CatalogoVentana
      */
     public CatalogoVentana() {
         initComponents();
+        llenarTabla();
     }
     private int privileges;
 
+    public void llenarTabla(){
+        DefaultTableModel modelo = new DefaultTableModel();
+        ResultSet res = null;
+        try {
+            String SQL="call mostrarVestidos()";
+            PreparedStatement pst= con.prepareStatement(SQL);
+            res= pst.executeQuery();
+            modelo.setColumnIdentifiers(new Object[]{"Vestido","Caracteristicas", "Talla", "Color", "Precio", "Estatus"});
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
+        }
+        try {
+            while (res.next()){
+                modelo.addRow(new Object[]{res.getString("nombreVes"), res.getString("caractVes"), res.getString("tallaVes"), res.getString("colorVes"), res.getString("precioVes"), res.getString("estatusVes")});
+            }
+            tblCatalogo.setModel(modelo);
+        } catch (Exception e) {
+        }
+    }
+    
     public int getPrivileges() {
         return privileges;
     }
