@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import sun.misc.Compare;
 
 /**
  *
@@ -47,10 +48,10 @@ public class RegistroClientes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         Nombres = new javax.swing.JLabel();
-        FechaNac = new javax.swing.JLabel();
         CalleyNumero = new javax.swing.JLabel();
         NumTel = new javax.swing.JLabel();
         Apellidos = new javax.swing.JLabel();
@@ -62,14 +63,17 @@ public class RegistroClientes extends javax.swing.JFrame {
         tfColonia = new javax.swing.JTextField();
         btnCancelar = new javax.swing.JButton();
         btnAlta = new javax.swing.JButton();
+        FechaNac = new javax.swing.JLabel();
         tfDia = new javax.swing.JTextField();
         tfMes = new javax.swing.JTextField();
         tfAnio = new javax.swing.JTextField();
-        Slash1 = new javax.swing.JLabel();
-        Slash2 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         imgLogo3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+
+        jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(722, 628));
@@ -85,9 +89,6 @@ public class RegistroClientes extends javax.swing.JFrame {
         Nombres.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         Nombres.setText("NOMBRE(S):");
 
-        FechaNac.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        FechaNac.setText("F. DE NACIMIENTO:");
-
         CalleyNumero.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         CalleyNumero.setText("CALLE Y NÚMERO:");
 
@@ -100,12 +101,25 @@ public class RegistroClientes extends javax.swing.JFrame {
         Colonia.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         Colonia.setText("COLONIA:");
 
+        tfNombres.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         tfNombres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfNombresActionPerformed(evt);
             }
         });
 
+        tfNumTel.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        tfCalleYNumero.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        tfApellidos.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tfApellidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfApellidosActionPerformed(evt);
+            }
+        });
+
+        tfColonia.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         tfColonia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfColoniaActionPerformed(evt);
@@ -137,72 +151,84 @@ public class RegistroClientes extends javax.swing.JFrame {
             }
         });
 
+        FechaNac.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        FechaNac.setText("FECHA DE NACIMIENTO");
+
+        tfDia.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tfDia.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tfDia.setText("DD");
-        tfDia.setPreferredSize(new java.awt.Dimension(22, 20));
+        tfDia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfDiaActionPerformed(evt);
+            }
+        });
 
+        tfMes.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tfMes.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tfMes.setText("MM");
+        tfMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfMesActionPerformed(evt);
+            }
+        });
 
-        tfAnio.setText("YYYY");
+        tfAnio.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tfAnio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tfAnio.setText("AAAA");
         tfAnio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfAnioActionPerformed(evt);
             }
         });
 
-        Slash1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        Slash1.setText("/");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("/");
 
-        Slash2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        Slash2.setText("/");
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("/");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(NumTel)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(Nombres, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfNombres, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfNumTel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Colonia, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfColonia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tfCalleYNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(34, 34, 34)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(tfDia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(29, 29, 29)
-                                                .addComponent(Slash1)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(tfMes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(23, 23, 23)
-                                                .addComponent(Slash2)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(tfAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(Apellidos)
-                                            .addComponent(FechaNac)
-                                            .addComponent(tfApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(CalleyNumero)))))))
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(Nombres, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfNombres, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(Colonia, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfColonia, javax.swing.GroupLayout.Alignment.LEADING)))
+                    .addComponent(NumTel)
+                    .addComponent(tfNumTel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(CalleyNumero)
+                    .addComponent(FechaNac)
+                    .addComponent(tfApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Apellidos)
+                    .addComponent(tfCalleYNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(btnAlta)))
-                .addContainerGap(35, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(354, 354, 354)
-                    .addComponent(btnCancelar)
-                    .addContainerGap(42, Short.MAX_VALUE)))
+                        .addComponent(tfDia, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfMes, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(47, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(btnAlta)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCancelar)
+                .addGap(107, 107, 107))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,39 +238,40 @@ public class RegistroClientes extends javax.swing.JFrame {
                     .addComponent(Nombres)
                     .addComponent(Apellidos))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tfNombres, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(tfApellidos))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfNombres, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                            .addComponent(tfApellidos))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(NumTel)
+                            .addComponent(FechaNac))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(tfAnio, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfNumTel, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfMes, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel2))
+                            .addComponent(tfDia)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel3)))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(NumTel)
-                    .addComponent(FechaNac))
+                    .addComponent(Colonia)
+                    .addComponent(CalleyNumero))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(tfNumTel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(tfDia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Slash1)
-                        .addComponent(tfMes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(tfAnio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Slash2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CalleyNumero)
-                    .addComponent(Colonia))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tfColonia, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(tfCalleYNumero))
-                .addGap(124, 124, 124)
-                .addComponent(btnAlta)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tfColonia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfCalleYNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(106, 106, 106)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAlta)
+                    .addComponent(btnCancelar))
                 .addGap(35, 35, 35))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(384, Short.MAX_VALUE)
-                    .addComponent(btnCancelar)
-                    .addGap(34, 34, 34)))
         );
 
         jPanel6.setBackground(new java.awt.Color(164, 55, 123));
@@ -289,7 +316,7 @@ public class RegistroClientes extends javax.swing.JFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -310,69 +337,71 @@ public class RegistroClientes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfAnioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAnioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfAnioActionPerformed
-
     private void tfNombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNombresActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfNombresActionPerformed
 
     private void btnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaActionPerformed
-        try {
-            try {
-                String SQL="call busquedaColonias(?)";
-                PreparedStatement pst= con.prepareStatement(SQL);
-                pst.setString(1, tfColonia.getText());
-                ResultSet res= pst.executeQuery();
-                if(res==null){
-                    try {
-                        SQL="call altaColonias(?)";
-                        pst= con.prepareStatement(SQL);
-                        pst.setString(1, tfColonia.getText());
-                        pst.execute();
-
-                    } catch (SQLException ex) {
-                        Logger.getLogger(AltaVestidos.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Error en la Colonia " + e.getMessage());
-            }
-            try {
-                String SQL="call altaClientes(?,?,?,?)";
-                PreparedStatement ppst= con.prepareStatement(SQL);
-                ppst.setString(1, tfColonia.getText());
-                ppst.setString(2, tfColonia.getText());
-                ppst.setString(3, tfColonia.getText());
-                int idCol;
-                String miniSQL="call getIdColonia(?)";
-                PreparedStatement pmst= con.prepareStatement(miniSQL);
-                pmst.setString(1, tfColonia.getText());
-                idCol= pmst.executeQuery().getInt(1);
-                ppst.setInt(4, idCol);
-                ppst.execute();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Error en la alta " + e.getMessage());
-            }
-            
-            if(getPrivileges()==1){
-                Empleados emp= new Empleados();
-                emp.setLayout(null);
-                emp.setLocationRelativeTo(null);
-                emp.setVisible(true);
-                this.setVisible(false);
-            }
-            else if(getPrivileges()==2){
-                Gerente ger = new Gerente();
-                ger.setLayout(null);
-                ger.setLocationRelativeTo(null);
-                ger.setVisible(true);
-                ger.setPrivileges(privileges);
-                this.setVisible(false);
+        if(tfNombres.getText().compareToIgnoreCase("")==0 || tfApellidos.getText().compareToIgnoreCase("")==0 || tfNumTel.getText().compareToIgnoreCase("")==0 || tfCalleYNumero.getText().compareToIgnoreCase("")==0 || tfColonia.getText().compareToIgnoreCase("")==0 || tfDia.getText().compareToIgnoreCase("")==0 || tfMes.getText().compareToIgnoreCase("")==0 || tfAnio.getText().compareToIgnoreCase("")==0 || tfDia.getText().compareToIgnoreCase("DD")==0 || tfMes.getText().compareToIgnoreCase("MM")==0 || tfAnio.getText().compareToIgnoreCase("AAAA")==0){
+            JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos");
         }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
+        else{
+            try {
+                try {
+                    String SQL="call busquedaColonias(?)";
+                    PreparedStatement pst= con.prepareStatement(SQL);
+                    pst.setString(1, tfColonia.getText());
+                    ResultSet res= pst.executeQuery();
+                    if(res==null){
+                        try {
+                            SQL="call altaColonias(?)";
+                            pst= con.prepareStatement(SQL);
+                            pst.setString(1, tfColonia.getText());
+                            pst.execute();
+
+                        } catch (SQLException ex) {
+                            Logger.getLogger(AltaVestidos.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Error en la Colonia " + e.getMessage());
+                }
+                try {
+                    String SQL="call altaClientes(?,?,?,?,?)";
+                    PreparedStatement ppst= con.prepareStatement(SQL);
+                    ppst.setString(1, tfNombres.getText());
+                    ppst.setString(2, tfApellidos.getText());
+                    ppst.setString(3, tfNumTel.getText());
+                    int idCol;
+                    String miniSQL="call getIdColonia(?)";
+                    PreparedStatement pmst= con.prepareStatement(miniSQL);
+                    pmst.setString(1, tfColonia.getText());
+                    idCol= pmst.executeQuery().getInt(1);
+                    ppst.setInt(4, idCol);
+                    ppst.setString(5, tfNumTel.getText());
+                    ppst.execute();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Error en la alta " + e.getMessage());
+                }
+
+                if(getPrivileges()==1){
+                    Empleados emp= new Empleados();
+                    emp.setLayout(null);
+                    emp.setLocationRelativeTo(null);
+                    emp.setVisible(true);
+                    this.setVisible(false);
+                }
+                else if(getPrivileges()==2){
+                    Gerente ger = new Gerente();
+                    ger.setLayout(null);
+                    ger.setLocationRelativeTo(null);
+                    ger.setVisible(true);
+                    ger.setPrivileges(privileges);
+                    this.setVisible(false);
+            }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
+            }
         }
     }//GEN-LAST:event_btnAltaActionPerformed
 
@@ -409,6 +438,22 @@ public class RegistroClientes extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_tfColoniaKeyReleased
+
+    private void tfApellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfApellidosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfApellidosActionPerformed
+
+    private void tfDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfDiaActionPerformed
+
+    private void tfMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfMesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfMesActionPerformed
+
+    private void tfAnioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAnioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfAnioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -451,11 +496,12 @@ public class RegistroClientes extends javax.swing.JFrame {
     private javax.swing.JLabel FechaNac;
     private javax.swing.JLabel Nombres;
     private javax.swing.JLabel NumTel;
-    private javax.swing.JLabel Slash1;
-    private javax.swing.JLabel Slash2;
     private javax.swing.JButton btnAlta;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JLabel imgLogo3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
