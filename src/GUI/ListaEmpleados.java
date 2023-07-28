@@ -4,17 +4,46 @@
  */
 package GUI;
 
+import Codigo.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ignee
  */
 public class ListaEmpleados extends javax.swing.JFrame {
-
+    Conexion cc=new Conexion();
+    Connection con= cc.conexion();
     /**
      * Creates new form ListaEmpleados
      */
     public ListaEmpleados() {
         initComponents();
+        llenarTabla();
+    }
+    
+    public void llenarTabla(){
+        DefaultTableModel modelo = new DefaultTableModel();
+        ResultSet res = null;
+        try {
+            String SQL="call mostrarEmpleados()";
+            PreparedStatement pst= con.prepareStatement(SQL);
+            res= pst.executeQuery();
+            modelo.setColumnIdentifiers(new Object[]{"","", "", "", "", ""});
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
+        }
+        try {
+            while (res.next()){
+                modelo.addRow(new Object[]{res.getString(""), res.getString(""), res.getString(""), res.getString(""), res.getString(""), res.getString("")});
+            }
+            tblEmpleados.setModel(modelo);
+        } catch (Exception e) {
+        }
     }
     
     private int privileges;
@@ -44,7 +73,7 @@ public class ListaEmpleados extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblEmpleados = new javax.swing.JTable();
         btnSalir = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         txtfBuscarPor = new javax.swing.JTextField();
@@ -120,7 +149,7 @@ public class ListaEmpleados extends javax.swing.JFrame {
 
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblEmpleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -131,7 +160,7 @@ public class ListaEmpleados extends javax.swing.JFrame {
                 "Nombre(s)", "Apellidos", "Telefono", "Calle y numero", "Colonia", "NSS", "RFC"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblEmpleados);
 
         btnSalir.setBackground(new java.awt.Color(240, 0, 0));
         btnSalir.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -311,7 +340,7 @@ public class ListaEmpleados extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblEmpleados;
     private javax.swing.JTextField txtfBuscarPor;
     // End of variables declaration//GEN-END:variables
 }

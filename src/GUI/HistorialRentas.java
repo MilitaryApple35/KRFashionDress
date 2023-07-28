@@ -4,17 +4,26 @@
  */
 package GUI;
 
+import Codigo.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Peraz
  */
 public class HistorialRentas extends javax.swing.JFrame {
-
+    Conexion cc=new Conexion();
+    Connection con= cc.conexion();
     /**
      * Creates new form HistorialRentas
      */
     public HistorialRentas() {
         initComponents();
+        llenarTabla();
     }
     private int privileges;
 
@@ -25,7 +34,26 @@ public class HistorialRentas extends javax.swing.JFrame {
     public void setPrivileges(int privileges) {
         this.privileges = privileges;
     }
-
+    
+    public void llenarTabla(){
+        DefaultTableModel modelo = new DefaultTableModel();
+        ResultSet res = null;
+        try {
+            String SQL="call mostrarEmpleados()";
+            PreparedStatement pst= con.prepareStatement(SQL);
+            res= pst.executeQuery();
+            modelo.setColumnIdentifiers(new Object[]{"","", "", "", "", ""});
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
+        }
+        try {
+            while (res.next()){
+                modelo.addRow(new Object[]{res.getString(""), res.getString(""), res.getString(""), res.getString(""), res.getString(""), res.getString("")});
+            }
+            tblHistorialRentas.setModel(modelo);
+        } catch (Exception e) {
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

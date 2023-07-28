@@ -4,17 +4,26 @@
  */
 package GUI;
 
+import Codigo.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Adrián Ortiz
  */
 public class ListaClientes extends javax.swing.JFrame {
-
+    Conexion cc=new Conexion();
+    Connection con= cc.conexion();
     /**
      * Creates new form ListaClientes
      */
     public ListaClientes() {
         initComponents();
+        llenarTabla();
     }
     
     private int privileges;
@@ -25,6 +34,26 @@ public class ListaClientes extends javax.swing.JFrame {
 
     public void setPrivileges(int privileges) {
         this.privileges = privileges;
+    }
+    
+    public void llenarTabla(){
+        DefaultTableModel modelo = new DefaultTableModel();
+        ResultSet res = null;
+        try {
+            String SQL="call mostrarEmpleados()";
+            PreparedStatement pst= con.prepareStatement(SQL);
+            res= pst.executeQuery();
+            modelo.setColumnIdentifiers(new Object[]{"","", "", "", "", ""});
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
+        }
+        try {
+            while (res.next()){
+                modelo.addRow(new Object[]{res.getString(""), res.getString(""), res.getString(""), res.getString(""), res.getString(""), res.getString("")});
+            }
+            tblClientes.setModel(modelo);
+        } catch (Exception e) {
+        }
     }
 
     /**
@@ -46,7 +75,7 @@ public class ListaClientes extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblClientes = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         txtfBuscarPor = new javax.swing.JTextField();
@@ -108,7 +137,7 @@ public class ListaClientes extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -119,7 +148,7 @@ public class ListaClientes extends javax.swing.JFrame {
                 "Nombre", "Apellidos", "Num. Teléfonico", "Fecha de Nacimiento", "Calle y Numero", "Colonia"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblClientes);
 
         jButton1.setBackground(new java.awt.Color(240, 0, 0));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -301,8 +330,8 @@ public class ListaClientes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JScrollPane jspTablaClientes;
+    private javax.swing.JTable tblClientes;
     private javax.swing.JTable tblListaClientes;
     private javax.swing.JTextField txtfBuscarPor;
     // End of variables declaration//GEN-END:variables
