@@ -173,11 +173,30 @@ public class GestionClientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaActionPerformed
-        // TODO add your handling code here:
+        RegistroClientes altClien = new RegistroClientes();
+        altClien.setLayout(null);
+        altClien.setLocationRelativeTo(null);
+        altClien.setVisible(true);
+        altClien.setPrivileges(privileges);
+        this.setVisible(false);
     }//GEN-LAST:event_btnAltaActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        // TODO add your handling code here:
+       if(getPrivileges()==1){
+            Empleados emp= new Empleados();
+            emp.setLayout(null);
+            emp.setLocationRelativeTo(null);
+            emp.setVisible(true);
+            this.setVisible(false);
+        }
+        else if(getPrivileges()==2){
+            Gerente ger = new Gerente();
+            ger.setLayout(null);
+            ger.setLocationRelativeTo(null);
+            ger.setVisible(true);
+            ger.setPrivileges(privileges);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaActionPerformed
@@ -189,7 +208,12 @@ public class GestionClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnListaActionPerformed
 
     private void btnBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaActionPerformed
-        // TODO add your handling code here:
+        BajaClientes bajClien = new BajaClientes();
+        bajClien.setLayout(null);
+        bajClien.setLocationRelativeTo(null);
+        bajClien.setVisible(true);
+        bajClien.setPrivileges(privileges);
+        this.setVisible(false);
     }//GEN-LAST:event_btnBajaActionPerformed
 
     /**

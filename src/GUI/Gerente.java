@@ -50,7 +50,7 @@ public class Gerente extends javax.swing.JFrame {
         btnGestionEmpleados = new javax.swing.JButton();
         btnCatalogo = new javax.swing.JButton();
         btnCrearRenta = new javax.swing.JButton();
-        btnAltaClientes = new javax.swing.JButton();
+        btnGestionClientes = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -130,13 +130,13 @@ public class Gerente extends javax.swing.JFrame {
             }
         });
 
-        btnAltaClientes.setBackground(new java.awt.Color(164, 55, 123));
-        btnAltaClientes.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnAltaClientes.setForeground(new java.awt.Color(255, 255, 255));
-        btnAltaClientes.setText("Alta Clientes");
-        btnAltaClientes.addActionListener(new java.awt.event.ActionListener() {
+        btnGestionClientes.setBackground(new java.awt.Color(164, 55, 123));
+        btnGestionClientes.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnGestionClientes.setForeground(new java.awt.Color(255, 255, 255));
+        btnGestionClientes.setText("Gestion Clientes");
+        btnGestionClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAltaClientesActionPerformed(evt);
+                btnGestionClientesActionPerformed(evt);
             }
         });
 
@@ -154,7 +154,7 @@ public class Gerente extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(89, 89, 89)
                         .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnAltaClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnGestionClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 11, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -169,7 +169,7 @@ public class Gerente extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(btnHistorialRentas, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnAltaClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnGestionClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addComponent(btnSalir)
                 .addGap(30, 30, 30))
@@ -265,14 +265,14 @@ public class Gerente extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnHistorialRentasActionPerformed
 
-    private void btnAltaClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaClientesActionPerformed
-        RegistroClientes altClien = new RegistroClientes();
-        altClien.setLayout(null);
-        altClien.setLocationRelativeTo(null);
-        altClien.setVisible(true);
-        altClien.setPrivileges(privileges);
+    private void btnGestionClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionClientesActionPerformed
+        GestionClientes gesClien = new GestionClientes();
+        gesClien.setLayout(null);
+        gesClien.setLocationRelativeTo(null);
+        gesClien.setVisible(true);
+        gesClien.setPrivileges(privileges);
         this.setVisible(false);
-    }//GEN-LAST:event_btnAltaClientesActionPerformed
+    }//GEN-LAST:event_btnGestionClientesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,9 +309,9 @@ public class Gerente extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAltaClientes;
     private javax.swing.JButton btnCatalogo;
     private javax.swing.JButton btnCrearRenta;
+    private javax.swing.JButton btnGestionClientes;
     private javax.swing.JButton btnGestionEmpleados;
     private javax.swing.JButton btnHistorialRentas;
     private javax.swing.JButton btnSalir;

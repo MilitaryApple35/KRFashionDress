@@ -181,7 +181,12 @@ public class BajaClientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+        GestionClientes gesClien = new GestionClientes();
+        gesClien.setLayout(null);
+        gesClien.setLocationRelativeTo(null);
+        gesClien.setVisible(true);
+        gesClien.setPrivileges(privileges);
+        this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaActionPerformed

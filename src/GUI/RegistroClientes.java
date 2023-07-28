@@ -410,21 +410,12 @@ public class RegistroClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_tfColoniaActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        if(getPrivileges()==1){
-            Empleados emp= new Empleados();
-            emp.setLayout(null);
-            emp.setLocationRelativeTo(null);
-            emp.setVisible(true);
-            this.setVisible(false);
-        }
-        else if(getPrivileges()==2){
-            Gerente ger = new Gerente();
-            ger.setLayout(null);
-            ger.setLocationRelativeTo(null);
-            ger.setVisible(true);
-            ger.setPrivileges(privileges);
-            this.setVisible(false);
-        }
+        GestionClientes gesClien = new GestionClientes();
+        gesClien.setLayout(null);
+        gesClien.setLocationRelativeTo(null);
+        gesClien.setVisible(true);
+        gesClien.setPrivileges(privileges);
+        this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void tfColoniaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfColoniaKeyReleased

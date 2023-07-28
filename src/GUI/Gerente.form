@@ -132,7 +132,7 @@
                               <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
                               <Component id="btnSalir" min="-2" pref="88" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="btnAltaClientes" alignment="0" min="-2" pref="271" max="-2" attributes="0"/>
+                          <Component id="btnGestionClientes" alignment="0" min="-2" pref="271" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
                   </Group>
@@ -150,7 +150,7 @@
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="btnHistorialRentas" min="-2" pref="60" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnAltaClientes" min="-2" pref="60" max="-2" attributes="0"/>
+                      <Component id="btnGestionClientes" min="-2" pref="60" max="-2" attributes="0"/>
                       <EmptySpace pref="45" max="32767" attributes="0"/>
                       <Component id="btnSalir" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
@@ -247,7 +247,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCrearRentaActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnAltaClientes">
+            <Component class="javax.swing.JButton" name="btnGestionClientes">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="7b" green="37" red="a4" type="rgb"/>
@@ -258,10 +258,10 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Alta Clientes"/>
+                <Property name="text" type="java.lang.String" value="Gestion Clientes"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAltaClientesActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGestionClientesActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
