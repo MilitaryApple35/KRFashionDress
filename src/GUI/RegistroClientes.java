@@ -352,7 +352,7 @@ public class RegistroClientes extends javax.swing.JFrame {
                     PreparedStatement pst= con.prepareStatement(SQL);
                     pst.setString(1, tfColonia.getText());
                     ResultSet res= pst.executeQuery();
-                    if(res==null){
+                    if(res == null){
                         try {
                             SQL="call altaColonias(?)";
                             pst= con.prepareStatement(SQL);
