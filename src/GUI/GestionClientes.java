@@ -40,7 +40,6 @@ public class GestionClientes extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnAlta = new javax.swing.JButton();
         btnLista = new javax.swing.JButton();
-        btnBaja = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         gestionClientes = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -74,16 +73,6 @@ public class GestionClientes extends javax.swing.JFrame {
             }
         });
 
-        btnBaja.setBackground(new java.awt.Color(164, 55, 123));
-        btnBaja.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnBaja.setForeground(new java.awt.Color(255, 255, 255));
-        btnBaja.setText("DAR DE BAJA");
-        btnBaja.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBajaActionPerformed(evt);
-            }
-        });
-
         btnSalir.setBackground(new java.awt.Color(240, 0, 0));
         btnSalir.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnSalir.setForeground(new java.awt.Color(255, 255, 255));
@@ -106,9 +95,7 @@ public class GestionClientes extends javax.swing.JFrame {
                 .addGap(153, 153, 153)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btnBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnLista)))
+                    .addComponent(btnLista))
                 .addContainerGap())
             .addComponent(gestionClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -124,9 +111,7 @@ public class GestionClientes extends javax.swing.JFrame {
                 .addComponent(btnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(btnLista, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(btnBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
+                .addGap(155, 155, 155)
                 .addComponent(btnSalir)
                 .addContainerGap(73, Short.MAX_VALUE))
         );
@@ -207,15 +192,6 @@ public class GestionClientes extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnListaActionPerformed
 
-    private void btnBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaActionPerformed
-        BajaClientes bajClien = new BajaClientes();
-        bajClien.setLayout(null);
-        bajClien.setLocationRelativeTo(null);
-        bajClien.setVisible(true);
-        bajClien.setPrivileges(privileges);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnBajaActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -252,7 +228,6 @@ public class GestionClientes extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlta;
-    private javax.swing.JButton btnBaja;
     private javax.swing.JButton btnLista;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel gestionClientes;
