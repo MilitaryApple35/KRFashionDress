@@ -205,6 +205,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfNombres">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfNombresKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
@@ -231,8 +234,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfPrecio">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfPrecioKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="tfColor">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfColorKeyTyped"/>
+              </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane3">
               <AuxValues>

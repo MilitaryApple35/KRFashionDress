@@ -162,14 +162,34 @@ public class CrearRenta extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTextArea1);
 
         tfNombres.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        tfNombres.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfNombresKeyTyped(evt);
+            }
+        });
 
         tfApellidos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        tfApellidos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfApellidosKeyTyped(evt);
+            }
+        });
 
         tfCalleYNumero.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         tfColonia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        tfColonia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfColoniaKeyTyped(evt);
+            }
+        });
 
         tfTelefono.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        tfTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfTelefonoKeyTyped(evt);
+            }
+        });
 
         spnDiaFR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
@@ -521,6 +541,67 @@ public class CrearRenta extends javax.swing.JFrame {
             this.setVisible(false);
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void tfNombresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNombresKeyTyped
+        int key = evt.getKeyChar();
+        
+        boolean mayusculas = key >= 65 && key <=90;
+
+        boolean minusculas = key >= 97 && key <=122;
+
+        boolean espacio = key == 32;
+
+        if (!(minusculas || mayusculas || espacio))
+    {
+        evt.consume();
+    }
+
+    }//GEN-LAST:event_tfNombresKeyTyped
+
+    private void tfApellidosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfApellidosKeyTyped
+        int key = evt.getKeyChar();
+        
+        boolean mayusculas = key >= 65 && key <=90;
+
+        boolean minusculas = key >= 97 && key <=122;
+
+        boolean espacio = key == 32;
+
+        if (!(minusculas || mayusculas || espacio))
+    {
+        evt.consume();
+    }
+
+    }//GEN-LAST:event_tfApellidosKeyTyped
+
+    private void tfColoniaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfColoniaKeyTyped
+        
+        int key = evt.getKeyChar();
+        
+        boolean mayusculas = key >= 65 && key <=90;
+
+        boolean minusculas = key >= 97 && key <=122;
+
+        boolean espacio = key == 32;
+
+        if (!(minusculas || mayusculas || espacio))
+    {
+        evt.consume();
+    }
+
+    }//GEN-LAST:event_tfColoniaKeyTyped
+
+    private void tfTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfTelefonoKeyTyped
+        
+	int key = evt.getKeyChar();
+
+        boolean numero = key >=8 && key <=57;
+
+        if (!numero)
+    {
+	evt.consume();
+    }
+    }//GEN-LAST:event_tfTelefonoKeyTyped
 
     /**
      * @param args the command line arguments

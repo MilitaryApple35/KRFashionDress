@@ -107,8 +107,18 @@ public class RegistroClientes extends javax.swing.JFrame {
                 tfNombresActionPerformed(evt);
             }
         });
+        tfNombres.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfNombresKeyTyped(evt);
+            }
+        });
 
         tfNumTel.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tfNumTel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfNumTelKeyTyped(evt);
+            }
+        });
 
         tfCalleYNumero.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
@@ -116,6 +126,11 @@ public class RegistroClientes extends javax.swing.JFrame {
         tfApellidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfApellidosActionPerformed(evt);
+            }
+        });
+        tfApellidos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfApellidosKeyTyped(evt);
             }
         });
 
@@ -126,6 +141,9 @@ public class RegistroClientes extends javax.swing.JFrame {
             }
         });
         tfColonia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfColoniaKeyTyped(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tfColoniaKeyReleased(evt);
             }
@@ -316,7 +334,7 @@ public class RegistroClientes extends javax.swing.JFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -445,6 +463,69 @@ public class RegistroClientes extends javax.swing.JFrame {
     private void tfAnioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAnioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfAnioActionPerformed
+
+    private void tfNombresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNombresKeyTyped
+
+        int key = evt.getKeyChar();
+        
+        boolean mayusculas = key >= 65 && key <=90;
+
+        boolean minusculas = key >= 97 && key <=122;
+
+        boolean espacio = key == 32;
+
+        if (!(minusculas || mayusculas || espacio))
+    {
+        evt.consume();
+    }
+
+    }//GEN-LAST:event_tfNombresKeyTyped
+
+    private void tfApellidosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfApellidosKeyTyped
+
+        int key = evt.getKeyChar();
+        
+        boolean mayusculas = key >= 65 && key <=90;
+
+        boolean minusculas = key >= 97 && key <=122;
+
+        boolean espacio = key == 32;
+
+        if (!(minusculas || mayusculas || espacio))
+    {
+        evt.consume();
+    }
+
+    }//GEN-LAST:event_tfApellidosKeyTyped
+
+    private void tfNumTelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNumTelKeyTyped
+      
+	int key = evt.getKeyChar();
+
+        boolean numero = key >=8 && key <=57;
+
+        if (!numero)
+    {
+	evt.consume();
+    }  
+    }//GEN-LAST:event_tfNumTelKeyTyped
+
+    private void tfColoniaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfColoniaKeyTyped
+
+        int key = evt.getKeyChar();
+        
+        boolean mayusculas = key >= 65 && key <=90;
+
+        boolean minusculas = key >= 97 && key <=122;
+
+        boolean espacio = key == 32;
+
+        if (!(minusculas || mayusculas || espacio))
+    {
+        evt.consume();
+    }
+
+    }//GEN-LAST:event_tfColoniaKeyTyped
 
     /**
      * @param args the command line arguments

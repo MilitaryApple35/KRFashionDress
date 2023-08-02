@@ -92,6 +92,12 @@ public class AltaVestidos extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel9.setText("Nombre");
 
+        tfNombres.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfNombresKeyTyped(evt);
+            }
+        });
+
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel10.setText("Descripcion");
 
@@ -100,6 +106,18 @@ public class AltaVestidos extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel12.setText("Precio   $");
+
+        tfPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfPrecioKeyTyped(evt);
+            }
+        });
+
+        tfColor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfColorKeyTyped(evt);
+            }
+        });
 
         taDescripcion.setColumns(20);
         taDescripcion.setRows(5);
@@ -317,6 +335,52 @@ public class AltaVestidos extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnAltaActionPerformed
+
+    private void tfPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfPrecioKeyTyped
+        
+	int key = evt.getKeyChar();
+
+        boolean numero = key >=8 && key <=57;
+
+        if (!numero)
+    {
+	evt.consume();
+    }
+    }//GEN-LAST:event_tfPrecioKeyTyped
+
+    private void tfColorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfColorKeyTyped
+
+        int key = evt.getKeyChar();
+        
+        boolean mayusculas = key >= 65 && key <=90;
+
+        boolean minusculas = key >= 97 && key <=122;
+
+        boolean espacio = key == 32;
+
+        if (!(minusculas || mayusculas || espacio))
+    {
+        evt.consume();
+    }
+
+    }//GEN-LAST:event_tfColorKeyTyped
+
+    private void tfNombresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNombresKeyTyped
+
+        int key = evt.getKeyChar();
+        
+        boolean mayusculas = key >= 65 && key <=90;
+
+        boolean minusculas = key >= 97 && key <=122;
+
+        boolean espacio = key == 32;
+
+        if (!(minusculas || mayusculas || espacio))
+    {
+        evt.consume();
+    }
+
+    }//GEN-LAST:event_tfNombresKeyTyped
 
     /**
      * @param args the command line arguments

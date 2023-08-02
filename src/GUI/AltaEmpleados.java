@@ -113,6 +113,11 @@ public class AltaEmpleados extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField2KeyTyped(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setText("Apellidos:");
@@ -121,6 +126,11 @@ public class AltaEmpleados extends javax.swing.JFrame {
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
+            }
+        });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
             }
         });
 
@@ -138,9 +148,20 @@ public class AltaEmpleados extends javax.swing.JFrame {
                 jTextField4ActionPerformed(evt);
             }
         });
+        jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField4KeyTyped(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setText("Numero Telefonico:");
+
+        jTextField5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField5KeyTyped(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel8.setText("Usuario:");
@@ -323,6 +344,70 @@ public class AltaEmpleados extends javax.swing.JFrame {
         emple.setPrivileges(privileges);
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+
+        int key = evt.getKeyChar();
+        
+        boolean mayusculas = key >= 65 && key <=90;
+
+        boolean minusculas = key >= 97 && key <=122;
+
+        boolean espacio = key == 32;
+
+        if (!(minusculas || mayusculas || espacio))
+    {
+        evt.consume();
+    }
+
+    }//GEN-LAST:event_jTextField1KeyTyped
+
+    private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
+
+        int key = evt.getKeyChar();
+        
+        boolean mayusculas = key >= 65 && key <=90;
+
+        boolean minusculas = key >= 97 && key <=122;
+
+        boolean espacio = key == 32;
+
+        if (!(minusculas || mayusculas || espacio))
+    {
+        evt.consume();
+    }
+
+    }//GEN-LAST:event_jTextField2KeyTyped
+
+    private void jTextField4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyTyped
+
+        int key = evt.getKeyChar();
+        
+        boolean mayusculas = key >= 65 && key <=90;
+
+        boolean minusculas = key >= 97 && key <=122;
+
+        boolean espacio = key == 32;
+
+        if (!(minusculas || mayusculas || espacio))
+    {
+        evt.consume();
+    }
+
+    }//GEN-LAST:event_jTextField4KeyTyped
+
+    private void jTextField5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyTyped
+
+        int key = evt.getKeyChar();
+
+        boolean numero = key >=8 && key <=57;
+
+        if (!numero)
+    {
+	evt.consume();
+    }
+
+    }//GEN-LAST:event_jTextField5KeyTyped
 
     /**
      * @param args the command line arguments
