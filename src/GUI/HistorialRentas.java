@@ -39,16 +39,17 @@ public class HistorialRentas extends javax.swing.JFrame {
         DefaultTableModel modelo = new DefaultTableModel();
         ResultSet res = null;
         try {
-            String SQL="call mostrarEmpleados()";
+            String SQL="call mostrarRentas()";
             PreparedStatement pst= con.prepareStatement(SQL);
             res= pst.executeQuery();
             modelo.setColumnIdentifiers(new Object[]{"","", "", "", "", ""});
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
         }
+        //Falta que se haga bien la base de datos
         try {
             while (res.next()){
-                modelo.addRow(new Object[]{res.getString(""), res.getString(""), res.getString(""), res.getString(""), res.getString(""), res.getString("")});
+                modelo.addRow(new Object[]{res.getString("fechaRenta"), res.getString("fechaEntrega"), res.getString("fechaDevolucion"), res.getString(""), res.getString(""), res.getString("")});
             }
             tblHistorialRentas.setModel(modelo);
         } catch (Exception e) {
