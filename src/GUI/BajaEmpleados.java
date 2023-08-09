@@ -4,6 +4,11 @@
  */
 package GUI;
 
+import Codigo.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ignee
@@ -16,6 +21,10 @@ public class BajaEmpleados extends javax.swing.JFrame {
     public BajaEmpleados() {
         initComponents();
     }
+        
+    Conexion cc=new Conexion();
+    Connection con= cc.conexion();
+    
     private int privileges;
 
     public int getPrivileges() {
@@ -41,11 +50,11 @@ public class BajaEmpleados extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        tfNSS = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        tfRFC = new javax.swing.JTextField();
         btnCancelar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnBaja = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(854, 620));
@@ -99,10 +108,15 @@ public class BajaEmpleados extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(51, 204, 0));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Dar de Baja");
+        btnBaja.setBackground(new java.awt.Color(51, 204, 0));
+        btnBaja.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnBaja.setForeground(new java.awt.Color(255, 255, 255));
+        btnBaja.setText("Dar de Baja");
+        btnBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBajaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -110,7 +124,7 @@ public class BajaEmpleados extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(47, 47, 47)
-                .addComponent(jButton2)
+                .addComponent(btnBaja)
                 .addGap(95, 95, 95)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -119,8 +133,8 @@ public class BajaEmpleados extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfRFC, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfNSS, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(90, 90, 90)))
@@ -135,14 +149,14 @@ public class BajaEmpleados extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfNSS, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
@@ -189,6 +203,34 @@ public class BajaEmpleados extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaActionPerformed
+         try {
+            String SQL="call bajaEmpleados(?,?)";
+            PreparedStatement ppst= con.prepareStatement(SQL);
+            ppst.setString(1, tfRFC.getText());
+            ppst.setString(2, tfNSS.getText());
+            ppst.execute();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error en la alta " + e.getMessage());
+        }
+
+        if(getPrivileges()==1){
+            Empleados emp= new Empleados();
+            emp.setLayout(null);
+            emp.setLocationRelativeTo(null);
+            emp.setVisible(true);
+            this.setVisible(false);
+        }
+        else if(getPrivileges()==2){
+            Gerente ger = new Gerente();
+            ger.setLayout(null);
+            ger.setLocationRelativeTo(null);
+            ger.setVisible(true);
+            ger.setPrivileges(privileges);
+            this.setVisible(false);
+    }
+    }//GEN-LAST:event_btnBajaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -224,8 +266,8 @@ public class BajaEmpleados extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBaja;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -233,7 +275,7 @@ public class BajaEmpleados extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField tfNSS;
+    private javax.swing.JTextField tfRFC;
     // End of variables declaration//GEN-END:variables
 }
