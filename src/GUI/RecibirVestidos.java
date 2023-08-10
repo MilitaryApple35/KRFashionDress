@@ -130,6 +130,11 @@ public class RecibirVestidos extends javax.swing.JFrame {
 
         btnSalir.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -177,6 +182,10 @@ public class RecibirVestidos extends javax.swing.JFrame {
     private void btnRecibirVestidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecibirVestidosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRecibirVestidosActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments
