@@ -13,6 +13,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -584,8 +586,15 @@ public class AltaEmpleados extends javax.swing.JFrame {
                 ppst.setString(5, tfNSS.getText());
                 ppst.setString(6, tfRFC.getText());
                 String fecha=tfAnio.getText().concat("-".concat(tfMes.getText().concat("-".concat(tfDia.getText()))));
-                ppst.setString(7, fecha);
-                ppst.execute();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                sdf.setLenient(false);
+                try {
+                    sdf.parse(fecha);
+                    ppst.setString(7, fecha);
+                    ppst.execute();
+                } catch (ParseException e) {
+                    JOptionPane.showMessageDialog(null, "La fecha ingresada es invalidad", "Error", JOptionPane.ERROR_MESSAGE);
+                }
                 try {
                     String minSQL="call altaTelEmpleados(?);";
                     PreparedStatement minppst= con.prepareStatement(minSQL);
