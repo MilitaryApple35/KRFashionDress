@@ -627,7 +627,7 @@ public class AltaEmpleados extends javax.swing.JFrame {
                 ger.setVisible(true);
                 ger.setPrivileges(privileges);
                 this.setVisible(false);
-        }
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
         }    
