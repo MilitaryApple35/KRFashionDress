@@ -13,6 +13,7 @@ import Codigo.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JFrame;
 /**
  *
  * @author Adrián Ortiz
@@ -236,38 +237,35 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSIGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSIGActionPerformed
-        /*
-         * String SQL="call verificacionLogin(?,?)";
-            PreparedStatement pst= con.prepareStatement(SQL);
-            pst.setString(1, tfUsuario.getText());
-            pst.setString(2, pssContrasenia.getText());
-            ResultSet res= pst.executeQuery();
-             if(res.getBoolean(0)==true){
-               if(res.getBoolean(1)==true){
-                   Gerente ger = new Gerente();
-                    ger.setLayout(null);
-                    ger.setLocationRelativeTo(null);
-                    ger.setVisible(true);
-                    setPrivileges(2);
-                    ger.setPrivileges(privileges);
-                    this.setVisible(false);
-               }
-               else{
-                   Empleados emp = new Empleados();
-                    emp.setLayout(null);
-                    emp.setLocationRelativeTo(null);
-                    emp.setVisible(true);
-                    setPrivileges(1);
-                    emp.setPrivileges(privileges);
-                    this.setVisible(false);
-               }
-             }
-             else{
-               JOptionPane.showMessageDialog(null, "Introduzca un usuario y contraseña correctos");
-                tfUsuario.setText("");
-                pssContrasenia.setText(""); 
-            * }
-         */
+        /*String SQL="call verificacionLogin(?,?)";
+        PreparedStatement pst= con.prepareStatement(SQL);
+        pst.setString(1, tfUsuario.getText());
+        pst.setString(2, pssContrasenia.getText());
+        ResultSet res= pst.executeQuery();
+         if(res.getBoolean(0)==true){
+           if(res.getBoolean(1)==true){
+               Gerente ger = new Gerente();
+                ger.setLayout(null);
+                ger.setLocationRelativeTo(null);
+                ger.setVisible(true);
+                setPrivileges(2);
+                ger.setPrivileges(privileges);
+                this.setVisible(false);
+           }
+           else{
+               Empleados emp = new Empleados();
+                emp.setLayout(null);
+                emp.setLocationRelativeTo(null);
+                emp.setVisible(true);
+                setPrivileges(1);
+                emp.setPrivileges(privileges);
+                this.setVisible(false);
+           }
+         }
+         else{
+           JOptionPane.showMessageDialog(null, "Introduzca un usuario y contraseña correctos");
+            tfUsuario.setText("");
+            pssContrasenia.setText("");*/ 
         cc.setUser("root");
         cc.setPassword("Ademir12");
         if(tfUsuario.getText().compareTo("empleado")==0 && pssContrasenia.getText().compareTo("cisco123")==0){

@@ -575,7 +575,11 @@ public class AltaEmpleados extends javax.swing.JFrame {
     }//GEN-LAST:event_tfNumTelKeyTyped
 
     private void btnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaActionPerformed
+        String fecha=tfAnio.getText().concat("-".concat(tfMes.getText().concat("-".concat(tfDia.getText()))));
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        sdf.setLenient(false);
         try {
+            sdf.parse(fecha);
             try {
                 String SQL="call altaEmpleados(?,?,?,?,?,?,?);";
                 PreparedStatement ppst= con.prepareStatement(SQL);
@@ -600,8 +604,6 @@ public class AltaEmpleados extends javax.swing.JFrame {
                 
                 ppst.setString(5, tfNSS.getText());
                 ppst.setString(6, tfRFC.getText());
-                String fecha=tfAnio.getText().concat("-".concat(tfMes.getText().concat("-".concat(tfDia.getText()))));
-                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                 sdf.setLenient(false);
                 try {
                     sdf.parse(fecha);
@@ -652,9 +654,12 @@ public class AltaEmpleados extends javax.swing.JFrame {
                 ger.setPrivileges(privileges);
                 this.setVisible(false);
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
-        }    
+        }catch(java.text.ParseException e){
+            JOptionPane.showMessageDialog(null, "La fecha ingresada es invalidad", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error "+e.toString() + e.getMessage());
+        }
     }//GEN-LAST:event_btnAltaActionPerformed
 
     private void tfUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfUsuarioActionPerformed
