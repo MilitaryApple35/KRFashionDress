@@ -40,19 +40,21 @@ public class ListaClientes extends javax.swing.JFrame {
         DefaultTableModel modelo = new DefaultTableModel();
         ResultSet res = null;
         try {
-            String SQL="call mostrarClientes()";
-            PreparedStatement pst= con.prepareStatement(SQL);
-            res= pst.executeQuery();
+            String mostrarClientesSQL = "call mostrarClientes()";
+            PreparedStatement psMostrarClientes = con.prepareStatement(mostrarClientesSQL);
+            res = psMostrarClientes.executeQuery();
             modelo.setColumnIdentifiers(new Object[]{"Nombres","Apellidos", "Calle y Numero", "Colonia", "Teléfono", "Correo"});
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
         }
+        
         try {
             while (res.next()){
-                modelo.addRow(new Object[]{res.getString("nombreCli"), res.getString("apellidosCli"), res.getString("calleNumeroCli"), res.getString("nombreColonia"), res.getString("telefonoCli"), res.getString("correoCli")});
+                modelo.addRow(new Object[]{res.getString("nombreCli"), res.getString("apellidosCli"), res.getString("calleNumeroCli"), res.getString("colonia"), res.getString("Telefono(s)"), res.getString("Correo(s)")});
             }
             tblClientes.setModel(modelo);
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
         }
     }
 
