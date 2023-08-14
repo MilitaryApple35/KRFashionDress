@@ -270,6 +270,11 @@ public class AltaEmpleados extends javax.swing.JFrame {
                 tfDiaActionPerformed(evt);
             }
         });
+        tfDia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfDiaKeyTyped(evt);
+            }
+        });
 
         tfMes.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tfMes.setText("MM");
@@ -278,12 +283,22 @@ public class AltaEmpleados extends javax.swing.JFrame {
                 tfMesActionPerformed(evt);
             }
         });
+        tfMes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfMesKeyTyped(evt);
+            }
+        });
 
         tfAnio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tfAnio.setText("AAAA");
         tfAnio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfAnioActionPerformed(evt);
+            }
+        });
+        tfAnio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfAnioKeyTyped(evt);
             }
         });
 
@@ -691,6 +706,30 @@ public class AltaEmpleados extends javax.swing.JFrame {
     private void tfCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCorreoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfCorreoActionPerformed
+
+    private void tfDiaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfDiaKeyTyped
+        char validar=evt.getKeyChar();
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_tfDiaKeyTyped
+
+    private void tfMesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfMesKeyTyped
+        char validar=evt.getKeyChar();
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_tfMesKeyTyped
+
+    private void tfAnioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfAnioKeyTyped
+        char validar=evt.getKeyChar();
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_tfAnioKeyTyped
 
     /**
      * @param args the command line arguments
