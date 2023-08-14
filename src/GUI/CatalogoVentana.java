@@ -36,14 +36,15 @@ public class CatalogoVentana extends javax.swing.JFrame {
             res= pst.executeQuery();
             modelo.setColumnIdentifiers(new Object[]{"Vestido","Caracteristicas", "Talla", "Color", "Precio", "Estatus"});
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
+            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
         }
         try {
             while (res.next()){
-                modelo.addRow(new Object[]{res.getString("nombreVes"), res.getString("caractVes"), res.getString("tallaVes"), res.getString("colorVes"), res.getString("precioVes"), res.getString("estatusVes")});
+                modelo.addRow(new Object[]{res.getString("nombreVes"), res.getString("caractVes"), res.getString("tallaVes"), res.getString("colorVes"), res.getString("precioVes"), res.getString("estatus")});
             }
             tblCatalogo.setModel(modelo);
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
         }
     }
     
