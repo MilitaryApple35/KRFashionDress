@@ -211,7 +211,7 @@ public class BajaEmpleados extends javax.swing.JFrame {
             ppst.setString(2, tfNSS.getText());
             ppst.execute();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error en la alta " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error en la baja " + e.getMessage());
         }
 
         if(getPrivileges()==1){
