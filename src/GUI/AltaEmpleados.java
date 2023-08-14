@@ -9,8 +9,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,6 +27,7 @@ public class AltaEmpleados extends javax.swing.JFrame {
      */
     public AltaEmpleados() {
         initComponents();
+        llenarColonias();
     }
     
     Conexion cc=new Conexion();
@@ -38,7 +42,24 @@ public class AltaEmpleados extends javax.swing.JFrame {
     public void setPrivileges(int privileges) {
         this.privileges = privileges;
     }
-
+    
+    public void llenarColonias(){
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        try {
+            String SQL="call mostrarColonias()";
+            Statement stmt;
+            ResultSet rs;
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(SQL);
+            while(rs.next()){
+                modelo.addElement(rs.getString("colonia"));
+            }
+            cmbColonia.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -61,7 +82,6 @@ public class AltaEmpleados extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         tfCalleyNum = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        tfColonia = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         tfNumTel = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -80,6 +100,10 @@ public class AltaEmpleados extends javax.swing.JFrame {
         tfDia = new javax.swing.JTextField();
         tfMes = new javax.swing.JTextField();
         tfAnio = new javax.swing.JTextField();
+        cmbColonia = new javax.swing.JComboBox();
+        btnAgrgarColonia = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        tfCorreo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -163,18 +187,6 @@ public class AltaEmpleados extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setText("Colonia:");
 
-        tfColonia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        tfColonia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfColoniaActionPerformed(evt);
-            }
-        });
-        tfColonia.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfColoniaKeyTyped(evt);
-            }
-        });
-
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setText("Numero Telefonico:");
 
@@ -236,7 +248,7 @@ public class AltaEmpleados extends javax.swing.JFrame {
         });
 
         cmbDepartamento.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        cmbDepartamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbDepartamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cajeros", "Gerencia", " " }));
         cmbDepartamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbDepartamentoActionPerformed(evt);
@@ -273,6 +285,38 @@ public class AltaEmpleados extends javax.swing.JFrame {
             }
         });
 
+        cmbColonia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cmbColonia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbColonia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbColoniaActionPerformed(evt);
+            }
+        });
+
+        btnAgrgarColonia.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnAgrgarColonia.setText("+");
+        btnAgrgarColonia.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAgrgarColonia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgrgarColoniaActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel14.setText("Correo:");
+
+        tfCorreo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        tfCorreo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfCorreoActionPerformed(evt);
+            }
+        });
+        tfCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfCorreoKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -280,40 +324,42 @@ public class AltaEmpleados extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addContainerGap(120, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(123, 123, 123)
                         .addComponent(btnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(65, 65, 65))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
+                                .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfColonia))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfApellidos))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfNombres))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfCalleyNum))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfNumTel, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)))
+                                .addComponent(tfCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addComponent(jLabel6)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(cmbColonia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(tfApellidos))
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(tfNombres))
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addComponent(jLabel5)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(tfCalleyNum))
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addComponent(jLabel7)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(tfNumTel, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))))
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(86, 86, 86)
-                                .addComponent(jLabel13))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jPanel4Layout.createSequentialGroup()
@@ -342,7 +388,16 @@ public class AltaEmpleados extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(tfMes, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(tfAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addComponent(tfAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addGap(86, 86, 86)
+                                        .addComponent(jLabel13))
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnAgrgarColonia)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(51, 51, 51))
         );
         jPanel4Layout.setVerticalGroup(
@@ -360,7 +415,7 @@ public class AltaEmpleados extends javax.swing.JFrame {
                             .addComponent(tfDia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfMes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(tfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -384,13 +439,18 @@ public class AltaEmpleados extends javax.swing.JFrame {
                             .addComponent(tfApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(tfCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(57, 57, 57)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(tfCalleyNum, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(60, 60, 60)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(tfColonia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(59, 59, 59)
+                            .addComponent(cmbColonia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAgrgarColonia))
+                        .addGap(58, 58, 58)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(tfNumTel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -420,7 +480,7 @@ public class AltaEmpleados extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 162, Short.MAX_VALUE))
+                .addGap(0, 160, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -440,10 +500,6 @@ public class AltaEmpleados extends javax.swing.JFrame {
     private void tfNombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNombresActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfNombresActionPerformed
-
-    private void tfColoniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfColoniaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfColoniaActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         GestionEmpleados emple = new GestionEmpleados();
@@ -488,23 +544,6 @@ public class AltaEmpleados extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tfApellidosKeyTyped
 
-    private void tfColoniaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfColoniaKeyTyped
-
-        int key = evt.getKeyChar();
-        
-        boolean mayusculas = key >= 65 && key <=90;
-
-        boolean minusculas = key >= 97 && key <=122;
-
-        boolean espacio = key == 32;
-
-        if (!(minusculas || mayusculas || espacio))
-    {
-        evt.consume();
-    }
-
-    }//GEN-LAST:event_tfColoniaKeyTyped
-
     private void tfNumTelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNumTelKeyTyped
 
         int key = evt.getKeyChar();
@@ -520,94 +559,78 @@ public class AltaEmpleados extends javax.swing.JFrame {
 
     private void btnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaActionPerformed
         try {
+            try {
+                String SQL="call altaEmpleados(?,?,?,?,?,?,?);";
+                PreparedStatement ppst= con.prepareStatement(SQL);
+                ppst.setString(1, tfNombres.getText());
+                ppst.setString(2, tfApellidos.getText());
+                ppst.setString(3, tfCalleyNum.getText());
                 try {
-                    String SQL="call busquedaColonias(?)";
-                    PreparedStatement pst= con.prepareStatement(SQL);
-                    pst.setString(1, tfColonia.getText());
-                    ResultSet res= pst.executeQuery();
-                    if(res == null){
-                        try {
-                            SQL="call altaColonias(?)";
-                            pst= con.prepareStatement(SQL);
-                            pst.setString(1, tfColonia.getText());
-                            pst.execute();
-
-                        } catch (SQLException ex) {
-                            Logger.getLogger(AltaVestidos.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+                    String idColoniaSQL="call buscarIdColonia(?);";
+                    PreparedStatement stmt=con.prepareStatement(idColoniaSQL);
+                    ResultSet rs;
+                    stmt.setString(1, cmbColonia.getSelectedItem().toString());
+                    rs = stmt.executeQuery();
+                    if (rs.next()) {
+                        int idColonia = rs.getInt(1);
+                        ppst.setInt(4, idColonia);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No hay un valor en el ResultSet");
                     }
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Error en la Colonia " + e.getMessage());
+                    JOptionPane.showMessageDialog(null, "Error en buscarIdColonia " + e.getMessage() +" " + e.getLocalizedMessage());
+                }
+                
+                ppst.setString(5, tfNSS.getText());
+                ppst.setString(6, tfRFC.getText());
+                String fecha=tfAnio.getText().concat("-".concat(tfMes.getText().concat("-".concat(tfDia.getText()))));
+                ppst.setString(7, fecha);
+                ppst.execute();
+                try {
+                    String minSQL="call altaTelEmpleados(?);";
+                    PreparedStatement minppst= con.prepareStatement(minSQL);
+                    minppst.setString(1, tfNumTel.getText());
+                    minppst.execute();
+                } catch (Exception e) {
                 }
                 try {
-                    String SQL="call altaEmpleados(?,?,?,?,?,?,?)";
-                    PreparedStatement ppst= con.prepareStatement(SQL);
-                    ppst.setString(1, tfNombres.getText());
-                    ppst.setString(2, tfApellidos.getText());
-                    ppst.setString(3, tfCalleyNum.getText());
-                    int idCol;
-                    String miniSQL="call getIdColonia(?)";
-                    PreparedStatement pmst= con.prepareStatement(miniSQL);
-                    pmst.setString(1, tfColonia.getText());
-                    idCol= pmst.executeQuery().getInt(1);
-                    ppst.setInt(4, idCol);
-                    ppst.setString(5, tfNSS.getText());
-                    ppst.setString(6, tfRFC.getText());
-                    String fecha;
-                    fecha.concat(tfAnio.getText().concat(tfMes.getText().concat(tfDia.getText())));
-                    ppst.setString(7, fecha);
-                    ppst.execute();
-                    try {
-                        String minSQL="call altaTelEmpleados(?)";
-                        PreparedStatement minppst= con.prepareStatement(minSQL);
-                        minppst.setString(1, tfNumTel.getText());
-                        minppst.execute();
-                    } catch (Exception e) {
-                    }
-                    try {
-                        String miSQL="call altaCorreoEmpleados(?)";
-                        PreparedStatement mippst= con.prepareStatement(miSQL);
-                        mippst.setString(1, tfCorreo.getText());
-                        mippst.execute();
-                    } catch (Exception e) {
-                    }
-                    try {
-                        String mSQL="call altaUsuarios(?,?,?,?)";
-                        PreparedStatement mppst= con.prepareStatement(mSQL);
-                        mppst.setString(1, idEmpleado);
-                        mppst.setInt(2, cmbDepartamento.getSelectedIndex());
-                        mppst.setString(3, tfUsuario.getText());
-                        mppst.setString(4, tfContrasenia.getText());
-                        mppst.execute();
-                    } catch (Exception e) {
-                    }
+                    String miSQL="call altaCorreoEmpleados(?);";
+                    PreparedStatement mippst= con.prepareStatement(miSQL);
+                    mippst.setString(1, tfCorreo.getText());
+                    mippst.execute();
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Error en la alta " + e.getMessage());
                 }
-
-                if(getPrivileges()==1){
-                    Empleados emp= new Empleados();
-                    emp.setLayout(null);
-                    emp.setLocationRelativeTo(null);
-                    emp.setVisible(true);
-                    this.setVisible(false);
+                try {
+                    String mSQL="call altaUsuarios(?,?,?);";
+                    PreparedStatement mppst= con.prepareStatement(mSQL);
+                    mppst.setInt(1, cmbDepartamento.getSelectedIndex()+1);
+                    mppst.setString(2, tfUsuario.getText());
+                    mppst.setString(3, tfContrasenia.getText());
+                    mppst.execute();
+                } catch (Exception e) {
                 }
-                else if(getPrivileges()==2){
-                    Gerente ger = new Gerente();
-                    ger.setLayout(null);
-                    ger.setLocationRelativeTo(null);
-                    ger.setVisible(true);
-                    ger.setPrivileges(privileges);
-                    this.setVisible(false);
-            }
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
+                JOptionPane.showMessageDialog(null, "Error en la alta " + e.getMessage());
             }
-        
-        
-        
-        
-        
+
+            if(getPrivileges()==1){
+                Empleados emp= new Empleados();
+                emp.setLayout(null);
+                emp.setLocationRelativeTo(null);
+                emp.setVisible(true);
+                this.setVisible(false);
+            }
+            else if(getPrivileges()==2){
+                Gerente ger = new Gerente();
+                ger.setLayout(null);
+                ger.setLocationRelativeTo(null);
+                ger.setVisible(true);
+                ger.setPrivileges(privileges);
+                this.setVisible(false);
+        }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
+        }    
     }//GEN-LAST:event_btnAltaActionPerformed
 
     private void tfUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfUsuarioActionPerformed
@@ -633,6 +656,32 @@ public class AltaEmpleados extends javax.swing.JFrame {
     private void tfAnioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAnioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfAnioActionPerformed
+
+    private void cmbColoniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbColoniaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbColoniaActionPerformed
+
+    private void btnAgrgarColoniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgrgarColoniaActionPerformed
+        try {
+            String SQL="call altaColonias(?)";
+            PreparedStatement pst= con.prepareStatement(SQL);
+            String a=JOptionPane.showInputDialog(null, "Introduzca el nombre de la colonia");
+            pst.setString(1, a);
+            pst.executeQuery(); 
+            llenarColonias();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
+        }
+        
+    }//GEN-LAST:event_btnAgrgarColoniaActionPerformed
+
+    private void tfCorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfCorreoKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfCorreoKeyTyped
+
+    private void tfCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCorreoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfCorreoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -669,14 +718,17 @@ public class AltaEmpleados extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgrgarColonia;
     private javax.swing.JButton btnAlta;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JComboBox cmbColonia;
     private javax.swing.JComboBox cmbDepartamento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -692,8 +744,8 @@ public class AltaEmpleados extends javax.swing.JFrame {
     private javax.swing.JTextField tfAnio;
     private javax.swing.JTextField tfApellidos;
     private javax.swing.JTextField tfCalleyNum;
-    private javax.swing.JTextField tfColonia;
     private javax.swing.JTextField tfContrasenia;
+    private javax.swing.JTextField tfCorreo;
     private javax.swing.JTextField tfDia;
     private javax.swing.JTextField tfMes;
     private javax.swing.JTextField tfNSS;
