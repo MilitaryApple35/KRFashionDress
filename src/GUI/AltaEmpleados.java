@@ -576,7 +576,7 @@ public class AltaEmpleados extends javax.swing.JFrame {
 
     private void btnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaActionPerformed
         String fecha=tfAnio.getText().concat("-".concat(tfMes.getText().concat("-".concat(tfDia.getText()))));
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         sdf.setLenient(false);
         try {
             sdf.parse(fecha);
@@ -618,6 +618,7 @@ public class AltaEmpleados extends javax.swing.JFrame {
                     minppst.setString(1, tfNumTel.getText());
                     minppst.execute();
                 } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Error en la alta de Telefono" + e.getMessage());
                 }
                 try {
                     String miSQL="call altaCorreoEmpleados(?);";
@@ -625,15 +626,17 @@ public class AltaEmpleados extends javax.swing.JFrame {
                     mippst.setString(1, tfCorreo.getText());
                     mippst.execute();
                 } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Error en la alta de Correo" + e.getMessage());
                 }
                 try {
                     String mSQL="call altaUsuarios(?,?,?);";
                     PreparedStatement mppst= con.prepareStatement(mSQL);
-                    mppst.setInt(1, cmbDepartamento.getSelectedIndex()+1);
+                    mppst.setInt(1, cmbDepartamento.getSelectedIndex()+3);
                     mppst.setString(2, tfUsuario.getText());
                     mppst.setString(3, tfContrasenia.getText());
                     mppst.execute();
                 } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Error en la alta de Usuario " + e.getMessage());
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error en la alta " + e.getMessage());
