@@ -36,7 +36,7 @@ public class ListaClientes extends javax.swing.JFrame {
         this.privileges = privileges;
     }
     
-    public void llenarTabla(){
+    public void llenarTabla() {
         DefaultTableModel modelo = new DefaultTableModel();
         ResultSet res = null;
         try {
@@ -57,6 +57,15 @@ public class ListaClientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
         }
     }
+    
+    /**public void busquedaCliente() {
+        try {
+            String aux = "" + tfBuscarPor;
+            String buscarCliente = "select nombreCli, apellidosCli, calleNumeroCli, colonia, fechaNacCli, TelefonosDeUnCliente(idCliente) as 'Telefono(s)', CorreosDeUnCliente(idCliente) as 'Correo(s)' from clientes c inner join telefonosclientes tc on (c.idCliente = tc.idCli) inner join correoeclientes cc on (c.idCliente = cc.idCli) inner join colonias on (idCol = idColonia) where nombreCli like '" + tfBuscarPor + "'%";
+        } catch(Exception e) {
+            
+        }
+    }**/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -80,7 +89,7 @@ public class ListaClientes extends javax.swing.JFrame {
         tblClientes = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        txtfBuscarPor = new javax.swing.JTextField();
+        tfBuscarPor = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
 
@@ -187,9 +196,9 @@ public class ListaClientes extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
-        txtfBuscarPor.addActionListener(new java.awt.event.ActionListener() {
+        tfBuscarPor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfBuscarPorActionPerformed(evt);
+                tfBuscarPorActionPerformed(evt);
             }
         });
 
@@ -197,6 +206,7 @@ public class ListaClientes extends javax.swing.JFrame {
         jLabel3.setText("Buscar por: ");
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nombre", "Telefono" }));
         jComboBox1.setToolTipText("");
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -213,9 +223,9 @@ public class ListaClientes extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addComponent(txtfBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addGap(51, 51, 51)
+                .addComponent(tfBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,7 +234,7 @@ public class ListaClientes extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(txtfBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
@@ -277,9 +287,9 @@ public class ListaClientes extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void txtfBuscarPorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfBuscarPorActionPerformed
+    private void tfBuscarPorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBuscarPorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtfBuscarPorActionPerformed
+    }//GEN-LAST:event_tfBuscarPorActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
@@ -335,6 +345,6 @@ public class ListaClientes extends javax.swing.JFrame {
     private javax.swing.JScrollPane jspTablaClientes;
     private javax.swing.JTable tblClientes;
     private javax.swing.JTable tblListaClientes;
-    private javax.swing.JTextField txtfBuscarPor;
+    private javax.swing.JTextField tfBuscarPor;
     // End of variables declaration//GEN-END:variables
 }

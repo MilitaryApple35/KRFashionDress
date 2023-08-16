@@ -1,7 +1,9 @@
 package GUI;
 
 import Codigo.Conexion;
+import java.awt.Frame;
 import java.sql.Connection;
+import javax.swing.JFrame;
 
 /*
  * To change this template, choose Tools | Templates
@@ -14,14 +16,23 @@ import java.sql.Connection;
  */
 public class Gerente extends javax.swing.JFrame {
     
-    Conexion cc=new Conexion();
-    Connection con= cc.conexion();
+    Conexion cc = new Conexion();
+    Connection con = cc.conexion();
     /**
      * Creates new form Gerente
      */
     public Gerente() {
         initComponents();
+        fullscreen();
     }
+    
+    public void fullscreen(){
+        super.dispose();
+        super.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        super.setUndecorated(!super.isUndecorated());
+        super.setVisible(true);
+    }
+    
     private int privileges;
 
     public int getPrivileges() {
@@ -56,6 +67,7 @@ public class Gerente extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setPreferredSize(new java.awt.Dimension(1920, 1080));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1920, 325));
 
@@ -93,6 +105,7 @@ public class Gerente extends javax.swing.JFrame {
         btnHistorialRentas.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnHistorialRentas.setForeground(new java.awt.Color(255, 255, 255));
         btnHistorialRentas.setText("Historial de Rentas");
+        btnHistorialRentas.setActionCommand("Historial rentas");
         btnHistorialRentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHistorialRentasActionPerformed(evt);
@@ -102,7 +115,9 @@ public class Gerente extends javax.swing.JFrame {
         btnGestionEmpleados.setBackground(new java.awt.Color(164, 55, 123));
         btnGestionEmpleados.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnGestionEmpleados.setForeground(new java.awt.Color(255, 255, 255));
-        btnGestionEmpleados.setText("Gestion de Empleados");
+        btnGestionEmpleados.setText("Empleados");
+        btnGestionEmpleados.setActionCommand("Empleados");
+        btnGestionEmpleados.setBorder(null);
         btnGestionEmpleados.setPreferredSize(new java.awt.Dimension(271, 60));
         btnGestionEmpleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,6 +129,7 @@ public class Gerente extends javax.swing.JFrame {
         btnCatalogo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnCatalogo.setForeground(new java.awt.Color(255, 255, 255));
         btnCatalogo.setText("Catalogo");
+        btnCatalogo.setBorder(null);
         btnCatalogo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCatalogoActionPerformed(evt);
@@ -123,7 +139,8 @@ public class Gerente extends javax.swing.JFrame {
         btnCrearRenta.setBackground(new java.awt.Color(164, 55, 123));
         btnCrearRenta.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnCrearRenta.setForeground(new java.awt.Color(255, 255, 255));
-        btnCrearRenta.setText("Crear Renta");
+        btnCrearRenta.setText("Crear renta");
+        btnCrearRenta.setActionCommand("Crear renta");
         btnCrearRenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearRentaActionPerformed(evt);
@@ -133,7 +150,7 @@ public class Gerente extends javax.swing.JFrame {
         btnGestionClientes.setBackground(new java.awt.Color(164, 55, 123));
         btnGestionClientes.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnGestionClientes.setForeground(new java.awt.Color(255, 255, 255));
-        btnGestionClientes.setText("Gestion Clientes");
+        btnGestionClientes.setText("Clientes");
         btnGestionClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGestionClientesActionPerformed(evt);
@@ -191,7 +208,7 @@ public class Gerente extends javax.swing.JFrame {
                         .addGap(848, 848, 848)
                         .addComponent(jLabel2))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(817, 817, 817)
+                        .addGap(811, 811, 811)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

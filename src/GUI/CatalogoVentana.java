@@ -34,7 +34,7 @@ public class CatalogoVentana extends javax.swing.JFrame {
             String SQL="call mostrarVestidos()";
             PreparedStatement pst= con.prepareStatement(SQL);
             res= pst.executeQuery();
-            modelo.setColumnIdentifiers(new Object[]{"Vestido","Caracteristicas", "Talla", "Color", "Precio", "Estatus"});
+            modelo.setColumnIdentifiers(new Object[]{"Vestido", "Caracteristicas", "Talla", "Color", "Precio", "Estatus"});
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
         }
@@ -115,7 +115,7 @@ public class CatalogoVentana extends javax.swing.JFrame {
                 .add(jLabel1))
         );
 
-        tblCatalogo.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        tblCatalogo.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         tblCatalogo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
