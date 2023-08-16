@@ -13,6 +13,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -269,6 +271,11 @@ public class AltaEmpleados extends javax.swing.JFrame {
                 tfDiaActionPerformed(evt);
             }
         });
+        tfDia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfDiaKeyTyped(evt);
+            }
+        });
 
         tfMes.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tfMes.setText("MM");
@@ -277,12 +284,22 @@ public class AltaEmpleados extends javax.swing.JFrame {
                 tfMesActionPerformed(evt);
             }
         });
+        tfMes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfMesKeyTyped(evt);
+            }
+        });
 
         tfAnio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tfAnio.setText("AAAA");
         tfAnio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfAnioActionPerformed(evt);
+            }
+        });
+        tfAnio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfAnioKeyTyped(evt);
             }
         });
 
@@ -557,7 +574,11 @@ public class AltaEmpleados extends javax.swing.JFrame {
     }//GEN-LAST:event_tfNumTelKeyTyped
 
     private void btnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaActionPerformed
+        String fecha=tfAnio.getText().concat("-".concat(tfMes.getText().concat("-".concat(tfDia.getText()))));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setLenient(false);
         try {
+            sdf.parse(fecha);
             try {
                 String SQL="call altaEmpleados(?,?,?,?,?,?,?);";
                 PreparedStatement ppst= con.prepareStatement(SQL);
@@ -582,15 +603,21 @@ public class AltaEmpleados extends javax.swing.JFrame {
                 
                 ppst.setString(5, tfNSS.getText());
                 ppst.setString(6, tfRFC.getText());
-                String fecha=tfAnio.getText().concat("-".concat(tfMes.getText().concat("-".concat(tfDia.getText()))));
-                ppst.setString(7, fecha);
-                ppst.execute();
+                sdf.setLenient(false);
+                try {
+                    sdf.parse(fecha);
+                    ppst.setString(7, fecha);
+                    ppst.execute();
+                } catch (ParseException e) {
+                    JOptionPane.showMessageDialog(null, "La fecha ingresada es invalidad", "Error", JOptionPane.ERROR_MESSAGE);
+                }
                 try {
                     String minSQL="call altaTelEmpleados(?);";
                     PreparedStatement minppst= con.prepareStatement(minSQL);
                     minppst.setString(1, tfNumTel.getText());
                     minppst.execute();
                 } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Error en la alta de Telefono" + e.getMessage());
                 }
                 try {
                     String miSQL="call altaCorreoEmpleados(?);";
@@ -598,15 +625,17 @@ public class AltaEmpleados extends javax.swing.JFrame {
                     mippst.setString(1, tfCorreo.getText());
                     mippst.execute();
                 } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Error en la alta de Correo" + e.getMessage());
                 }
                 try {
                     String mSQL="call altaUsuarios(?,?,?);";
                     PreparedStatement mppst= con.prepareStatement(mSQL);
-                    mppst.setInt(1, cmbDepartamento.getSelectedIndex()+1);
+                    mppst.setInt(1, cmbDepartamento.getSelectedIndex()+3);
                     mppst.setString(2, tfUsuario.getText());
                     mppst.setString(3, tfContrasenia.getText());
                     mppst.execute();
                 } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Error en la alta de Usuario " + e.getMessage());
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error en la alta " + e.getMessage());
@@ -627,9 +656,12 @@ public class AltaEmpleados extends javax.swing.JFrame {
                 ger.setPrivileges(privileges);
                 this.setVisible(false);
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
-        }    
+        }catch(java.text.ParseException e){
+            JOptionPane.showMessageDialog(null, "La fecha ingresada es invalidad", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error "+e.toString() + e.getMessage());
+        }
     }//GEN-LAST:event_btnAltaActionPerformed
 
     private void tfUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfUsuarioActionPerformed
@@ -681,6 +713,30 @@ public class AltaEmpleados extends javax.swing.JFrame {
     private void tfCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCorreoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfCorreoActionPerformed
+
+    private void tfDiaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfDiaKeyTyped
+        char validar=evt.getKeyChar();
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_tfDiaKeyTyped
+
+    private void tfMesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfMesKeyTyped
+        char validar=evt.getKeyChar();
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_tfMesKeyTyped
+
+    private void tfAnioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfAnioKeyTyped
+        char validar=evt.getKeyChar();
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_tfAnioKeyTyped
 
     /**
      * @param args the command line arguments
