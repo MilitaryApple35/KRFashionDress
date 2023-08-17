@@ -10,9 +10,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import sun.misc.Compare;
@@ -31,8 +35,10 @@ public class RegistroClientes extends javax.swing.JFrame {
     public RegistroClientes() {
         initComponents();
         llenarColonias();
+        llenarTabla();
     }
-    
+    private int idCliente;
+    private int seleccionado=0;
     private int privileges;
 
     public int getPrivileges() {
@@ -58,6 +64,43 @@ public class RegistroClientes extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
         }
+    }
+    
+    public void llenarTabla(){
+        DefaultTableModel modelo = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+        // Hacer que todas las celdas no sean editables
+                return false;
+            }
+        };
+        ResultSet res = null;
+        try {
+            String mostrarClientesSQL = "call mostrarClientes()";
+            PreparedStatement psMostrarClientes = con.prepareStatement(mostrarClientesSQL);
+            res = psMostrarClientes.executeQuery();
+            modelo.setColumnIdentifiers(new Object[]{"Nombres","Apellidos", "Calle y Numero", "Colonia", "Fecha de Nacimiento", "Teléfono",  "Correo"});
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
+        }
+        
+        try {
+            while (res.next()){
+                modelo.addRow(new Object[]{res.getString("nombreCli"), res.getString("apellidosCli"), res.getString("calleNumeroCli"), res.getString("colonia"), res.getString("fechaNacCli"), res.getString("Telefono(s)"), res.getString("Correo(s)")});
+            }
+            tblClientes.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
+        }
+    }
+    
+    public static int findIndexByName(JComboBox<String> comboBox, String nombre) {
+        for (int i = 0; i < comboBox.getItemCount(); i++) {
+            if (comboBox.getItemAt(i).equals(nombre)) {
+                return i;
+            }
+        }
+        return -1; // No se encontró el elemento
     }
 
     /**
@@ -97,14 +140,12 @@ public class RegistroClientes extends javax.swing.JFrame {
         imgLogo3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblEmpleados = new javax.swing.JTable();
+        tblClientes = new javax.swing.JTable();
 
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(722, 628));
         setMinimumSize(new java.awt.Dimension(722, 628));
-        setPreferredSize(new java.awt.Dimension(722, 638));
         setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -313,7 +354,7 @@ public class RegistroClientes extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel3)))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                         .addComponent(CalleyNumero)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfCalleYNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -369,7 +410,7 @@ public class RegistroClientes extends javax.swing.JFrame {
             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        tblEmpleados.setModel(new javax.swing.table.DefaultTableModel(
+        tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -377,10 +418,15 @@ public class RegistroClientes extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre(s)", "Apellidos", "Telefono", "Calle y numero", "Colonia", "NSS", "RFC"
+                "Nombre(s)", "Apellidos", "Calle y numero", "Colonia", "Fecha de Nacimiento", "Telefono", "Correo"
             }
         ));
-        jScrollPane1.setViewportView(tblEmpleados);
+        tblClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblClientesMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblClientes);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -436,70 +482,95 @@ public class RegistroClientes extends javax.swing.JFrame {
         else {
             try {
                 try {
-                    String altaClientesSQL="call altaClientes(?,?,?,?,?)";
-                    PreparedStatement psaltaClientes = con.prepareStatement(altaClientesSQL);
-                    psaltaClientes.setString(1, tfNombres.getText());
-                    psaltaClientes.setString(2, tfApellidos.getText());
-                    psaltaClientes.setString(3, tfCalleYNumero.getText());
-                    
-                    int idCol;
+                    if(seleccionado==0){
+                        String altaClientesSQL="call altaClientes(?,?,?,?,?)";
+                        PreparedStatement psaltaClientes = con.prepareStatement(altaClientesSQL);
+                        psaltaClientes.setString(1, tfNombres.getText());
+                        psaltaClientes.setString(2, tfApellidos.getText());
+                        psaltaClientes.setString(3, tfCalleYNumero.getText());
+
+                        int idCol;
+                        try {
+                            String idColoniaSQL="call buscarIdColonia(?);";
+                            PreparedStatement stmt=con.prepareStatement(idColoniaSQL);
+                            ResultSet rs;
+                            stmt.setString(1, cmbColonia.getSelectedItem().toString());
+                            rs = stmt.executeQuery();
+                            if (rs.next()) {
+                                int idColonia = rs.getInt(1);
+                                psaltaClientes.setInt(4, idColonia);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "No hay un valor en el ResultSet");
+                            }
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(null, "Error en buscarIdColonia " + e.getMessage() +" " + e.getLocalizedMessage());
+                        }
+
+                        String fecha=tfAnio.getText().concat("-".concat(tfMes.getText().concat("-".concat(tfDia.getText()))));
+                        psaltaClientes.setString(5, fecha);
+                        psaltaClientes.execute();
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Error en la alta del cliente: " + e.getMessage());
+                }
+                if(seleccionado==0){
                     try {
-                        String idColoniaSQL="call buscarIdColonia(?);";
+                        String altaTelClienteSQL="call altaTelCliente(?)";
+                        PreparedStatement psAltaTelCliente= con.prepareStatement(altaTelClienteSQL);
+                        psAltaTelCliente.setString(1, tfNumTel.getText());
+                        psAltaTelCliente.execute();
+                    } catch(Exception e) {
+                        JOptionPane.showMessageDialog(null, "Error en la alta del telefono del cliente: " + e.getMessage());
+                    }
+
+                    try {
+                        String altaCorreoClienteSQL="call altaCorreoCliente(?)";
+                        PreparedStatement psaltaCorreoCliente= con.prepareStatement(altaCorreoClienteSQL);
+                        psaltaCorreoCliente.setString(1, tfCorreo.getText());
+                        psaltaCorreoCliente.execute();
+                    } catch(Exception e) {
+                        JOptionPane.showMessageDialog(null, "Error en la alta del correo del cliente: " + e.getMessage());
+                    }
+                
+                    try {
+                        String idColoniaSQL="call ultimoCliente();";
                         PreparedStatement stmt=con.prepareStatement(idColoniaSQL);
                         ResultSet rs;
-                        stmt.setString(1, cmbColonia.getSelectedItem().toString());
                         rs = stmt.executeQuery();
                         if (rs.next()) {
-                            int idColonia = rs.getInt(1);
-                            psaltaClientes.setInt(4, idColonia);
+                            idCliente = rs.getInt(1);
                         } else {
                             JOptionPane.showMessageDialog(null, "No hay un valor en el ResultSet");
                         }
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "Error en buscarIdColonia " + e.getMessage() +" " + e.getLocalizedMessage());
                     }
-                    
-                    String fecha=tfAnio.getText().concat("-".concat(tfMes.getText().concat("-".concat(tfDia.getText()))));
-                    psaltaClientes.setString(5, fecha);
-                    psaltaClientes.execute();
-                    
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Error en la alta del cliente: " + e.getMessage());
-                }
-
-                try {
-                    String altaTelClienteSQL="call altaTelCliente(?)";
-                    PreparedStatement psAltaTelCliente= con.prepareStatement(altaTelClienteSQL);
-                    psAltaTelCliente.setString(1, tfNumTel.getText());
-                    psAltaTelCliente.execute();
-                } catch(Exception e) {
-                    JOptionPane.showMessageDialog(null, "Error en la alta del telefono del cliente: " + e.getMessage());
                 }
                 
-                try {
-                    String altaCorreoClienteSQL="call altaCorreoCliente(?)";
-                    PreparedStatement psaltaCorreoCliente= con.prepareStatement(altaCorreoClienteSQL);
-                    psaltaCorreoCliente.setString(1, tfCorreo.getText());
-                    psaltaCorreoCliente.execute();
-                } catch(Exception e) {
-                    JOptionPane.showMessageDialog(null, "Error en la alta del correo del cliente: " + e.getMessage());
+                if(seleccionado==1){
+                    try {
+                        String idColoniaSQL="call buscarIdCliente(?);";
+                        PreparedStatement stmt=con.prepareStatement(idColoniaSQL);
+                        ResultSet rs;
+                        stmt.setString(1, tfNumTel.getText());
+                        rs = stmt.executeQuery();
+                        if (rs.next()) {
+                            idCliente = rs.getInt(1);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No hay un valor en el ResultSet");
+                        }
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Error en buscarIdColonia " + e.getMessage() +" " + e.getLocalizedMessage());
+                    }
                 }
                 
-                if(getPrivileges()==1){
-                    Empleados emp= new Empleados();
-                    emp.setLayout(null);
-                    emp.setLocationRelativeTo(null);
-                    emp.setVisible(true);
-                    this.setVisible(false);
-                }
-                else if(getPrivileges()==2){
-                    Gerente ger = new Gerente();
-                    ger.setLayout(null);
-                    ger.setLocationRelativeTo(null);
-                    ger.setVisible(true);
-                    ger.setPrivileges(privileges);
-                    this.setVisible(false);
-                }
+                CrearRenta ren = new CrearRenta();
+                ren.setLayout(null);
+                ren.setLocationRelativeTo(null);
+                ren.setVisible(true);
+                ren.setPrivileges(privileges);
+                ren.setIdCliente(idCliente);
+                this.setVisible(false);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
             }
@@ -594,6 +665,63 @@ public class RegistroClientes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAgrgarColoniaActionPerformed
 
+    private void tblClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesMouseClicked
+        int filaSeleccionada = tblClientes.getSelectedRow();
+        int columnaSeleccionada = tblClientes.getSelectedColumn();
+
+        if (filaSeleccionada != -1 && columnaSeleccionada != -1) {
+            Object nombre = tblClientes.getValueAt(filaSeleccionada, 0);
+            Object apellidos = tblClientes.getValueAt(filaSeleccionada, 1);
+            Object calleynumero = tblClientes.getValueAt(filaSeleccionada, 2);
+            Object colonia = tblClientes.getValueAt(filaSeleccionada, 3);
+            Object fechanac = tblClientes.getValueAt(filaSeleccionada, 4);
+            Object telefono = tblClientes.getValueAt(filaSeleccionada, 5);
+            Object correo = tblClientes.getValueAt(filaSeleccionada, 6);
+            
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date fecha;
+            int year = 0;
+            int month = 0;
+            int day =0;
+            
+            try {
+                fecha = sdf.parse(fechanac.toString());
+
+                // Extraer año, mes y día de la fecha
+                year = fecha.getYear() + 1900;
+                month = fecha.getMonth() + 1;
+                day = fecha.getDate();
+
+            } catch (ParseException e) {
+                JOptionPane.showMessageDialog(null, "Error de Parse en la fecha: "+ e.getMessage());
+            }
+            
+            tfNombres.setText(nombre.toString());
+            tfApellidos.setText(apellidos.toString());
+            tfCalleYNumero.setText(calleynumero.toString());
+            tfCorreo.setText(correo.toString());
+            tfDia.setText(Integer.toString(day));
+            tfMes.setText(Integer.toString(month));
+            tfAnio.setText(Integer.toString(year));
+            tfNumTel.setText(telefono.toString());
+            cmbColonia.setSelectedItem(findIndexByName(cmbColonia, colonia.toString()));
+            
+            
+            tfNombres.disable();
+            tfApellidos.disable();
+            tfCalleYNumero.disable();
+            tfCorreo.disable();
+            tfDia.disable();
+            tfMes.disable();
+            tfAnio.disable();
+            cmbColonia.disable();
+            tfNumTel.disable();
+            btnAgrgarColonia.disable();
+            
+            seleccionado=1;
+        }
+    }//GEN-LAST:event_tblClientesMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -649,7 +777,7 @@ public class RegistroClientes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblEmpleados;
+    private javax.swing.JTable tblClientes;
     private javax.swing.JTextField tfAnio;
     private javax.swing.JTextField tfApellidos;
     private javax.swing.JTextField tfCalleYNumero;
