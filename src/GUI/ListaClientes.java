@@ -5,19 +5,14 @@
 package GUI;
 
 import Codigo.Conexion;
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 /**
  *
@@ -29,7 +24,7 @@ public class ListaClientes extends javax.swing.JFrame {
     DefaultTableModel table_clientes = new DefaultTableModel();
     TableRowSorter<TableModel> trs;
     ResultSet rs;
-    String[] Titulos = {"NOMBRE", "APELLIDOS", "CALLE Y NUMERO", "COLONIA", "FECHA DE NACIMIENTO", "TELEFONO(S)", "CORREO(S)"};
+    String[] Titulos = {"ID", "NOMBRE", "CALLE Y NUMERO", "COLONIA", "FECHA DE NACIMIENTO", "TELEFONO(S)", "CORREO(S)"};
     String[][] M_Clientes;
     /**
      * Creates new form ListaClientes
@@ -50,42 +45,31 @@ public class ListaClientes extends javax.swing.JFrame {
     }
     
     public void llenarTabla(){
-        int contador = 0;
         DefaultTableModel modelo = new DefaultTableModel();
         ResultSet res = null;
-        try { 
-            Statement st_cont = con.createStatement(); 
+        int contador = 0;
+        try {
+            Statement st_cont = con.createStatement();
             ResultSet rs_cont = st_cont.executeQuery("SELECT COUNT(*) FROM Clientes");
-            if (rs_cont.next()) {
+            String mostrarClientesSQL = "call mostrarClientes()";
+            if(rs_cont.next()){
                 contador = rs_cont.getInt(1);
             }
-            Statement st = con.createStatement();
-            rs = st.executeQuery("call mostrarClientes");
-            
-            int cont=0;
-            M_Clientes = new String[contador][7];
-            while(rs.next()){
-                M_Clientes[cont][0] = rs.getString("nombreCli");
-                M_Clientes[cont][1] = rs.getString("apellidosCli");
-                M_Clientes[cont][2] = rs.getString("calleNumeroCli");
-                M_Clientes[cont][3] = rs.getString("colonia");
-                M_Clientes[cont][4] = rs.getString("fechaNacCli");
-                M_Clientes[cont][5] = rs.getString("Telefono(s)");
-                M_Clientes[cont][6] = rs.getString("Correo(s)");
-                cont++;
-            }
-            table_clientes = new DefaultTableModel(M_Clientes, Titulos);
-            tblClientes.setModel(table_clientes);
-            tblClientes.setRowSorter(trs);
-        }catch (SQLException ex) {
-            Logger.getLogger(ListaClientes.class.getName()).log(Level.SEVERE, null, ex); //si llegara a ocurrir un error ya se  una mala consulta o mala conexion aqui nos lo mostraria
+            PreparedStatement psMostrarClientes = con.prepareStatement(mostrarClientesSQL);
+            res = psMostrarClientes.executeQuery();
+            modelo.setColumnIdentifiers(new Object[]{"Nombres","Apellidos", "Calle y Numero", "Colonia", "Teléfono", "Correo"});
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
         }
-        table_clientes = new DefaultTableModel(M_Clientes, Titulos) { //ahora agregaremos la matriz y los titulos al modelo de tabla
-            public boolean isCellEditable(int row, int column) {//este metodo es muy util si no quieren que editen su tabla, 
-                return false;  //si quieren modificar los campos al dar clic entonces borren este metodo
+        
+        try {
+            while (res.next()){
+                modelo.addRow(new Object[]{res.getString("nombreCli"), res.getString("apellidosCli"), res.getString("calleNumeroCli"), res.getString("colonia"), res.getString("Telefono(s)"), res.getString("Correo(s)")});
             }
-        };
-        tblClientes.setModel(table_clientes);
+            tableClientes.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
+        }
     }
 
     /**
@@ -107,12 +91,13 @@ public class ListaClientes extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblClientes = new javax.swing.JTable();
+        tableClientes = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        txfBusqueda = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         cmbBuscarPor = new javax.swing.JComboBox();
+        tfBuscarPor = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
 
         btnSalir.setText("SALIR");
 
@@ -169,7 +154,7 @@ public class ListaClientes extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        tblClientes.setModel(new javax.swing.table.DefaultTableModel(
+        tableClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -180,7 +165,7 @@ public class ListaClientes extends javax.swing.JFrame {
                 "Nombre", "Apellidos", "Num. Teléfonico", "Fecha de Nacimiento", "Calle y Numero", "Colonia"
             }
         ));
-        jScrollPane1.setViewportView(tblClientes);
+        jScrollPane1.setViewportView(tableClientes);
 
         jButton1.setBackground(new java.awt.Color(240, 0, 0));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -217,17 +202,6 @@ public class ListaClientes extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
-        txfBusqueda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfBusquedaActionPerformed(evt);
-            }
-        });
-        txfBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txfBusquedaKeyReleased(evt);
-            }
-        });
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel3.setText("Buscar por: ");
 
@@ -240,6 +214,21 @@ public class ListaClientes extends javax.swing.JFrame {
             }
         });
 
+        tfBuscarPor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfBuscarPorActionPerformed(evt);
+            }
+        });
+
+        btnBuscar.setBackground(new java.awt.Color(164, 55, 123));
+        btnBuscar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnBuscar.setText("BUSCAR");
+        btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBuscarMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -248,20 +237,24 @@ public class ListaClientes extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addComponent(cmbBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addComponent(txfBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addComponent(cmbBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(tfBuscarPor, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(txfBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(tfBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(cmbBuscarPor, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -281,9 +274,9 @@ public class ListaClientes extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -313,51 +306,36 @@ public class ListaClientes extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void txfBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfBusquedaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txfBusquedaActionPerformed
-
     private void cmbBuscarPorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBuscarPorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbBuscarPorActionPerformed
 
-    private void txfBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfBusquedaKeyReleased
+    private void tfBuscarPorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBuscarPorActionPerformed
         // TODO add your handling code here:
-        String busqueda = "" + txfBusqueda.getText();
-        String busquedaPor = cmbBuscarPor.getSelectedItem().toString();
-        int valor = 0;
-        int cont = 0;
+    }//GEN-LAST:event_tfBuscarPorActionPerformed
+
+    private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
+        DefaultTableModel modelo = new DefaultTableModel();
+        ResultSet res = null;
         try {
-            //CallableStatement cs_cont = con.prepareCall("{call contadorClientes(?, ?)}");
-            CallableStatement cs_cont = con.prepareCall("call contadorClientes(?, ?)");
-            cs_cont.setString(1, busquedaPor);
-            cs_cont.setString(2, busqueda);
-            ResultSet rs = cs_cont.executeQuery();
-            if(rs.next()){
-                valor = rs.getInt(1);
-            }
-            M_Clientes = new String[valor][7];
-            cs_cont = con.prepareCall("call buscarCliente(?, ?)");
-            cs_cont.setString(1, busquedaPor);
-            cs_cont.setString(2, busqueda);
-            rs = cs_cont.executeQuery();
-            while(rs.next()){
-                M_Clientes[cont][0] = rs.getString("nombreCli");
-                M_Clientes[cont][1] = rs.getString("apellidosCli");
-                M_Clientes[cont][2] = rs.getString("calleNumeroCli");
-                M_Clientes[cont][3] = rs.getString("colonia");
-                M_Clientes[cont][4] = rs.getString("fechaNacCli");
-                M_Clientes[cont][5] = rs.getString("Telefonos(s)");
-                M_Clientes[cont][6] = rs.getString("Correos(s)");
-                cont++;
-            }
-            table_clientes = new DefaultTableModel(M_Clientes, Titulos);
-            tblClientes.setModel(table_clientes);
-            tblClientes.setRowSorter(trs);
-        }catch (Exception e){
-            
+            String SQL="call buscarCliente(?,?)";
+            PreparedStatement pst = con.prepareStatement(SQL);
+            pst.setString(1, cmbBuscarPor.getSelectedItem().toString());
+            pst.setString(2, tfBuscarPor.getText());
+            res = pst.executeQuery();
+            modelo.setColumnIdentifiers(new Object[]{"Nombres","Apellidos", "Calle y Numero", "Colonia", "Teléfono", "Correo"});
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
         }
-    }//GEN-LAST:event_txfBusquedaKeyReleased
+        try {
+            while (res.next()){
+                modelo.addRow(new Object[]{res.getString("nombreCli"), res.getString("apellidosCli"), res.getString("calleNumeroCli"), res.getString("colonia"), res.getString("Telefono(s)"), res.getString("Correo(s)")});
+            }
+            tableClientes.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
+        }
+    }//GEN-LAST:event_btnBuscarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -395,8 +373,9 @@ public class ListaClientes extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ListaClientes;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnSalir;
-    public static javax.swing.JComboBox cmbBuscarPor;
+    private javax.swing.JComboBox cmbBuscarPor;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -407,8 +386,8 @@ public class ListaClientes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jspTablaClientes;
-    public static javax.swing.JTable tblClientes;
+    public static javax.swing.JTable tableClientes;
     private javax.swing.JTable tblListaClientes;
-    public static javax.swing.JTextField txfBusqueda;
+    private javax.swing.JTextField tfBuscarPor;
     // End of variables declaration//GEN-END:variables
 }
