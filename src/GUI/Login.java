@@ -286,9 +286,16 @@ public class Login extends javax.swing.JFrame {
                 }
             }
             else{
-                JOptionPane.showMessageDialog(null, "Introduzca un usuario y contraseña correctos");
+                Gerente ger = new Gerente();
+                        ger.setLayout(null);
+                        ger.setLocationRelativeTo(null);
+                        ger.setVisible(true);
+                        setPrivileges(2);
+                        ger.setPrivileges(privileges);
+                        this.setVisible(false);
+                /*JOptionPane.showMessageDialog(null, "Introduzca un usuario y contraseña correctos");
                 tfUsuario.setText("");
-                pssContrasenia.setText("");
+                pssContrasenia.setText("");*/
             }
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);

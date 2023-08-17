@@ -8,6 +8,9 @@ import Codigo.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -29,6 +32,16 @@ public class RecibirVestidos extends javax.swing.JFrame {
         fullscreen();
         llenarTabla();
     }
+    private int privileges;
+
+    
+    public int getPrivileges() {
+        return privileges;
+    }
+
+    public void setPrivileges(int privileges) {
+        this.privileges = privileges;
+    }
     
     public void fullscreen(){
         super.dispose();
@@ -37,11 +50,31 @@ public class RecibirVestidos extends javax.swing.JFrame {
         super.setVisible(true);
     }
     
+    public int getIdVestido(String nombre){
+        try {
+            String idVestidoSQL="call buscarIdVestido(?);";
+            PreparedStatement stmt=con.prepareStatement(idVestidoSQL);
+            ResultSet rs;
+            stmt.setString(1, nombre);
+            rs = stmt.executeQuery();
+            return rs.getInt(1);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
+        }
+        return -1;
+    }
+    
     public void llenarTabla(){
-        DefaultTableModel modelo = new DefaultTableModel();
+        DefaultTableModel modelo = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+        // Hacer que todas las celdas no sean editables
+                return false;
+            }
+        };
         ResultSet res = null;
         try {
-            String SQL="call mostrarVestidosPendientes()";
+            String SQL="call mostrarVestidos()";
             PreparedStatement pst= con.prepareStatement(SQL);
             res= pst.executeQuery();
             modelo.setColumnIdentifiers(new Object[]{"Vestido","Caracteristicas", "Talla", "Color", "Precio", "Estatus"});
@@ -131,7 +164,9 @@ public class RecibirVestidos extends javax.swing.JFrame {
         );
 
         btnRecibirVestidos.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnRecibirVestidos.setText("Recibir Vestido");
+        btnRecibirVestidos.setText("Vestido No Disponible");
+        btnRecibirVestidos.setToolTipText("");
+        btnRecibirVestidos.setActionCommand("Vestido No Disponible");
         btnRecibirVestidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRecibirVestidosActionPerformed(evt);
@@ -190,11 +225,44 @@ public class RecibirVestidos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRecibirVestidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecibirVestidosActionPerformed
-        // TODO add your handling code here:
+        int filaSeleccionada = tblCatalogo.getSelectedRow();
+        int columnaSeleccionada = tblCatalogo.getSelectedColumn();
+
+        if (filaSeleccionada != -1 && columnaSeleccionada != -1) {
+            String SQL="call vestidoNoDisponible(?);";
+            PreparedStatement ppst;
+            try {
+                ppst = con.prepareStatement(SQL);
+                if(getIdVestido(tblCatalogo.getValueAt(filaSeleccionada, 1).toString())!=-1){
+                        ppst.setInt(1, getIdVestido(tblCatalogo.getValueAt(filaSeleccionada, 1).toString()));
+                        ppst.executeQuery();
+                        llenarTabla();
+                }   
+            }catch (SQLException ex) {
+                Logger.getLogger(RecibirVestidos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Seleccione un vestido");
+        }
     }//GEN-LAST:event_btnRecibirVestidosActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        // TODO add your handling code here:
+        if(getPrivileges()==1){
+                Empleados emp= new Empleados();
+                emp.setLayout(null);
+                emp.setLocationRelativeTo(null);
+                emp.setVisible(true);
+                this.setVisible(false);
+            }
+            else if(getPrivileges()==2){
+                Gerente ger = new Gerente();
+                ger.setLayout(null);
+                ger.setLocationRelativeTo(null);
+                ger.setVisible(true);
+                ger.setPrivileges(privileges);
+                this.setVisible(false);
+            }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     /**

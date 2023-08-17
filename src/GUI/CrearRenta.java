@@ -34,6 +34,8 @@ public class CrearRenta extends javax.swing.JFrame {
     Connection con= cc.conexion();
     private int idCliente;
     private int privileges;
+    private String user;
+    private String password;
 
     public int getIdCliente() {
         return idCliente;
@@ -49,6 +51,33 @@ public class CrearRenta extends javax.swing.JFrame {
 
     public void setPrivileges(int privileges) {
         this.privileges = privileges;
+    }
+    public int getIdEmpleado(){
+        try {
+            String idEmpleadoSQL="call buscarIdEmpleado(?);";
+            PreparedStatement stmt=con.prepareStatement(idEmpleadoSQL);
+            ResultSet rs;
+            stmt.setString(1, user);
+            rs = stmt.executeQuery();
+            return rs.getInt(1);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
+        }
+        return -1;
+    }
+    
+    public int getIdVestido(String nombre){
+        try {
+            String idVestidoSQL="call buscarIdVestido(?);";
+            PreparedStatement stmt=con.prepareStatement(idVestidoSQL);
+            ResultSet rs;
+            stmt.setString(1, nombre);
+            rs = stmt.executeQuery();
+            return rs.getInt(1);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
+        }
+        return -1;
     }
     
     public void fullscreen(){
@@ -103,6 +132,24 @@ public class CrearRenta extends javax.swing.JFrame {
         tblListaActual.setModel(modelo);
     }
     
+    public void actualizarListaAnotaciones(String Anotaciones){
+        DefaultTableModel modelo = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+        // Hacer que todas las celdas no sean editables
+                return false;
+            }
+        };
+        modelo.setColumnIdentifiers(new Object[]{"Anotaciones"});
+        int y=1;
+        while(y<tblListaActual.getRowCount()){
+            modelo.addRow(new Object[]{tblListaAnotaciones.getValueAt(y, 1)});
+            y++;
+        }
+        modelo.addRow(new Object[]{Anotaciones});
+        tblListaActual.setModel(modelo);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -124,8 +171,6 @@ public class CrearRenta extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblListaActual = new javax.swing.JTable();
         lbAnotaciones = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         spnDiaFR = new javax.swing.JSpinner();
         spnMesFR = new javax.swing.JSpinner();
         spnAnioFR = new javax.swing.JSpinner();
@@ -139,6 +184,8 @@ public class CrearRenta extends javax.swing.JFrame {
         lbTelefono1 = new javax.swing.JLabel();
         rdioINE = new javax.swing.JRadioButton();
         rdioLicencia = new javax.swing.JRadioButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblListaAnotaciones = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         lbListaVestidos = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -168,7 +215,7 @@ public class CrearRenta extends javax.swing.JFrame {
                 .add(imgLogo)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 373, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(1453, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -215,11 +262,7 @@ public class CrearRenta extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblListaActual);
 
         lbAnotaciones.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lbAnotaciones.setText("Anotaciones");
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        lbAnotaciones.setText("Lista Anotaciones");
 
         spnDiaFR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
@@ -266,6 +309,22 @@ public class CrearRenta extends javax.swing.JFrame {
             }
         });
 
+        tblListaAnotaciones.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        tblListaAnotaciones.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null}
+            },
+            new String [] {
+                "Anotacion"
+            }
+        ));
+        tblListaAnotaciones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblListaAnotacionesMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(tblListaAnotaciones);
+
         org.jdesktop.layout.GroupLayout jPanel3Layout = new org.jdesktop.layout.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -274,8 +333,16 @@ public class CrearRenta extends javax.swing.JFrame {
                 .addContainerGap()
                 .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jPanel3Layout.createSequentialGroup()
-                        .add(lbAnotaciones)
-                        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jPanel3Layout.createSequentialGroup()
+                                .add(lbTelefono1)
+                                .add(32, 32, 32)
+                                .add(rdioINE)
+                                .add(18, 18, 18)
+                                .add(rdioLicencia))
+                            .add(lbListaActual)
+                            .add(lbAnotaciones))
+                        .add(0, 0, Short.MAX_VALUE))
                     .add(jPanel3Layout.createSequentialGroup()
                         .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(jScrollPane1)
@@ -305,19 +372,9 @@ public class CrearRenta extends javax.swing.JFrame {
                                 .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                     .add(spnAnioFR, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 130, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                     .add(spnAnioFE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 130, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                .add(0, 293, Short.MAX_VALUE))
-                            .add(jScrollPane2))
-                        .addContainerGap())
-                    .add(jPanel3Layout.createSequentialGroup()
-                        .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jPanel3Layout.createSequentialGroup()
-                                .add(lbTelefono1)
-                                .add(32, 32, 32)
-                                .add(rdioINE)
-                                .add(18, 18, 18)
-                                .add(rdioLicencia))
-                            .add(lbListaActual))
-                        .add(0, 448, Short.MAX_VALUE))))
+                                .add(0, 287, Short.MAX_VALUE))
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane4))
+                        .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -349,8 +406,8 @@ public class CrearRenta extends javax.swing.JFrame {
                 .add(18, 18, 18)
                 .add(lbAnotaciones)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 223, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(165, 165, 165))
+                .add(jScrollPane4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 336, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(52, 52, 52))
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -509,68 +566,43 @@ public class CrearRenta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRentarActionPerformed
-        String fecha=spnAnioFR.getValue().toString().concat("-".concat(spnMesFR.getValue().toString().concat("-".concat(spnDiaFR.getValue().toString()))));
+        String fechaRegreso=spnAnioFR.getValue().toString().concat("-".concat(spnMesFR.getValue().toString().concat("-".concat(spnDiaFR.getValue().toString()))));
+        String fechaEntrega=spnAnioFE.getValue().toString().concat("-".concat(spnMesFE.getValue().toString().concat("-".concat(spnDiaFE.getValue().toString()))));
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         sdf.setLenient(false);
         try {
-            sdf.parse(fecha);
+            sdf.parse(fechaRegreso);
+            sdf.parse(fechaEntrega);
             try {
                 String SQL="call altaRentas(?,?,?,?,?,?,?);";
                 PreparedStatement ppst= con.prepareStatement(SQL);
                 ppst.setInt(1, idCliente);
-                ppst.setString(2, tfApellidos.getText());
-                ppst.setString(3, tfCalleyNum.getText());
-                try {
-                    String idColoniaSQL="call buscarIdColonia(?);";
-                    PreparedStatement stmt=con.prepareStatement(idColoniaSQL);
-                    ResultSet rs;
-                    stmt.setString(1, cmbColonia.getSelectedItem().toString());
-                    rs = stmt.executeQuery();
-                    if (rs.next()) {
-                        int idColonia = rs.getInt(1);
-                        ppst.setInt(4, idColonia);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "No hay un valor en el ResultSet");
+                if(getIdEmpleado()==-1){
+                    int a = 1/0;
+                }
+                ppst.setInt(2, getIdEmpleado());
+                Date fecha = new Date();
+                String fechaRenta = Integer.toString(fecha.getYear()).concat("-".concat(Integer.toString(fecha.getMonth()).concat("-".concat(Integer.toString(fecha.getDay())))));
+                ppst.setString(3, fechaRenta);
+                ppst.setString(4, fechaEntrega);
+                ppst.setString(5, fechaRegreso);
+                if(buttonGroup1.getSelection().equals(rdioINE.getModel())==true){
+                    ppst.setInt(6, 0);
+                }
+                else{
+                    ppst.setInt(6, 1);
+                }
+                ppst.setInt(7, 0);
+                int y=1;
+                String anSQL="call altaDetallesRenta(?,?)";
+                PreparedStatement pst= con.prepareStatement(anSQL);
+                while(y<tblListaActual.getRowCount()){
+                    if(getIdVestido(tblListaActual.getValueAt(y, 1).toString())==-1){
+                        int a = 1/0;
                     }
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Error en buscarIdColonia " + e.getMessage() +" " + e.getLocalizedMessage());
-                }
-                
-                ppst.setString(5, tfNSS.getText());
-                ppst.setString(6, tfRFC.getText());
-                sdf.setLenient(false);
-                try {
-                    sdf.parse(fecha);
-                    ppst.setString(7, fecha);
-                    ppst.execute();
-                } catch (ParseException e) {
-                    JOptionPane.showMessageDialog(null, "La fecha ingresada es invalidad", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                try {
-                    String minSQL="call altaTelEmpleados(?);";
-                    PreparedStatement minppst= con.prepareStatement(minSQL);
-                    minppst.setString(1, tfNumTel.getText());
-                    minppst.execute();
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Error en la alta de Telefono" + e.getMessage());
-                }
-                try {
-                    String miSQL="call altaCorreoEmpleados(?);";
-                    PreparedStatement mippst= con.prepareStatement(miSQL);
-                    mippst.setString(1, tfCorreo.getText());
-                    mippst.execute();
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Error en la alta de Correo" + e.getMessage());
-                }
-                try {
-                    String mSQL="call altaUsuarios(?,?,?);";
-                    PreparedStatement mppst= con.prepareStatement(mSQL);
-                    mppst.setInt(1, cmbDepartamento.getSelectedIndex()+3);
-                    mppst.setString(2, tfUsuario.getText());
-                    mppst.setString(3, tfContrasenia.getText());
-                    mppst.execute();
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Error en la alta de Usuario " + e.getMessage());
+                    pst.setInt(1,getIdVestido(tblListaActual.getValueAt(y, 1).toString()));
+                    pst.setString(2, tblListaAnotaciones.getValueAt(y, 1).toString());
+                    y++;
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error en la alta " + e.getMessage());
@@ -634,6 +666,8 @@ public class CrearRenta extends javax.swing.JFrame {
             actualizarListaActual(tblListaVestidos.getValueAt(filaSeleccionada, 1).toString(), tblListaVestidos.getValueAt(filaSeleccionada, 2).toString(), Float.parseFloat(tblListaVestidos.getValueAt(filaSeleccionada, 3).toString()));
             total= total+ Float.parseFloat(tblListaVestidos.getValueAt(filaSeleccionada, 3).toString());
             lbTotal.setText("$$ "+total);
+            String anotaciones = JOptionPane.showInputDialog(null, "Introduzca las anotaciones pertinentes");
+            actualizarListaAnotaciones(anotaciones);
         }
     }//GEN-LAST:event_tblListaVestidosMouseClicked
 
@@ -645,8 +679,15 @@ public class CrearRenta extends javax.swing.JFrame {
         if (selectedRow != -1) {
             model.removeRow(selectedRow);
         }
-
+        DefaultTableModel anotacion = (DefaultTableModel) tblListaAnotaciones.getModel();
+        if(selectedRow!=-1){
+            anotacion.removeRow(selectedRow);
+        }
     }//GEN-LAST:event_tblListaActualMouseClicked
+
+    private void tblListaAnotacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblListaAnotacionesMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblListaAnotacionesMouseClicked
 
     /**
      * @param args the command line arguments
@@ -694,9 +735,8 @@ public class CrearRenta extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lbAnotaciones;
     private javax.swing.JLabel lbFechaEntrega;
     private javax.swing.JLabel lbFechaRenta;
@@ -717,6 +757,7 @@ public class CrearRenta extends javax.swing.JFrame {
     private javax.swing.JSpinner spnMesFE;
     private javax.swing.JSpinner spnMesFR;
     private javax.swing.JTable tblListaActual;
+    private javax.swing.JTable tblListaAnotaciones;
     private javax.swing.JTable tblListaVestidos;
     // End of variables declaration//GEN-END:variables
 }
