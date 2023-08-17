@@ -32,8 +32,8 @@ public class AltaEmpleados extends javax.swing.JFrame {
         llenarColonias();
     }
     
-    Conexion cc=new Conexion();
-    Connection con= cc.conexion();
+    Conexion cc = new Conexion();
+    Connection con = cc.conexion();
     
     private int privileges;
 
@@ -108,6 +108,7 @@ public class AltaEmpleados extends javax.swing.JFrame {
         tfCorreo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -537,10 +538,9 @@ public class AltaEmpleados extends javax.swing.JFrame {
 
         boolean espacio = key == 32;
 
-        if (!(minusculas || mayusculas || espacio))
-    {
-        evt.consume();
-    }
+        if (!(minusculas || mayusculas || espacio)) {
+            evt.consume();
+        }
 
     }//GEN-LAST:event_tfNombresKeyTyped
 
@@ -554,10 +554,9 @@ public class AltaEmpleados extends javax.swing.JFrame {
 
         boolean espacio = key == 32;
 
-        if (!(minusculas || mayusculas || espacio))
-    {
-        evt.consume();
-    }
+        if (!(minusculas || mayusculas || espacio)) {
+            evt.consume();
+        }
 
     }//GEN-LAST:event_tfApellidosKeyTyped
 

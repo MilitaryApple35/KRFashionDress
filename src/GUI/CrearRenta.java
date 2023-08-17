@@ -4,6 +4,16 @@
  */
 package GUI;
 
+import Codigo.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author asder
@@ -15,8 +25,21 @@ public class CrearRenta extends javax.swing.JFrame {
      */
     public CrearRenta() {
         initComponents();
+        llenarTabla();
     }
+    
+    Conexion cc=new Conexion();
+    Connection con= cc.conexion();
+    private int idCliente;
     private int privileges;
+
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
 
     public int getPrivileges() {
         return privileges;
@@ -25,6 +48,50 @@ public class CrearRenta extends javax.swing.JFrame {
     public void setPrivileges(int privileges) {
         this.privileges = privileges;
     }
+    
+    public void llenarTabla(){
+        DefaultTableModel modelo = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+        // Hacer que todas las celdas no sean editables
+                return false;
+            }
+        };
+        ResultSet res = null;
+        try {
+            String SQL="call mostrarVestidos()";
+            PreparedStatement pst= con.prepareStatement(SQL);
+            res= pst.executeQuery();
+            modelo.setColumnIdentifiers(new Object[]{"Vestido", "Caracteristicas", "Talla", "Color", "Precio", "Estatus"});
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
+        }
+        try {
+            while (res.next()){
+                modelo.addRow(new Object[]{res.getString("nombreVes"), res.getString("caractVes"), res.getString("tallaVes"), res.getString("colorVes"), res.getString("precioVes"), res.getString("estatus")});
+            }
+            tblListaVestidos.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
+        }
+    }
+    
+    public void actualizarListaActual(){
+        DefaultTableModel modelo = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+        // Hacer que todas las celdas no sean editables
+                return false;
+            }
+        };
+        modelo.setColumnIdentifiers(new Object[]{"Vestido", "Caracteristicas"});
+        int y=0;
+        while(y<tblListaActual.getRowCount()){
+            Object
+            modelo.addRow();
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,24 +106,14 @@ public class CrearRenta extends javax.swing.JFrame {
         imgLogo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        lbNombres = new javax.swing.JLabel();
-        lbApellidos = new javax.swing.JLabel();
-        lbCalleYNum = new javax.swing.JLabel();
-        lbColonia = new javax.swing.JLabel();
         lbFechaRenta = new javax.swing.JLabel();
         lbFechaEntrega = new javax.swing.JLabel();
-        lbTelefono = new javax.swing.JLabel();
         lbListaActual = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblListaActual = new javax.swing.JTable();
         lbAnotaciones = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        tfNombres = new javax.swing.JTextField();
-        tfApellidos = new javax.swing.JTextField();
-        tfCalleYNumero = new javax.swing.JTextField();
-        tfColonia = new javax.swing.JTextField();
-        tfTelefono = new javax.swing.JTextField();
         spnDiaFR = new javax.swing.JSpinner();
         spnMesFR = new javax.swing.JSpinner();
         spnAnioFR = new javax.swing.JSpinner();
@@ -73,7 +130,7 @@ public class CrearRenta extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         lbListaVestidos = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblListaVestidos = new javax.swing.JTable();
         btnRentar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
@@ -111,26 +168,11 @@ public class CrearRenta extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        lbNombres.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lbNombres.setText("Nombre(s)");
-
-        lbApellidos.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lbApellidos.setText("Apellidos");
-
-        lbCalleYNum.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lbCalleYNum.setText("Calle y Numero");
-
-        lbColonia.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lbColonia.setText("Colonia");
-
         lbFechaRenta.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbFechaRenta.setText("Fecha de Entrega");
 
         lbFechaEntrega.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbFechaEntrega.setText("Fecha de Regreso");
-
-        lbTelefono.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lbTelefono.setText("Telefono");
 
         lbListaActual.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbListaActual.setText("Lista Actual");
@@ -160,36 +202,6 @@ public class CrearRenta extends javax.swing.JFrame {
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
-
-        tfNombres.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        tfNombres.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfNombresKeyTyped(evt);
-            }
-        });
-
-        tfApellidos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        tfApellidos.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfApellidosKeyTyped(evt);
-            }
-        });
-
-        tfCalleYNumero.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
-        tfColonia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        tfColonia.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfColoniaKeyTyped(evt);
-            }
-        });
-
-        tfTelefono.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        tfTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfTelefonoKeyTyped(evt);
-            }
-        });
 
         spnDiaFR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
@@ -249,43 +261,31 @@ public class CrearRenta extends javax.swing.JFrame {
                             .add(jScrollPane1)
                             .add(jPanel3Layout.createSequentialGroup()
                                 .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(lbApellidos)
-                                    .add(lbCalleYNum)
-                                    .add(lbColonia)
                                     .add(lbFechaRenta)
-                                    .add(lbFechaEntrega)
-                                    .add(lbTelefono)
-                                    .add(lbNombres))
+                                    .add(lbFechaEntrega))
                                 .add(18, 18, 18)
                                 .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(tfNombres)
-                                    .add(tfApellidos)
-                                    .add(tfCalleYNumero)
-                                    .add(tfColonia)
-                                    .add(tfTelefono)
+                                    .add(spnDiaFR, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 65, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                    .add(spnDiaFE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 65, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                .add(40, 40, 40)
+                                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(lbSlash)
+                                    .add(lbSlash2))
+                                .add(41, 41, 41)
+                                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                                     .add(jPanel3Layout.createSequentialGroup()
-                                        .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                            .add(spnDiaFR, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 65, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                            .add(spnDiaFE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 65, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                        .add(40, 40, 40)
-                                        .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                            .add(lbSlash)
-                                            .add(lbSlash2))
-                                        .add(41, 41, 41)
-                                        .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                                            .add(jPanel3Layout.createSequentialGroup()
-                                                .add(spnMesFE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 65, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .add(lbSlash3))
-                                            .add(jPanel3Layout.createSequentialGroup()
-                                                .add(spnMesFR, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 65, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                                .add(38, 38, 38)
-                                                .add(lbSlash1)))
+                                        .add(spnMesFE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 65, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .add(lbSlash3))
+                                    .add(jPanel3Layout.createSequentialGroup()
+                                        .add(spnMesFR, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 65, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                         .add(38, 38, 38)
-                                        .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                            .add(spnAnioFR, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 130, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                            .add(spnAnioFE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 130, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                        .add(0, 293, Short.MAX_VALUE))))
+                                        .add(lbSlash1)))
+                                .add(38, 38, 38)
+                                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(spnAnioFR, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 130, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                    .add(spnAnioFE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 130, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                .add(0, 293, Short.MAX_VALUE))
                             .add(jScrollPane2))
                         .addContainerGap())
                     .add(jPanel3Layout.createSequentialGroup()
@@ -302,33 +302,13 @@ public class CrearRenta extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(lbNombres, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(tfNombres))
-                .add(18, 18, 18)
-                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(lbApellidos, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(tfApellidos))
-                .add(18, 18, 18)
-                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(lbCalleYNum, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(tfCalleYNumero))
-                .add(18, 18, 18)
-                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(lbColonia, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(tfColonia))
-                .add(18, 18, 18)
                 .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(lbFechaRenta, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, spnDiaFR)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, spnAnioFR)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .add(0, 0, Short.MAX_VALUE)
-                        .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(org.jdesktop.layout.GroupLayout.TRAILING, spnMesFR, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(org.jdesktop.layout.GroupLayout.TRAILING, lbSlash)
-                            .add(org.jdesktop.layout.GroupLayout.TRAILING, lbSlash1))))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, spnMesFR, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, lbSlash)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, lbSlash1))
                 .add(18, 18, 18)
                 .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(lbFechaEntrega)
@@ -338,23 +318,19 @@ public class CrearRenta extends javax.swing.JFrame {
                     .add(spnMesFE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(spnAnioFE))
                 .add(18, 18, 18)
-                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(lbTelefono, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(tfTelefono))
-                .add(18, 18, 18)
                 .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(lbTelefono1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(jRadioButton1)
                     .add(jRadioButton2))
-                .add(18, 18, 18)
+                .add(45, 45, 45)
                 .add(lbListaActual)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 239, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 336, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(18, 18, 18)
                 .add(lbAnotaciones)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 124, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(117, 117, 117))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 223, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(165, 165, 165))
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -362,8 +338,8 @@ public class CrearRenta extends javax.swing.JFrame {
         lbListaVestidos.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbListaVestidos.setText("Lista Vestidos");
 
-        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblListaVestidos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tblListaVestidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -388,7 +364,12 @@ public class CrearRenta extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable1);
+        tblListaVestidos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblListaVestidosMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tblListaVestidos);
 
         btnRentar.setBackground(new java.awt.Color(0, 204, 0));
         btnRentar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -409,38 +390,6 @@ public class CrearRenta extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-
-        org.jdesktop.layout.GroupLayout jPanel4Layout = new org.jdesktop.layout.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jPanel4Layout.createSequentialGroup()
-                        .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(lbListaVestidos)
-                            .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 955, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .add(btnRentar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 126, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(40, 40, 40)
-                        .add(btnCancelar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 126, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(80, 80, 80))))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(lbListaVestidos)
-                .add(18, 18, 18)
-                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 662, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(30, 30, 30)
-                .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(btnRentar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 42, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(btnCancelar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 42, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         jPanel5.setBackground(new java.awt.Color(204, 255, 204));
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -466,6 +415,43 @@ public class CrearRenta extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        org.jdesktop.layout.GroupLayout jPanel4Layout = new org.jdesktop.layout.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(jPanel4Layout.createSequentialGroup()
+                        .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(lbListaVestidos)
+                            .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 955, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(btnRentar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 142, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(40, 40, 40)
+                        .add(btnCancelar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 148, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(58, 58, 58))))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(lbListaVestidos)
+                .add(18, 18, 18)
+                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 662, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(30, 30, 30)
+                .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(btnCancelar, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(jPanel4Layout.createSequentialGroup()
+                        .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(0, 0, Short.MAX_VALUE))
+                    .add(btnRentar, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -473,11 +459,7 @@ public class CrearRenta extends javax.swing.JFrame {
             .add(jPanel1Layout.createSequentialGroup()
                 .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jPanel1Layout.createSequentialGroup()
-                        .add(10, 10, 10)
-                        .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
             .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -487,10 +469,7 @@ public class CrearRenta extends javax.swing.JFrame {
                 .add(18, 18, 18)
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jPanel1Layout.createSequentialGroup()
-                        .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(18, 18, 18)
-                        .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                    .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .add(0, 0, Short.MAX_VALUE))
         );
 
@@ -542,66 +521,14 @@ public class CrearRenta extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void tfNombresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNombresKeyTyped
-        int key = evt.getKeyChar();
-        
-        boolean mayusculas = key >= 65 && key <=90;
+    private void tblListaVestidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblListaVestidosMouseClicked
+        int filaSeleccionada = tblListaVestidos.getSelectedRow();
+        int columnaSeleccionada = tblListaVestidos.getSelectedColumn();
 
-        boolean minusculas = key >= 97 && key <=122;
-
-        boolean espacio = key == 32;
-
-        if (!(minusculas || mayusculas || espacio))
-    {
-        evt.consume();
-    }
-
-    }//GEN-LAST:event_tfNombresKeyTyped
-
-    private void tfApellidosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfApellidosKeyTyped
-        int key = evt.getKeyChar();
-        
-        boolean mayusculas = key >= 65 && key <=90;
-
-        boolean minusculas = key >= 97 && key <=122;
-
-        boolean espacio = key == 32;
-
-        if (!(minusculas || mayusculas || espacio))
-    {
-        evt.consume();
-    }
-
-    }//GEN-LAST:event_tfApellidosKeyTyped
-
-    private void tfColoniaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfColoniaKeyTyped
-        
-        int key = evt.getKeyChar();
-        
-        boolean mayusculas = key >= 65 && key <=90;
-
-        boolean minusculas = key >= 97 && key <=122;
-
-        boolean espacio = key == 32;
-
-        if (!(minusculas || mayusculas || espacio))
-    {
-        evt.consume();
-    }
-
-    }//GEN-LAST:event_tfColoniaKeyTyped
-
-    private void tfTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfTelefonoKeyTyped
-        
-	int key = evt.getKeyChar();
-
-        boolean numero = key >=8 && key <=57;
-
-        if (!numero)
-    {
-	evt.consume();
-    }
-    }//GEN-LAST:event_tfTelefonoKeyTyped
+        if (filaSeleccionada != -1 && columnaSeleccionada != -1) {
+            actualizarListaActual();
+        }
+    }//GEN-LAST:event_tblListaVestidosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -652,22 +579,16 @@ public class CrearRenta extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lbAnotaciones;
-    private javax.swing.JLabel lbApellidos;
-    private javax.swing.JLabel lbCalleYNum;
-    private javax.swing.JLabel lbColonia;
     private javax.swing.JLabel lbFechaEntrega;
     private javax.swing.JLabel lbFechaRenta;
     private javax.swing.JLabel lbListaActual;
     private javax.swing.JLabel lbListaVestidos;
-    private javax.swing.JLabel lbNombres;
     private javax.swing.JLabel lbSlash;
     private javax.swing.JLabel lbSlash1;
     private javax.swing.JLabel lbSlash2;
     private javax.swing.JLabel lbSlash3;
-    private javax.swing.JLabel lbTelefono;
     private javax.swing.JLabel lbTelefono1;
     private javax.swing.JLabel lbTotal;
     private javax.swing.JSpinner spnAnioFE;
@@ -677,10 +598,6 @@ public class CrearRenta extends javax.swing.JFrame {
     private javax.swing.JSpinner spnMesFE;
     private javax.swing.JSpinner spnMesFR;
     private javax.swing.JTable tblListaActual;
-    private javax.swing.JTextField tfApellidos;
-    private javax.swing.JTextField tfCalleYNumero;
-    private javax.swing.JTextField tfColonia;
-    private javax.swing.JTextField tfNombres;
-    private javax.swing.JTextField tfTelefono;
+    private javax.swing.JTable tblListaVestidos;
     // End of variables declaration//GEN-END:variables
 }
