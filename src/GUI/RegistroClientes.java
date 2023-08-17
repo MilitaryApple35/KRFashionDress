@@ -50,6 +50,24 @@ public class RegistroClientes extends javax.swing.JFrame {
     private int idCliente;
     private int seleccionado=0;
     private int privileges;
+    private String user;
+    private String password;
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public int getPrivileges() {
         return privileges;
@@ -580,6 +598,8 @@ public class RegistroClientes extends javax.swing.JFrame {
                 ren.setVisible(true);
                 ren.setPrivileges(privileges);
                 ren.setIdCliente(idCliente);
+                ren.setUser(user);
+                ren.setPassword(password);
                 this.setVisible(false);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error " + e.getMessage());

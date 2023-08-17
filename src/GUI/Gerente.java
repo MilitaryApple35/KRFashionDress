@@ -34,6 +34,24 @@ public class Gerente extends javax.swing.JFrame {
     }
     
     private int privileges;
+    private String user;
+    private String password;
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public int getPrivileges() {
         return privileges;
@@ -268,11 +286,13 @@ public class Gerente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGestionEmpleadosActionPerformed
 
     private void btnCrearRentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearRentaActionPerformed
-        CrearRenta rent= new CrearRenta();
+        RegistroClientes rent= new RegistroClientes();
         rent.setLayout(null);
         rent.setLocationRelativeTo(null);
         rent.setVisible(true);
         rent.setPrivileges(privileges);
+        rent.setUser(user);
+        rent.setPassword(password);
         this.setVisible(false);
     }//GEN-LAST:event_btnCrearRentaActionPerformed
 

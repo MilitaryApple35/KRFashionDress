@@ -232,7 +232,7 @@ public class RecibirVestidos extends javax.swing.JFrame {
             PreparedStatement ppst;
             try {
                 ppst = con.prepareStatement(SQL);
-                if(getIdVestido(tblCatalogo.getValueAt(filaSeleccionada, 1).toString())!=-1){
+                if(getIdVestido(tblCatalogo.getValueAt(filaSeleccionada, 0).toString())!=-1){
                         ppst.setInt(1, getIdVestido(tblCatalogo.getValueAt(filaSeleccionada, 1).toString()));
                         ppst.executeQuery();
                         llenarTabla();

@@ -45,6 +45,24 @@ public class Login extends javax.swing.JFrame {
     public int getPrivileges() {
         return privileges;
     }
+    private String user;
+    private String password;
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public void setPrivileges(int privileges) {
         this.privileges = privileges;
@@ -256,6 +274,8 @@ public class Login extends javax.swing.JFrame {
             pst.setString(1, tfUsuario.getText());
             pst.setString(2, pssContrasenia.getText());
             ResultSet res= pst.executeQuery();
+            user=tfUsuario.getText();
+            password=pssContrasenia.getText();
             if(res.next() &&res.getBoolean(1)==true){
                 try {
                     String tipoSQL="select rolUsuario(?);";
@@ -270,6 +290,8 @@ public class Login extends javax.swing.JFrame {
                         ger.setVisible(true);
                         setPrivileges(2);
                         ger.setPrivileges(privileges);
+                        ger.setUser(user);
+                        ger.setPassword(password);
                         this.setVisible(false);
                     }
                     else{
@@ -279,6 +301,8 @@ public class Login extends javax.swing.JFrame {
                         emp.setVisible(true);
                         setPrivileges(1);
                         emp.setPrivileges(privileges);
+                        emp.setUser(user);
+                        emp.setPassword(password);
                         this.setVisible(false);
                      }
                 } catch (Exception e) {

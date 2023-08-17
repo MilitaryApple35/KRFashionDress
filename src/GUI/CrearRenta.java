@@ -37,6 +37,22 @@ public class CrearRenta extends javax.swing.JFrame {
     private String user;
     private String password;
 
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public int getIdCliente() {
         return idCliente;
     }
@@ -54,14 +70,14 @@ public class CrearRenta extends javax.swing.JFrame {
     }
     public int getIdEmpleado(){
         try {
-            String idEmpleadoSQL="call buscarIdEmpleado(?);";
+            String idEmpleadoSQL="call buscarIdUsuario(?);";
             PreparedStatement stmt=con.prepareStatement(idEmpleadoSQL);
             ResultSet rs;
             stmt.setString(1, user);
             rs = stmt.executeQuery();
             return rs.getInt(1);
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error id Usuario" + e.getMessage());
         }
         return -1;
     }
@@ -75,7 +91,7 @@ public class CrearRenta extends javax.swing.JFrame {
             rs = stmt.executeQuery();
             return rs.getInt(1);
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error Id Vestido" + e.getMessage());
         }
         return -1;
     }
@@ -125,7 +141,7 @@ public class CrearRenta extends javax.swing.JFrame {
         modelo.setColumnIdentifiers(new Object[]{"Vestido", "Caracteristicas", "Precio"});
         int y=1;
         while(y<tblListaActual.getRowCount()){
-            modelo.addRow(new Object[]{tblListaActual.getValueAt(y, 1), tblListaActual.getValueAt(y, 2), tblListaActual.getValueAt(y, 3)});
+            modelo.addRow(new Object[]{tblListaActual.getValueAt(y, 0), tblListaActual.getValueAt(y, 1), tblListaActual.getValueAt(y, 4)});
             y++;
         }
         modelo.addRow(new Object[]{vestido,caracteristicas, precio});
@@ -142,12 +158,12 @@ public class CrearRenta extends javax.swing.JFrame {
         };
         modelo.setColumnIdentifiers(new Object[]{"Anotaciones"});
         int y=1;
-        while(y<tblListaActual.getRowCount()){
+        while(y<tblListaAnotaciones.getRowCount()){
             modelo.addRow(new Object[]{tblListaAnotaciones.getValueAt(y, 1)});
             y++;
         }
         modelo.addRow(new Object[]{Anotaciones});
-        tblListaActual.setModel(modelo);
+        tblListaAnotaciones.setModel(modelo);
     }
     
     /**
@@ -595,11 +611,11 @@ public class CrearRenta extends javax.swing.JFrame {
                 String anSQL="call altaDetallesRenta(?,?)";
                 PreparedStatement pst= con.prepareStatement(anSQL);
                 while(y<tblListaActual.getRowCount()){
-                    if(getIdVestido(tblListaActual.getValueAt(y, 1).toString())==-1){
+                    if(getIdVestido(tblListaActual.getValueAt(y, 0).toString())==-1){
                         int a = 1/0;
                     }
-                    pst.setInt(1,getIdVestido(tblListaActual.getValueAt(y, 1).toString()));
-                    pst.setString(2, tblListaAnotaciones.getValueAt(y, 1).toString());
+                    pst.setInt(1,getIdVestido(tblListaActual.getValueAt(y, 0).toString()));
+                    pst.setString(2, tblListaAnotaciones.getValueAt(y, 0).toString());
                     y++;
                 }
             } catch (Exception e) {
@@ -611,6 +627,9 @@ public class CrearRenta extends javax.swing.JFrame {
                 emp.setLayout(null);
                 emp.setLocationRelativeTo(null);
                 emp.setVisible(true);
+                emp.setPrivileges(privileges);
+                emp.setUser(user);
+                emp.setPassword(password);
                 this.setVisible(false);
             }
             else if(getPrivileges()==2){
@@ -619,6 +638,8 @@ public class CrearRenta extends javax.swing.JFrame {
                 ger.setLocationRelativeTo(null);
                 ger.setVisible(true);
                 ger.setPrivileges(privileges);
+                ger.setUser(user);
+                ger.setPassword(password);
                 this.setVisible(false);
             }
         }catch(java.text.ParseException e){
@@ -661,8 +682,8 @@ public class CrearRenta extends javax.swing.JFrame {
         int columnaSeleccionada = tblListaVestidos.getSelectedColumn();
 
         if (filaSeleccionada != -1 && columnaSeleccionada != -1) {
-            actualizarListaActual(tblListaVestidos.getValueAt(filaSeleccionada, 1).toString(), tblListaVestidos.getValueAt(filaSeleccionada, 2).toString(), Float.parseFloat(tblListaVestidos.getValueAt(filaSeleccionada, 3).toString()));
-            total= total+ Float.parseFloat(tblListaVestidos.getValueAt(filaSeleccionada, 3).toString());
+            actualizarListaActual(tblListaVestidos.getValueAt(filaSeleccionada, 0).toString(), tblListaVestidos.getValueAt(filaSeleccionada, 1).toString(), Float.parseFloat(tblListaVestidos.getValueAt(filaSeleccionada, 4).toString()));
+            total= total+ Float.parseFloat(tblListaVestidos.getValueAt(filaSeleccionada, 4).toString());
             lbTotal.setText("$$ "+total);
             String anotaciones = JOptionPane.showInputDialog(null, "Introduzca las anotaciones pertinentes");
             actualizarListaAnotaciones(anotaciones);
@@ -672,7 +693,7 @@ public class CrearRenta extends javax.swing.JFrame {
     private void tblListaActualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblListaActualMouseClicked
         DefaultTableModel model = (DefaultTableModel) tblListaActual.getModel();
         int selectedRow = tblListaActual.getSelectedRow();
-        total= total- Float.parseFloat(tblListaVestidos.getValueAt(selectedRow, 3).toString());
+        total= total- Float.parseFloat(tblListaVestidos.getValueAt(selectedRow, 4).toString());
         lbTotal.setText("$$ "+total);
         if (selectedRow != -1) {
             model.removeRow(selectedRow);
