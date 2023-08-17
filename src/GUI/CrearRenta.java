@@ -602,19 +602,15 @@ public class CrearRenta extends javax.swing.JFrame {
                     int a = 1/0;
                 }
                 ppst.setInt(2, getIdEmpleado());
-                Date fecha = new Date();
-                String fechaRenta = Integer.toString(fecha.getYear()).concat("-".concat(Integer.toString(fecha.getMonth()).concat("-".concat(Integer.toString(fecha.getDay())))));
-                JOptionPane.showMessageDialog(null, fechaRenta);
-                ppst.setString(3, fechaRenta);
-                ppst.setString(4, fechaEntrega);
-                ppst.setString(5, fechaRegreso);
+                ppst.setString(3, fechaEntrega);
+                ppst.setString(4, fechaRegreso);
                 if(buttonGroup1.getSelection().equals(rdioINE.getModel())==true){
-                    ppst.setInt(6, 0);
+                    ppst.setInt(5, 0);
                 }
                 else{
-                    ppst.setInt(6, 1);
+                    ppst.setInt(5, 1);
                 }
-                ppst.setInt(7, 0);
+                ppst.setInt(6, 0);
                 int y=1;
                 try {
                     String anSQL="call altaDetallesRenta(?,?)";
