@@ -587,7 +587,7 @@ public class AltaEmpleados extends javax.swing.JFrame {
                 ppst.setString(3, tfCalleyNum.getText());
                 try {
                     String idColoniaSQL="call buscarIdColonia(?);";
-                    PreparedStatement stmt=con.prepareStatement(idColoniaSQL);
+                    PreparedStatement stmt = con.prepareStatement(idColoniaSQL);
                     ResultSet rs;
                     stmt.setString(1, cmbColonia.getSelectedItem().toString());
                     rs = stmt.executeQuery();
