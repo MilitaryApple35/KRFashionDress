@@ -112,7 +112,7 @@ public class RecibirVestidos extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        tblCatalogo.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        tblCatalogo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         tblCatalogo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -132,6 +132,7 @@ public class RecibirVestidos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblCatalogo.setRowHeight(24);
         jScrollPane3.setViewportView(tblCatalogo);
 
         jPanel3.setBackground(new java.awt.Color(164, 55, 123));
@@ -162,17 +163,20 @@ public class RecibirVestidos extends javax.swing.JFrame {
             .addComponent(imgLogo, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
+        btnRecibirVestidos.setBackground(new java.awt.Color(164, 55, 123));
         btnRecibirVestidos.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnRecibirVestidos.setForeground(new java.awt.Color(255, 255, 255));
         btnRecibirVestidos.setText("Vestido No Disponible");
         btnRecibirVestidos.setToolTipText("");
-        btnRecibirVestidos.setActionCommand("Vestido No Disponible");
         btnRecibirVestidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRecibirVestidosActionPerformed(evt);
             }
         });
 
-        btnSalir.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnSalir.setBackground(new java.awt.Color(255, 0, 0));
+        btnSalir.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(255, 255, 255));
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,24 +193,24 @@ public class RecibirVestidos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane3)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnRecibirVestidos)
-                .addGap(66, 66, 66)
-                .addComponent(btnSalir)
-                .addGap(103, 103, 103))
+                .addGap(33, 33, 33))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 826, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalir)
-                    .addComponent(btnRecibirVestidos))
-                .addContainerGap(279, Short.MAX_VALUE))
+                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRecibirVestidos, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

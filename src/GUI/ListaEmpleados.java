@@ -159,6 +159,7 @@ public class ListaEmpleados extends javax.swing.JFrame {
 
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
 
+        tblEmpleados.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         tblEmpleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -170,6 +171,7 @@ public class ListaEmpleados extends javax.swing.JFrame {
                 "Nombre(s)", "Apellidos", "Telefono", "Calle y numero", "Colonia", "NSS", "RFC"
             }
         ));
+        tblEmpleados.setRowHeight(24);
         jScrollPane1.setViewportView(tblEmpleados);
 
         btnSalir.setBackground(new java.awt.Color(240, 0, 0));

@@ -93,7 +93,7 @@ public class ReportesMes extends javax.swing.JFrame {
         jpTablaReportesEmpleado.setBackground(new java.awt.Color(255, 255, 255));
         jpTablaReportesEmpleado.setPreferredSize(new java.awt.Dimension(1920, 100));
 
-        tblReportesMes.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tblReportesMes.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         tblReportesMes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -113,6 +113,7 @@ public class ReportesMes extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblReportesMes.setRowHeight(24);
         jScrollPane3.setViewportView(tblReportesMes);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N

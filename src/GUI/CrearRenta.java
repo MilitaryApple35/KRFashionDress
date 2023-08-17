@@ -252,7 +252,7 @@ public class CrearRenta extends javax.swing.JFrame {
         lbListaActual.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbListaActual.setText("Lista Actual");
 
-        tblListaActual.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        tblListaActual.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tblListaActual.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null}
@@ -269,6 +269,7 @@ public class CrearRenta extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblListaActual.setRowHeight(24);
         tblListaActual.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblListaActualMouseClicked(evt);
@@ -324,7 +325,7 @@ public class CrearRenta extends javax.swing.JFrame {
             }
         });
 
-        tblListaAnotaciones.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        tblListaAnotaciones.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tblListaAnotaciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null}
@@ -333,6 +334,7 @@ public class CrearRenta extends javax.swing.JFrame {
                 "Anotacion"
             }
         ));
+        tblListaAnotaciones.setRowHeight(24);
         tblListaAnotaciones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblListaAnotacionesMouseClicked(evt);
@@ -456,6 +458,7 @@ public class CrearRenta extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblListaVestidos.setRowHeight(24);
         tblListaVestidos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblListaVestidosMouseClicked(evt);

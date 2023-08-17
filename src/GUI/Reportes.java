@@ -112,7 +112,7 @@ public class Reportes extends javax.swing.JFrame {
         jpTablaReportesGeneral.setBackground(new java.awt.Color(255, 255, 255));
         jpTablaReportesGeneral.setPreferredSize(new java.awt.Dimension(1920, 100));
 
-        tblReportesGeneral.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tblReportesGeneral.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         tblReportesGeneral.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null},
@@ -132,6 +132,7 @@ public class Reportes extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblReportesGeneral.setRowHeight(24);
         jScrollPane3.setViewportView(tblReportesGeneral);
 
         org.jdesktop.layout.GroupLayout jpTablaReportesGeneralLayout = new org.jdesktop.layout.GroupLayout(jpTablaReportesGeneral);
