@@ -343,7 +343,7 @@ public class ListaClientes extends javax.swing.JFrame {
             while (res.next()){
                 modelo.addRow(new Object[]{res.getString("nombreCli"), res.getString("apellidosCli"), res.getString("calleNumeroCli"), res.getString("colonia"), res.getString("Telefono(s)"), res.getString("Correo(s)")});
             }
-            tableClientes.setModel(modelo);
+            tblClientes.setModel(modelo);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
         }
