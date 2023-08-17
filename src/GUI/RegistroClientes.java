@@ -595,12 +595,14 @@ public class RegistroClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAltaActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        if(getPrivileges()==1){
+       if(getPrivileges()==1){
             Empleados emp= new Empleados();
             emp.setLayout(null);
             emp.setLocationRelativeTo(null);
             emp.setVisible(true);
             emp.setPrivileges(privileges);
+            emp.setUser(user);
+            emp.setPassword(password);
             this.setVisible(false);
         }
         else if(getPrivileges()==2){
@@ -609,6 +611,8 @@ public class RegistroClientes extends javax.swing.JFrame {
             ger.setLocationRelativeTo(null);
             ger.setVisible(true);
             ger.setPrivileges(privileges);
+            ger.setUser(user);
+            ger.setPassword(password);
             this.setVisible(false);
         }
     }//GEN-LAST:event_btnCancelarActionPerformed

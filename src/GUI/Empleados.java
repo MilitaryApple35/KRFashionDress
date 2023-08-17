@@ -226,6 +226,8 @@ public class Empleados extends javax.swing.JFrame {
         Catalogo.setLocationRelativeTo(null);
         Catalogo.setVisible(true);
         Catalogo.setPrivileges(privileges);
+        Catalogo.setUser(user);
+        Catalogo.setPassword(password);
         this.setVisible(false);
     }//GEN-LAST:event_btnCatalogoActionPerformed
 
@@ -235,6 +237,8 @@ public class Empleados extends javax.swing.JFrame {
         GesCli.setLocationRelativeTo(null);
         GesCli.setVisible(true);
         GesCli.setPrivileges(privileges);
+        GesCli.setUser(user);
+        GesCli.setPassword(password);
         this.setVisible(false);
     }//GEN-LAST:event_btnGestionclientesActionPerformed
 
@@ -244,11 +248,20 @@ public class Empleados extends javax.swing.JFrame {
         rent.setLocationRelativeTo(null);
         rent.setVisible(true);
         rent.setPrivileges(privileges);
+        rent.setUser(user);
+        rent.setPassword(password);
         this.setVisible(false);
     }//GEN-LAST:event_btnCrearRentaActionPerformed
 
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
-        // TODO add your handling code here:
+        GestionReportes gesReportes = new GestionReportes();
+        gesReportes.setLayout(null);
+        gesReportes.setLocationRelativeTo(null);
+        gesReportes.setVisible(true);
+        gesReportes.setPrivileges(privileges);
+        gesReportes.setUser(user);
+        gesReportes.setPassword(password);
+        this.setVisible(false);
     }//GEN-LAST:event_btnReporteActionPerformed
 
     /**

@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author asder
  */
-public class RecibirVestidos extends javax.swing.JFrame {
+public class TerminarRenta extends javax.swing.JFrame {
 
     /**
      * Creates new form RecibirVestidos
@@ -27,12 +27,31 @@ public class RecibirVestidos extends javax.swing.JFrame {
     Conexion cc=new Conexion();
     Connection con= cc.conexion();
     
-    public RecibirVestidos() {
+    public TerminarRenta() {
         initComponents();
         fullscreen();
         llenarTabla();
     }
     private int privileges;
+    private String user;
+    private String password;
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
 
     
     public int getPrivileges() {
@@ -50,19 +69,6 @@ public class RecibirVestidos extends javax.swing.JFrame {
         super.setVisible(true);
     }
     
-    public int getIdVestido(String nombre){
-        try {
-            String idVestidoSQL="call buscarIdVestido(?);";
-            PreparedStatement stmt=con.prepareStatement(idVestidoSQL);
-            ResultSet rs;
-            stmt.setString(1, nombre);
-            rs = stmt.executeQuery();
-            return rs.getInt(1);
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
-        }
-        return -1;
-    }
     
     public void llenarTabla(){
         DefaultTableModel modelo = new DefaultTableModel(){
@@ -74,16 +80,16 @@ public class RecibirVestidos extends javax.swing.JFrame {
         };
         ResultSet res = null;
         try {
-            String SQL="call mostrarVestidos()";
+            String SQL="call verVestidosEnVenta()";
             PreparedStatement pst= con.prepareStatement(SQL);
             res= pst.executeQuery();
-            modelo.setColumnIdentifiers(new Object[]{"Vestido","Caracteristicas", "Talla", "Color", "Precio", "Estatus"});
+            modelo.setColumnIdentifiers(new Object[]{"ID","Vestidos", "Nombre Completo", "Empleado", "Fecha Renta", "Fecha Entrega", "Fecha Devolucion", "Identificacion", "Estatus"});
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
         }
         try {
             while (res.next()){
-                modelo.addRow(new Object[]{res.getString("nombreVes"), res.getString("caractVes"), res.getString("tallaVes"), res.getString("colorVes"), res.getString("precioVes"), res.getString("estatusVes")});
+                modelo.addRow(new Object[]{res.getString("numFactura"), res.getString("vestidos"), res.getString("cliente"), res.getString("Empleado"), res.getString("fechaRenta"), res.getString("fechaEntrega"), res.getString("fechaDevolucion"), res.getString("identificacion"), res.getString("estatusRenta")});
             }
             tblCatalogo.setModel(modelo);
         } catch (Exception e) {
@@ -232,45 +238,45 @@ public class RecibirVestidos extends javax.swing.JFrame {
         int columnaSeleccionada = tblCatalogo.getSelectedColumn();
 
         if (filaSeleccionada != -1 && columnaSeleccionada != -1) {
-            String SQL="call vestidoNoDisponible(?);";
+            String SQL="call terminarRenta(?);";
             PreparedStatement ppst;
             try {
                 ppst = con.prepareStatement(SQL);
                 if(getIdVestido(tblCatalogo.getValueAt(filaSeleccionada, 0).toString())!=-1){
-                        ppst.setInt(1, getIdVestido(tblCatalogo.getValueAt(filaSeleccionada, 1).toString()));
+                        ppst.setInt(1, Integer.parseInt(tblCatalogo.getValueAt(filaSeleccionada, 0).toString()));
                         ppst.executeQuery();
                         llenarTabla();
                 }   
             }catch (SQLException ex) {
-                Logger.getLogger(RecibirVestidos.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TerminarRenta.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         else{
-            JOptionPane.showMessageDialog(null, "Seleccione un vestido");
+            JOptionPane.showMessageDialog(null, "Seleccione una renta");
         }
     }//GEN-LAST:event_btnRecibirVestidosActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         if(getPrivileges()==1){
-            Empleados emp= new Empleados();
-            emp.setLayout(null);
-            emp.setLocationRelativeTo(null);
-            emp.setVisible(true);
-            emp.setPrivileges(privileges);
-            emp.setUser(user);
-            emp.setPassword(password);
-            this.setVisible(false);
-        }
-        else if(getPrivileges()==2){
-            Gerente ger = new Gerente();
-            ger.setLayout(null);
-            ger.setLocationRelativeTo(null);
-            ger.setVisible(true);
-            ger.setPrivileges(privileges);
-            ger.setUser(user);
-            ger.setPassword(password);
-            this.setVisible(false);
-        }
+                Empleados emp= new Empleados();
+                emp.setLayout(null);
+                emp.setLocationRelativeTo(null);
+                emp.setVisible(true);
+                emp.setPrivileges(privileges);
+                emp.setUser(user);
+                emp.setPassword(password);
+                this.setVisible(false);
+            }
+            else if(getPrivileges()==2){
+                Gerente ger = new Gerente();
+                ger.setLayout(null);
+                ger.setLocationRelativeTo(null);
+                ger.setVisible(true);
+                ger.setPrivileges(privileges);
+                ger.setUser(user);
+                ger.setPassword(password);
+                this.setVisible(false);
+            }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
@@ -290,20 +296,20 @@ public class RecibirVestidos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RecibirVestidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TerminarRenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RecibirVestidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TerminarRenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RecibirVestidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TerminarRenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RecibirVestidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TerminarRenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RecibirVestidos().setVisible(true);
+                new TerminarRenta().setVisible(true);
             }
         });
     }
