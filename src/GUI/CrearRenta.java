@@ -27,7 +27,7 @@ public class CrearRenta extends javax.swing.JFrame {
         initComponents();
         llenarTabla();
     }
-    
+    private float total;
     Conexion cc=new Conexion();
     Connection con= cc.conexion();
     private int idCliente;
@@ -59,7 +59,7 @@ public class CrearRenta extends javax.swing.JFrame {
         };
         ResultSet res = null;
         try {
-            String SQL="call mostrarVestidos()";
+            String SQL="call mostrarVestidosDisponibles()";
             PreparedStatement pst= con.prepareStatement(SQL);
             res= pst.executeQuery();
             modelo.setColumnIdentifiers(new Object[]{"Vestido", "Caracteristicas", "Talla", "Color", "Precio", "Estatus"});
@@ -76,7 +76,7 @@ public class CrearRenta extends javax.swing.JFrame {
         }
     }
     
-    public void actualizarListaActual(){
+    public void actualizarListaActual(String vestido, String caracteristicas, float precio){
         DefaultTableModel modelo = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -84,12 +84,14 @@ public class CrearRenta extends javax.swing.JFrame {
                 return false;
             }
         };
-        modelo.setColumnIdentifiers(new Object[]{"Vestido", "Caracteristicas"});
-        int y=0;
+        modelo.setColumnIdentifiers(new Object[]{"Vestido", "Caracteristicas", "Precio"});
+        int y=1;
         while(y<tblListaActual.getRowCount()){
-            Object
-            modelo.addRow();
+            modelo.addRow(new Object[]{tblListaActual.getValueAt(y, 1), tblListaActual.getValueAt(y, 2), tblListaActual.getValueAt(y, 3)});
+            y++;
         }
+        modelo.addRow(new Object[]{vestido,caracteristicas, precio});
+        tblListaActual.setModel(modelo);
     }
     
     /**
@@ -101,6 +103,7 @@ public class CrearRenta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         imgLogo = new javax.swing.JLabel();
@@ -125,8 +128,8 @@ public class CrearRenta extends javax.swing.JFrame {
         spnMesFE = new javax.swing.JSpinner();
         spnAnioFE = new javax.swing.JSpinner();
         lbTelefono1 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        rdioINE = new javax.swing.JRadioButton();
+        rdioLicencia = new javax.swing.JRadioButton();
         jPanel4 = new javax.swing.JPanel();
         lbListaVestidos = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -180,18 +183,23 @@ public class CrearRenta extends javax.swing.JFrame {
         tblListaActual.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         tblListaActual.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null}
+                {null, null, null}
             },
             new String [] {
-                "Vestido", "Caracteristicas"
+                "Vestido", "Caracteristicas", "Precio"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblListaActual.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblListaActualMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblListaActual);
@@ -230,19 +238,21 @@ public class CrearRenta extends javax.swing.JFrame {
         lbTelefono1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbTelefono1.setText("Identificacion");
 
-        jRadioButton1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jRadioButton1.setText("INE");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(rdioINE);
+        rdioINE.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        rdioINE.setText("INE");
+        rdioINE.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                rdioINEActionPerformed(evt);
             }
         });
 
-        jRadioButton2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jRadioButton2.setText("Licencia de conducir");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(rdioLicencia);
+        rdioLicencia.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        rdioLicencia.setText("Licencia de conducir");
+        rdioLicencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                rdioLicenciaActionPerformed(evt);
             }
         });
 
@@ -293,9 +303,9 @@ public class CrearRenta extends javax.swing.JFrame {
                             .add(jPanel3Layout.createSequentialGroup()
                                 .add(lbTelefono1)
                                 .add(32, 32, 32)
-                                .add(jRadioButton1)
+                                .add(rdioINE)
                                 .add(18, 18, 18)
-                                .add(jRadioButton2))
+                                .add(rdioLicencia))
                             .add(lbListaActual))
                         .add(0, 448, Short.MAX_VALUE))))
         );
@@ -320,8 +330,8 @@ public class CrearRenta extends javax.swing.JFrame {
                 .add(18, 18, 18)
                 .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(lbTelefono1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(jRadioButton1)
-                    .add(jRadioButton2))
+                    .add(rdioINE)
+                    .add(rdioLicencia))
                 .add(45, 45, 45)
                 .add(lbListaActual)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -488,20 +498,103 @@ public class CrearRenta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRentarActionPerformed
-        Empleados emp= new Empleados();
-        emp.setLayout(null);
-        emp.setLocationRelativeTo(null);
-        emp.setVisible(true);
-        this.setVisible(false);
+        String fecha=spnAnioFR.getValue().toString().concat("-".concat(spnMesFR.getValue().toString().concat("-".concat(spnDiaFR.getValue().toString()))));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setLenient(false);
+        try {
+            sdf.parse(fecha);
+            try {
+                String SQL="call altaRentas(?,?,?,?,?,?,?);";
+                PreparedStatement ppst= con.prepareStatement(SQL);
+                ppst.setInt(1, idCliente);
+                ppst.setString(2, tfApellidos.getText());
+                ppst.setString(3, tfCalleyNum.getText());
+                try {
+                    String idColoniaSQL="call buscarIdColonia(?);";
+                    PreparedStatement stmt=con.prepareStatement(idColoniaSQL);
+                    ResultSet rs;
+                    stmt.setString(1, cmbColonia.getSelectedItem().toString());
+                    rs = stmt.executeQuery();
+                    if (rs.next()) {
+                        int idColonia = rs.getInt(1);
+                        ppst.setInt(4, idColonia);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No hay un valor en el ResultSet");
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Error en buscarIdColonia " + e.getMessage() +" " + e.getLocalizedMessage());
+                }
+                
+                ppst.setString(5, tfNSS.getText());
+                ppst.setString(6, tfRFC.getText());
+                sdf.setLenient(false);
+                try {
+                    sdf.parse(fecha);
+                    ppst.setString(7, fecha);
+                    ppst.execute();
+                } catch (ParseException e) {
+                    JOptionPane.showMessageDialog(null, "La fecha ingresada es invalidad", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                try {
+                    String minSQL="call altaTelEmpleados(?);";
+                    PreparedStatement minppst= con.prepareStatement(minSQL);
+                    minppst.setString(1, tfNumTel.getText());
+                    minppst.execute();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Error en la alta de Telefono" + e.getMessage());
+                }
+                try {
+                    String miSQL="call altaCorreoEmpleados(?);";
+                    PreparedStatement mippst= con.prepareStatement(miSQL);
+                    mippst.setString(1, tfCorreo.getText());
+                    mippst.execute();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Error en la alta de Correo" + e.getMessage());
+                }
+                try {
+                    String mSQL="call altaUsuarios(?,?,?);";
+                    PreparedStatement mppst= con.prepareStatement(mSQL);
+                    mppst.setInt(1, cmbDepartamento.getSelectedIndex()+3);
+                    mppst.setString(2, tfUsuario.getText());
+                    mppst.setString(3, tfContrasenia.getText());
+                    mppst.execute();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Error en la alta de Usuario " + e.getMessage());
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error en la alta " + e.getMessage());
+            }
+
+            if(getPrivileges()==1){
+                Empleados emp= new Empleados();
+                emp.setLayout(null);
+                emp.setLocationRelativeTo(null);
+                emp.setVisible(true);
+                this.setVisible(false);
+            }
+            else if(getPrivileges()==2){
+                Gerente ger = new Gerente();
+                ger.setLayout(null);
+                ger.setLocationRelativeTo(null);
+                ger.setVisible(true);
+                ger.setPrivileges(privileges);
+                this.setVisible(false);
+            }
+        }catch(java.text.ParseException e){
+            JOptionPane.showMessageDialog(null, "La fecha ingresada es invalidad", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error "+e.toString() + e.getMessage());
+        }
     }//GEN-LAST:event_btnRentarActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void rdioINEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdioINEActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_rdioINEActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void rdioLicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdioLicenciaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    }//GEN-LAST:event_rdioLicenciaActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         if(getPrivileges()==1){
@@ -509,6 +602,7 @@ public class CrearRenta extends javax.swing.JFrame {
             emp.setLayout(null);
             emp.setLocationRelativeTo(null);
             emp.setVisible(true);
+            emp.setPrivileges(privileges);
             this.setVisible(false);
         }
         else if(getPrivileges()==2){
@@ -526,9 +620,22 @@ public class CrearRenta extends javax.swing.JFrame {
         int columnaSeleccionada = tblListaVestidos.getSelectedColumn();
 
         if (filaSeleccionada != -1 && columnaSeleccionada != -1) {
-            actualizarListaActual();
+            actualizarListaActual(tblListaVestidos.getValueAt(filaSeleccionada, 1).toString(), tblListaVestidos.getValueAt(filaSeleccionada, 2).toString(), Float.parseFloat(tblListaVestidos.getValueAt(filaSeleccionada, 3).toString()));
+            total= total+ Float.parseFloat(tblListaVestidos.getValueAt(filaSeleccionada, 3).toString());
+            lbTotal.setText("$$ "+total);
         }
     }//GEN-LAST:event_tblListaVestidosMouseClicked
+
+    private void tblListaActualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblListaActualMouseClicked
+        DefaultTableModel model = (DefaultTableModel) tblListaActual.getModel();
+        int selectedRow = tblListaActual.getSelectedRow();
+        total= total- Float.parseFloat(tblListaVestidos.getValueAt(selectedRow, 3).toString());
+        lbTotal.setText("$$ "+total);
+        if (selectedRow != -1) {
+            model.removeRow(selectedRow);
+        }
+
+    }//GEN-LAST:event_tblListaActualMouseClicked
 
     /**
      * @param args the command line arguments
@@ -567,6 +674,7 @@ public class CrearRenta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnRentar;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel imgLogo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
@@ -574,8 +682,6 @@ public class CrearRenta extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -591,6 +697,8 @@ public class CrearRenta extends javax.swing.JFrame {
     private javax.swing.JLabel lbSlash3;
     private javax.swing.JLabel lbTelefono1;
     private javax.swing.JLabel lbTotal;
+    private javax.swing.JRadioButton rdioINE;
+    private javax.swing.JRadioButton rdioLicencia;
     private javax.swing.JSpinner spnAnioFE;
     private javax.swing.JSpinner spnAnioFR;
     private javax.swing.JSpinner spnDiaFE;

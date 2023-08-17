@@ -172,6 +172,7 @@ public class GestionClientes extends javax.swing.JFrame {
             emp.setLayout(null);
             emp.setLocationRelativeTo(null);
             emp.setVisible(true);
+            emp.setPrivileges(privileges);
             this.setVisible(false);
         }
         else if(getPrivileges()==2){
