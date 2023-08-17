@@ -266,7 +266,7 @@ public class Login extends javax.swing.JFrame {
 
     private void btnSIGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSIGActionPerformed
         cc.setUser("root");
-        cc.setPassword("Ademir12");
+        cc.setPassword("Chochias0404/");
         try {
             String SQL="select verificacionLogin(?,?);";
             PreparedStatement pst;

@@ -112,7 +112,7 @@ public class ReportesVestidoMasRentado extends javax.swing.JFrame {
         jpTablaReportesEmpleado.setBackground(new java.awt.Color(255, 255, 255));
         jpTablaReportesEmpleado.setPreferredSize(new java.awt.Dimension(1920, 100));
 
-        tblReportesVestidos.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        tblReportesVestidos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tblReportesVestidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},

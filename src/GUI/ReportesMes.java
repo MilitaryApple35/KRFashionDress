@@ -93,7 +93,7 @@ public class ReportesMes extends javax.swing.JFrame {
         jpTablaReportesEmpleado.setBackground(new java.awt.Color(255, 255, 255));
         jpTablaReportesEmpleado.setPreferredSize(new java.awt.Dimension(1920, 100));
 
-        tblReportesMes.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        tblReportesMes.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tblReportesMes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},

@@ -194,7 +194,7 @@ public class RegistroClientes extends javax.swing.JFrame {
         Colonia.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         Colonia.setText("COLONIA:");
 
-        tfNombres.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tfNombres.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tfNombres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfNombresActionPerformed(evt);
@@ -206,16 +206,16 @@ public class RegistroClientes extends javax.swing.JFrame {
             }
         });
 
-        tfNumTel.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tfNumTel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tfNumTel.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfNumTelKeyTyped(evt);
             }
         });
 
-        tfCalleYNumero.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tfCalleYNumero.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        tfApellidos.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tfApellidos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tfApellidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfApellidosActionPerformed(evt);
@@ -250,7 +250,7 @@ public class RegistroClientes extends javax.swing.JFrame {
         FechaNac.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         FechaNac.setText("FECHA DE NACIMIENTO");
 
-        tfDia.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tfDia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tfDia.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tfDia.setText("DD");
         tfDia.addActionListener(new java.awt.event.ActionListener() {
@@ -259,7 +259,7 @@ public class RegistroClientes extends javax.swing.JFrame {
             }
         });
 
-        tfMes.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tfMes.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tfMes.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tfMes.setText("MM");
         tfMes.addActionListener(new java.awt.event.ActionListener() {
@@ -268,7 +268,7 @@ public class RegistroClientes extends javax.swing.JFrame {
             }
         });
 
-        tfAnio.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tfAnio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tfAnio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tfAnio.setText("AAAA");
         tfAnio.addActionListener(new java.awt.event.ActionListener() {
@@ -294,7 +294,7 @@ public class RegistroClientes extends javax.swing.JFrame {
             }
         });
 
-        tfCorreo.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tfCorreo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         correoE.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         correoE.setText("CORREO ELECTRONICO:");
@@ -305,7 +305,7 @@ public class RegistroClientes extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -316,34 +316,33 @@ public class RegistroClientes extends javax.swing.JFrame {
                                 .addComponent(btnAgrgarColonia)))
                         .addGap(46, 46, 46)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfCalleYNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CalleyNumero)))
+                            .addComponent(CalleyNumero)
+                            .addComponent(tfCalleYNumero)))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(tfCorreo, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(correoE, javax.swing.GroupLayout.Alignment.LEADING))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(20, 20, 20)
-                            .addComponent(btnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(NumTel)
-                                .addComponent(tfNumTel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tfNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Nombres))
-                            .addGap(109, 109, 109)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(FechaNac)
-                                .addComponent(tfApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Apellidos)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(tfDia, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(tfMes, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(39, 39, 39)
-                                    .addComponent(tfAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(btnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(NumTel)
+                            .addComponent(tfNumTel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Nombres))
+                        .addGap(109, 109, 109)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(FechaNac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Apellidos)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(tfDia, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tfMes, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39)
+                                .addComponent(tfAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfApellidos))))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -424,7 +423,7 @@ public class RegistroClientes extends javax.swing.JFrame {
             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        tblClientes.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        tblClientes.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},

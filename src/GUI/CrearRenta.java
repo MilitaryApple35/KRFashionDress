@@ -8,6 +8,7 @@ import Codigo.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -587,15 +588,23 @@ public class CrearRenta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRentarActionPerformed
-        String fechaRegreso=spnAnioFR.getValue().toString().concat("-".concat(spnMesFR.getValue().toString().concat("-".concat(spnDiaFR.getValue().toString()))));
-        String fechaEntrega=spnAnioFE.getValue().toString().concat("-".concat(spnMesFE.getValue().toString().concat("-".concat(spnDiaFE.getValue().toString()))));
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        sdf.setLenient(false);
+        DecimalFormat twoDigitFormatter = new DecimalFormat("00");
+
+        int anioFR = (int) spnAnioFR.getValue();
+        int mesFR = (int) spnMesFR.getValue();
+        int diaFR = (int) spnDiaFR.getValue();
+
+        int anioFE = (int) spnAnioFE.getValue();
+        int mesFE = (int) spnMesFE.getValue();
+        int diaFE = (int) spnDiaFE.getValue();
+
+        String fechaRegreso = anioFR + "-" + twoDigitFormatter.format(mesFR) + "-" + twoDigitFormatter.format(diaFR);
+        String fechaEntrega = anioFE + "-" + twoDigitFormatter.format(mesFE) + "-" + twoDigitFormatter.format(diaFE);
+
         try {
-            sdf.parse(fechaRegreso);
-            sdf.parse(fechaEntrega);
+            
             try {
-                String SQL="call altaRentas(?,?,?,?,?,?,?);";
+                String SQL="call altaRentas(?,?,?,?,?,?);";
                 PreparedStatement ppst= con.prepareStatement(SQL);
                 ppst.setInt(1, idCliente);
                 if(getIdEmpleado()==-1){
@@ -611,21 +620,24 @@ public class CrearRenta extends javax.swing.JFrame {
                     ppst.setInt(5, 1);
                 }
                 ppst.setInt(6, 0);
-                int y=1;
+                ppst.executeQuery();
+                int y = 0;
                 try {
-                    String anSQL="call altaDetallesRenta(?,?)";
+                    System.out.println("Si entre");
+                    String anSQL = "call altaDetallesRenta(?,?)";
                     PreparedStatement pst= con.prepareStatement(anSQL);
-                    while(y<tblListaActual.getRowCount()){
-                        if(getIdVestido(tblListaActual.getValueAt(y, 0).toString())==-1){
+                    while(y < tblListaActual.getRowCount()){
+                        if(getIdVestido(tblListaActual.getValueAt(y, 0).toString())== -1){
                             int a = 1/0;
                         }
                         pst.setInt(1,getIdVestido(tblListaActual.getValueAt(y, 0).toString()));
                         pst.setString(2, tblListaAnotaciones.getValueAt(y, 0).toString());
+                        pst.executeQuery();
                         y++;
                     }
                     
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Error en la alta " + e.getMessage());
+                    JOptionPane.showMessageDialog(null, "Error en detallesRenta " + e.getLocalizedMessage());
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error en la alta " + e.getMessage());
@@ -651,11 +663,8 @@ public class CrearRenta extends javax.swing.JFrame {
                 ger.setPassword(password);
                 this.setVisible(false);
             }
-        }catch(java.text.ParseException e){
+        } catch(Exception e){
             JOptionPane.showMessageDialog(null, "La fecha ingresada es invalidad", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error "+e.toString() + e.getMessage());
         }
     }//GEN-LAST:event_btnRentarActionPerformed
 
