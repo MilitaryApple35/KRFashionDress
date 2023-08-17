@@ -4,6 +4,8 @@
  */
 package GUI;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author ignee
@@ -15,6 +17,7 @@ public class GestionEmpleados extends javax.swing.JFrame {
      */
     public GestionEmpleados() {
         initComponents();
+        fullscreen();
     }
     private int privileges;
 
@@ -24,6 +27,13 @@ public class GestionEmpleados extends javax.swing.JFrame {
 
     public void setPrivileges(int privileges) {
         this.privileges = privileges;
+    }
+    
+    public void fullscreen(){
+        super.dispose();
+        super.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        super.setUndecorated(!super.isUndecorated());
+        super.setVisible(true);
     }
 
     /**

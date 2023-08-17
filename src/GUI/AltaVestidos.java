@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /**
  *
@@ -32,7 +33,15 @@ public class AltaVestidos extends javax.swing.JFrame {
      */
     public AltaVestidos() {
         initComponents();
+        fullscreen();
         setLocationRelativeTo(null);
+    }
+    
+    public void fullscreen(){
+        super.dispose();
+        super.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        super.setUndecorated(!super.isUndecorated());
+        super.setVisible(true);
     }
 
     /**

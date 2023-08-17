@@ -8,6 +8,7 @@ import Codigo.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,7 +24,15 @@ public class ListaEmpleados extends javax.swing.JFrame {
      */
     public ListaEmpleados() {
         initComponents();
+        fullscreen();
         llenarTabla();
+    }
+    
+    public void fullscreen(){
+        super.dispose();
+        super.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        super.setUndecorated(!super.isUndecorated());
+        super.setVisible(true);
     }
     
     public void llenarTabla(){

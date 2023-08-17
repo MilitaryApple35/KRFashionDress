@@ -7,6 +7,7 @@ package GUI;
 import Codigo.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +21,7 @@ public class BajaEmpleados extends javax.swing.JFrame {
      */
     public BajaEmpleados() {
         initComponents();
+        fullscreen();
     }
         
     Conexion cc=new Conexion();
@@ -33,6 +35,13 @@ public class BajaEmpleados extends javax.swing.JFrame {
 
     public void setPrivileges(int privileges) {
         this.privileges = privileges;
+    }
+    
+    public void fullscreen(){
+        super.dispose();
+        super.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        super.setUndecorated(!super.isUndecorated());
+        super.setVisible(true);
     }
 
     /**
