@@ -8,6 +8,9 @@ import Codigo.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -63,24 +66,28 @@ public class Reportes extends javax.swing.JFrame {
     }
     
     public void llenarTabla() {
-        DefaultTableModel modelo = new DefaultTableModel();
+        DefaultTableModel modelo = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+        // Hacer que todas las celdas no sean editables
+                return false;
+            }
+        };
         ResultSet res = null;
         try {
-            String mostrarClientesSQL = "call reporteRentasGeneral()";
-            PreparedStatement psMostrarClientes = con.prepareStatement(mostrarClientesSQL);
-            res = psMostrarClientes.executeQuery();
-            modelo.setColumnIdentifiers(new Object[]{"Numero de factura", "Vestidos", "Cliente", "Empleado", "Fecha de renta", "Fecha de entrega", "Fecha de devolucion", "Identificacion", "Estatus de renta", "Total"});
+            String SQL="call verVestidosEnVenta()";
+            PreparedStatement pst= con.prepareStatement(SQL);
+            res= pst.executeQuery();
+            modelo.setColumnIdentifiers(new Object[]{"ID","Vestidos", "Nombre Completo", "Empleado", "Fecha Renta", "Fecha Entrega", "Fecha Devolucion", "Identificacion", "Estatus"});
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
         }
-        
         try {
             while (res.next()){
-                modelo.addRow(new Object[]{res.getString("numFactura"), res.getString("vestidos"), res.getString("cliente"), res.getString("empleado"), res.getString("fechaRenta"), res.getString("fechaEntrega"), res.getString("fechaDevolucion"), res.getString("identificacion"), res.getString("estatusRenta"), res.getString("total")});
+                modelo.addRow(new Object[]{res.getString("numFactura"), res.getString("vestidos"), res.getString("cliente"), res.getString("empleado"), res.getString("fechaRenta"), res.getString("fechaEntrega"), res.getString("fechaDevolucion"), res.getString("identificacion"), res.getString("estatusRenta")});
             }
             tblReportesGeneral.setModel(modelo);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
         }
     }
     
@@ -96,6 +103,7 @@ public class Reportes extends javax.swing.JFrame {
         tblReportesGeneral = new javax.swing.JTable();
         jpBotones = new javax.swing.JPanel();
         btnSalir = new javax.swing.JButton();
+        btnTerminarRenta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -175,6 +183,16 @@ public class Reportes extends javax.swing.JFrame {
             }
         });
 
+        btnTerminarRenta.setBackground(new java.awt.Color(164, 55, 123));
+        btnTerminarRenta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnTerminarRenta.setForeground(new java.awt.Color(255, 255, 255));
+        btnTerminarRenta.setText("TERMINAR RENTA");
+        btnTerminarRenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTerminarRentaActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout jpBotonesLayout = new org.jdesktop.layout.GroupLayout(jpBotones);
         jpBotones.setLayout(jpBotonesLayout);
         jpBotonesLayout.setHorizontalGroup(
@@ -182,14 +200,18 @@ public class Reportes extends javax.swing.JFrame {
             .add(jpBotonesLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(btnSalir, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 154, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(btnTerminarRenta, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 217, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(25, 25, 25))
         );
         jpBotonesLayout.setVerticalGroup(
             jpBotonesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jpBotonesLayout.createSequentialGroup()
                 .addContainerGap(24, Short.MAX_VALUE)
-                .add(btnSalir, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 67, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(20, 20, 20))
+                .add(jpBotonesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(btnSalir, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 67, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(btnTerminarRenta, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 67, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(18, 18, 18))
         );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
@@ -227,6 +249,29 @@ public class Reportes extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void btnTerminarRentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarRentaActionPerformed
+        int filaSeleccionada = tblReportesGeneral.getSelectedRow();
+        int columnaSeleccionada = tblReportesGeneral.getSelectedColumn();
+
+        if (filaSeleccionada != -1 && columnaSeleccionada != -1) {
+            String SQL="call terminarRenta(?);";
+            PreparedStatement ppst;
+            try {
+                ppst = con.prepareStatement(SQL);
+                if(Integer.parseInt(tblReportesGeneral.getValueAt(filaSeleccionada, 0).toString())!=-1){
+                        ppst.setInt(1, Integer.parseInt(tblReportesGeneral.getValueAt(filaSeleccionada, 0).toString()));
+                        ppst.executeQuery();
+                        llenarTabla();
+                }   
+            }catch (SQLException ex) {
+                Logger.getLogger(TerminarRenta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Seleccione una renta");
+        }
+    }//GEN-LAST:event_btnTerminarRentaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -263,6 +308,7 @@ public class Reportes extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalir;
+    private javax.swing.JButton btnTerminarRenta;
     private javax.swing.JLabel imgLogo3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane3;

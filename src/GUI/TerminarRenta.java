@@ -170,9 +170,9 @@ public class TerminarRenta extends javax.swing.JFrame {
         );
 
         btnRecibirVestidos.setBackground(new java.awt.Color(164, 55, 123));
-        btnRecibirVestidos.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnRecibirVestidos.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnRecibirVestidos.setForeground(new java.awt.Color(255, 255, 255));
-        btnRecibirVestidos.setText("Vestido No Disponible");
+        btnRecibirVestidos.setText("TERMINAR RENTA");
         btnRecibirVestidos.setToolTipText("");
         btnRecibirVestidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -200,10 +200,10 @@ public class TerminarRenta extends javax.swing.JFrame {
                 .addComponent(jScrollPane3)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(32, 32, 32)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnRecibirVestidos)
+                .addComponent(btnRecibirVestidos, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
         );
         jPanel1Layout.setVerticalGroup(
@@ -266,17 +266,17 @@ public class TerminarRenta extends javax.swing.JFrame {
                 emp.setUser(user);
                 emp.setPassword(password);
                 this.setVisible(false);
-            }
-            else if(getPrivileges()==2){
-                Gerente ger = new Gerente();
-                ger.setLayout(null);
-                ger.setLocationRelativeTo(null);
-                ger.setVisible(true);
-                ger.setPrivileges(privileges);
-                ger.setUser(user);
-                ger.setPassword(password);
-                this.setVisible(false);
-            }
+        }
+        else if(getPrivileges()==2){
+            Gerente ger = new Gerente();
+            ger.setLayout(null);
+            ger.setLocationRelativeTo(null);
+            ger.setVisible(true);
+            ger.setPrivileges(privileges);
+            ger.setUser(user);
+            ger.setPassword(password);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     /**

@@ -101,6 +101,9 @@ public class CatalogoVentana extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblCatalogo = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        cmbBuscarPor = new javax.swing.JComboBox();
+        btnBuscar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         btnAltaVestidos = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
@@ -157,15 +160,56 @@ public class CatalogoVentana extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel3.setText("Buscar por: ");
+
+        cmbBuscarPor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cmbBuscarPor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Disponible", "En renta", "No disponible" }));
+        cmbBuscarPor.setToolTipText("");
+        cmbBuscarPor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbBuscarPorActionPerformed(evt);
+            }
+        });
+
+        btnBuscar.setBackground(new java.awt.Color(164, 55, 123));
+        btnBuscar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscar.setText("BUSCAR");
+        btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBuscarMouseClicked(evt);
+            }
+        });
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+            .add(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jLabel3)
+                .add(18, 18, 18)
+                .add(cmbBuscarPor, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 168, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(37, 37, 37)
+                .add(btnBuscar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 106, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 91, Short.MAX_VALUE)
+            .add(jPanel1Layout.createSequentialGroup()
+                .add(28, 28, 28)
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jLabel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                        .add(cmbBuscarPor)
+                        .add(btnBuscar, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -193,7 +237,7 @@ public class CatalogoVentana extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel4Layout.createSequentialGroup()
                 .add(btnAltaVestidos, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 67, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         btnSalir.setBackground(new java.awt.Color(255, 0, 51));
@@ -303,6 +347,45 @@ public class CatalogoVentana extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void cmbBuscarPorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBuscarPorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbBuscarPorActionPerformed
+
+    private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
+        
+    }//GEN-LAST:event_btnBuscarMouseClicked
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        DefaultTableModel modelo = new DefaultTableModel();
+        ResultSet res = null;
+        try {
+            if(cmbBuscarPor.getSelectedItem().toString().equals("Disponible")){
+                String SQL="call mostrarVestidosDisponibles()";
+                PreparedStatement pst= con.prepareStatement(SQL);
+                res= pst.executeQuery();
+            } else if(cmbBuscarPor.getSelectedItem().toString().equals("En renta")){
+                String SQL="call mostrarVestidosRentados()";
+                PreparedStatement pst= con.prepareStatement(SQL);
+                res= pst.executeQuery();
+            } else {
+                String SQL="call mostrarVestidosNoDisponibles()";
+                PreparedStatement pst= con.prepareStatement(SQL);
+                res= pst.executeQuery();
+            }    
+            modelo.setColumnIdentifiers(new Object[]{"Vestido", "Caracteristicas", "Talla", "Color", "Precio", "Estatus"});
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
+        }
+        try {
+            while (res.next()){
+                modelo.addRow(new Object[]{res.getString("nombreVes"), res.getString("caractVes"), res.getString("tallaVes"), res.getString("colorVes"), res.getString("precioVes"), res.getString("estatus")});
+            }
+            tblCatalogo.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -339,10 +422,13 @@ public class CatalogoVentana extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAltaVestidos;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEliminarVestidos;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JComboBox cmbBuscarPor;
     private javax.swing.JLabel imgLogo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
