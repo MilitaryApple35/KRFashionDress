@@ -75,7 +75,9 @@ public class CrearRenta extends javax.swing.JFrame {
             ResultSet rs;
             stmt.setString(1, user);
             rs = stmt.executeQuery();
-            return rs.getInt(1);
+            if(rs.next()){
+                return rs.getInt(1);
+            }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error id Usuario" + e.getMessage());
         }
@@ -89,7 +91,9 @@ public class CrearRenta extends javax.swing.JFrame {
             ResultSet rs;
             stmt.setString(1, nombre);
             rs = stmt.executeQuery();
-            return rs.getInt(1);
+            if(rs.next()){
+                return rs.getInt(1);
+            }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error Id Vestido" + e.getMessage());
         }
