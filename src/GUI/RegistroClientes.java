@@ -578,12 +578,22 @@ public class RegistroClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAltaActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        GestionClientes gesClien = new GestionClientes();
-        gesClien.setLayout(null);
-        gesClien.setLocationRelativeTo(null);
-        gesClien.setVisible(true);
-        gesClien.setPrivileges(privileges);
-        this.setVisible(false);
+        if(getPrivileges()==1){
+            Empleados emp= new Empleados();
+            emp.setLayout(null);
+            emp.setLocationRelativeTo(null);
+            emp.setVisible(true);
+            emp.setPrivileges(privileges);
+            this.setVisible(false);
+        }
+        else if(getPrivileges()==2){
+            Gerente ger = new Gerente();
+            ger.setLayout(null);
+            ger.setLocationRelativeTo(null);
+            ger.setVisible(true);
+            ger.setPrivileges(privileges);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void tfApellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfApellidosActionPerformed
