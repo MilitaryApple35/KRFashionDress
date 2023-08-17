@@ -56,14 +56,13 @@ public class Gerente extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        btnSalir = new javax.swing.JButton();
-        btnHistorialRentas = new javax.swing.JButton();
         btnGestionEmpleados = new javax.swing.JButton();
         btnCatalogo = new javax.swing.JButton();
         btnCrearRenta = new javax.swing.JButton();
         btnGestionClientes = new javax.swing.JButton();
         btnReportes = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        btnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,32 +91,10 @@ public class Gerente extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnSalir.setBackground(new java.awt.Color(240, 0, 0));
-        btnSalir.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnSalir.setForeground(new java.awt.Color(255, 255, 255));
-        btnSalir.setText("Salir");
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
-            }
-        });
-
-        btnHistorialRentas.setBackground(new java.awt.Color(164, 55, 123));
-        btnHistorialRentas.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnHistorialRentas.setForeground(new java.awt.Color(255, 255, 255));
-        btnHistorialRentas.setText("Historial de Rentas");
-        btnHistorialRentas.setActionCommand("Historial rentas");
-        btnHistorialRentas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHistorialRentasActionPerformed(evt);
-            }
-        });
-
         btnGestionEmpleados.setBackground(new java.awt.Color(164, 55, 123));
         btnGestionEmpleados.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnGestionEmpleados.setForeground(new java.awt.Color(255, 255, 255));
         btnGestionEmpleados.setText("Empleados");
-        btnGestionEmpleados.setActionCommand("Empleados");
         btnGestionEmpleados.setBorder(null);
         btnGestionEmpleados.setPreferredSize(new java.awt.Dimension(271, 60));
         btnGestionEmpleados.addActionListener(new java.awt.event.ActionListener() {
@@ -141,7 +118,6 @@ public class Gerente extends javax.swing.JFrame {
         btnCrearRenta.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnCrearRenta.setForeground(new java.awt.Color(255, 255, 255));
         btnCrearRenta.setText("Crear renta");
-        btnCrearRenta.setActionCommand("Crear renta");
         btnCrearRenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearRentaActionPerformed(evt);
@@ -161,7 +137,8 @@ public class Gerente extends javax.swing.JFrame {
         btnReportes.setBackground(new java.awt.Color(164, 55, 123));
         btnReportes.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnReportes.setForeground(new java.awt.Color(255, 255, 255));
-        btnReportes.setText("REPORTES");
+        btnReportes.setText("Reportes");
+        btnReportes.setActionCommand("btnReportes");
         btnReportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReportesActionPerformed(evt);
@@ -175,42 +152,46 @@ public class Gerente extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGestionEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCrearRenta, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnHistorialRentas, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnGestionClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 11, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addComponent(btnReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnGestionClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnGestionEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCrearRenta, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(11, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(btnCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addGap(49, 49, 49)
                 .addComponent(btnGestionEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
+                .addGap(53, 53, 53)
                 .addComponent(btnCrearRenta, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addComponent(btnHistorialRentas, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(48, 48, 48)
                 .addComponent(btnGestionClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(53, 53, 53)
                 .addComponent(btnReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                .addComponent(btnSalir)
-                .addGap(30, 30, 30))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel2.setText("GERENTE");
+
+        btnSalir.setBackground(new java.awt.Color(240, 0, 0));
+        btnSalir.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalir.setLabel("SALIR");
+        btnSalir.setPreferredSize(new java.awt.Dimension(87, 31));
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -225,7 +206,9 @@ public class Gerente extends javax.swing.JFrame {
                         .addGap(848, 848, 848)
                         .addComponent(jLabel2))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(811, 811, 811)
+                        .addGap(27, 27, 27)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(630, 630, 630)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -235,9 +218,15 @@ public class Gerente extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(37, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -290,15 +279,6 @@ public class Gerente extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnCrearRentaActionPerformed
 
-    private void btnHistorialRentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialRentasActionPerformed
-        HistorialRentas histrent= new HistorialRentas();
-        histrent.setLayout(null);
-        histrent.setLocationRelativeTo(null);
-        histrent.setVisible(true);
-        histrent.setPrivileges(privileges);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnHistorialRentasActionPerformed
-
     private void btnGestionClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionClientesActionPerformed
         GestionClientes gesClien = new GestionClientes();
         gesClien.setLayout(null);
@@ -309,7 +289,12 @@ public class Gerente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGestionClientesActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
-        // TODO add your handling code here:
+        GestionReportes gesReportes = new GestionReportes();
+        gesReportes.setLayout(null);
+        gesReportes.setLocationRelativeTo(null);
+        gesReportes.setVisible(true);
+        gesReportes.setPrivileges(privileges);
+        this.setVisible(false);
     }//GEN-LAST:event_btnReportesActionPerformed
 
     /**
@@ -351,7 +336,6 @@ public class Gerente extends javax.swing.JFrame {
     private javax.swing.JButton btnCrearRenta;
     private javax.swing.JButton btnGestionClientes;
     private javax.swing.JButton btnGestionEmpleados;
-    private javax.swing.JButton btnHistorialRentas;
     private javax.swing.JButton btnReportes;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
