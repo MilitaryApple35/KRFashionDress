@@ -5,14 +5,19 @@
 package GUI;
 
 import Codigo.Conexion;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 /**
  *
@@ -24,7 +29,7 @@ public class ListaClientes extends javax.swing.JFrame {
     DefaultTableModel table_clientes = new DefaultTableModel();
     TableRowSorter<TableModel> trs;
     ResultSet rs;
-    String[] Titulos = {"ID", "NOMBRE", "CALLE Y NUMERO", "COLONIA", "FECHA DE NACIMIENTO", "TELEFONO(S)", "CORREO(S)"};
+    String[] Titulos = {"NOMBRE", "APELLIDOS", "CALLE Y NUMERO", "COLONIA", "FECHA DE NACIMIENTO", "TELEFONO(S)", "CORREO(S)"};
     String[][] M_Clientes;
     /**
      * Creates new form ListaClientes
@@ -45,31 +50,42 @@ public class ListaClientes extends javax.swing.JFrame {
     }
     
     public void llenarTabla(){
+        int contador = 0;
         DefaultTableModel modelo = new DefaultTableModel();
         ResultSet res = null;
-        int contador = 0;
-        try {
-            Statement st_cont = con.createStatement();
+        try { 
+            Statement st_cont = con.createStatement(); 
             ResultSet rs_cont = st_cont.executeQuery("SELECT COUNT(*) FROM Clientes");
-            String mostrarClientesSQL = "call mostrarClientes()";
-            if(rs_cont.next()){
+            if (rs_cont.next()) {
                 contador = rs_cont.getInt(1);
             }
-            PreparedStatement psMostrarClientes = con.prepareStatement(mostrarClientesSQL);
-            res = psMostrarClientes.executeQuery();
-            modelo.setColumnIdentifiers(new Object[]{"Nombres","Apellidos", "Calle y Numero", "Colonia", "Teléfono", "Correo"});
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
-        }
-        
-        try {
-            while (res.next()){
-                modelo.addRow(new Object[]{res.getString("nombreCli"), res.getString("apellidosCli"), res.getString("calleNumeroCli"), res.getString("colonia"), res.getString("Telefono(s)"), res.getString("Correo(s)")});
+            Statement st = con.createStatement();
+            rs = st.executeQuery("call mostrarClientes");
+            
+            int cont=0;
+            M_Clientes = new String[contador][7];
+            while(rs.next()){
+                M_Clientes[cont][0] = rs.getString("nombreCli");
+                M_Clientes[cont][1] = rs.getString("apellidosCli");
+                M_Clientes[cont][2] = rs.getString("calleNumeroCli");
+                M_Clientes[cont][3] = rs.getString("colonia");
+                M_Clientes[cont][4] = rs.getString("fechaNacCli");
+                M_Clientes[cont][5] = rs.getString("Telefono(s)");
+                M_Clientes[cont][6] = rs.getString("Correo(s)");
+                cont++;
             }
-            tableClientes.setModel(modelo);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
+            table_clientes = new DefaultTableModel(M_Clientes, Titulos);
+            tblClientes.setModel(table_clientes);
+            tblClientes.setRowSorter(trs);
+        }catch (SQLException ex) {
+            Logger.getLogger(ListaClientes.class.getName()).log(Level.SEVERE, null, ex); //si llegara a ocurrir un error ya se  una mala consulta o mala conexion aqui nos lo mostraria
         }
+        table_clientes = new DefaultTableModel(M_Clientes, Titulos) { //ahora agregaremos la matriz y los titulos al modelo de tabla
+            public boolean isCellEditable(int row, int column) {//este metodo es muy util si no quieren que editen su tabla, 
+                return false;  //si quieren modificar los campos al dar clic entonces borren este metodo
+            }
+        };
+        tblClientes.setModel(table_clientes);
     }
 
     /**
@@ -91,7 +107,7 @@ public class ListaClientes extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableClientes = new javax.swing.JTable();
+        tblClientes = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         txfBusqueda = new javax.swing.JTextField();
@@ -153,7 +169,7 @@ public class ListaClientes extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        tableClientes.setModel(new javax.swing.table.DefaultTableModel(
+        tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -164,7 +180,7 @@ public class ListaClientes extends javax.swing.JFrame {
                 "Nombre", "Apellidos", "Num. Teléfonico", "Fecha de Nacimiento", "Calle y Numero", "Colonia"
             }
         ));
-        jScrollPane1.setViewportView(tableClientes);
+        jScrollPane1.setViewportView(tblClientes);
 
         jButton1.setBackground(new java.awt.Color(240, 0, 0));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -307,24 +323,28 @@ public class ListaClientes extends javax.swing.JFrame {
 
     private void txfBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfBusquedaKeyReleased
         // TODO add your handling code here:
-        String aux = "" + txfBusqueda.getText();
+        String busqueda = "" + txfBusqueda.getText();
         String busquedaPor = cmbBuscarPor.getSelectedItem().toString();
         int valor = 0;
         int cont = 0;
-        DefaultTableModel modelo = new DefaultTableModel();
-        ResultSet res = null;
         try {
-            Statement st_cont = con.createStatement();
-            ResultSet rs = st_cont.executeQuery("call contadorClientes(" + busquedaPor + "," + aux +")");
+            //CallableStatement cs_cont = con.prepareCall("{call contadorClientes(?, ?)}");
+            CallableStatement cs_cont = con.prepareCall("call contadorClientes(?, ?)");
+            cs_cont.setString(1, busquedaPor);
+            cs_cont.setString(2, busqueda);
+            ResultSet rs = cs_cont.executeQuery();
             if(rs.next()){
                 valor = rs.getInt(1);
             }
             M_Clientes = new String[valor][7];
-            rs = st_cont.executeQuery("call buscarCliente(" + busquedaPor + "," + aux +")");
+            cs_cont = con.prepareCall("call buscarCliente(?, ?)");
+            cs_cont.setString(1, busquedaPor);
+            cs_cont.setString(2, busqueda);
+            rs = cs_cont.executeQuery();
             while(rs.next()){
                 M_Clientes[cont][0] = rs.getString("nombreCli");
-                M_Clientes[cont][1] = rs.getString("apellidoCli");
-                M_Clientes[cont][2] = rs.getString("calleNumCli");
+                M_Clientes[cont][1] = rs.getString("apellidosCli");
+                M_Clientes[cont][2] = rs.getString("calleNumeroCli");
                 M_Clientes[cont][3] = rs.getString("colonia");
                 M_Clientes[cont][4] = rs.getString("fechaNacCli");
                 M_Clientes[cont][5] = rs.getString("Telefonos(s)");
@@ -332,8 +352,8 @@ public class ListaClientes extends javax.swing.JFrame {
                 cont++;
             }
             table_clientes = new DefaultTableModel(M_Clientes, Titulos);
-            tableClientes.setModel(table_clientes);
-            tableClientes.setRowSorter(trs);
+            tblClientes.setModel(table_clientes);
+            tblClientes.setRowSorter(trs);
         }catch (Exception e){
             
         }
@@ -387,7 +407,7 @@ public class ListaClientes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jspTablaClientes;
-    public static javax.swing.JTable tableClientes;
+    public static javax.swing.JTable tblClientes;
     private javax.swing.JTable tblListaClientes;
     public static javax.swing.JTextField txfBusqueda;
     // End of variables declaration//GEN-END:variables
