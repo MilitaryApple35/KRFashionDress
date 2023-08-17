@@ -4,10 +4,15 @@
  */
 package GUI;
 
+import Codigo.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,7 +25,11 @@ public class CrearRenta extends javax.swing.JFrame {
      */
     public CrearRenta() {
         initComponents();
+        llenarTabla();
     }
+    
+    Conexion cc=new Conexion();
+    Connection con= cc.conexion();
     private int idCliente;
     private int privileges;
 
@@ -39,6 +48,50 @@ public class CrearRenta extends javax.swing.JFrame {
     public void setPrivileges(int privileges) {
         this.privileges = privileges;
     }
+    
+    public void llenarTabla(){
+        DefaultTableModel modelo = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+        // Hacer que todas las celdas no sean editables
+                return false;
+            }
+        };
+        ResultSet res = null;
+        try {
+            String SQL="call mostrarVestidos()";
+            PreparedStatement pst= con.prepareStatement(SQL);
+            res= pst.executeQuery();
+            modelo.setColumnIdentifiers(new Object[]{"Vestido", "Caracteristicas", "Talla", "Color", "Precio", "Estatus"});
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
+        }
+        try {
+            while (res.next()){
+                modelo.addRow(new Object[]{res.getString("nombreVes"), res.getString("caractVes"), res.getString("tallaVes"), res.getString("colorVes"), res.getString("precioVes"), res.getString("estatus")});
+            }
+            tblListaVestidos.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
+        }
+    }
+    
+    public void actualizarListaActual(){
+        DefaultTableModel modelo = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+        // Hacer que todas las celdas no sean editables
+                return false;
+            }
+        };
+        modelo.setColumnIdentifiers(new Object[]{"Vestido", "Caracteristicas"});
+        int y=0;
+        while(y<tblListaActual.getRowCount()){
+            Object
+            modelo.addRow();
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -473,55 +526,7 @@ public class CrearRenta extends javax.swing.JFrame {
         int columnaSeleccionada = tblListaVestidos.getSelectedColumn();
 
         if (filaSeleccionada != -1 && columnaSeleccionada != -1) {
-            Object nombre = tblClientes.getValueAt(filaSeleccionada, 0);
-            Object apellidos = tblClientes.getValueAt(filaSeleccionada, 1);
-            Object calleynumero = tblClientes.getValueAt(filaSeleccionada, 2);
-            Object colonia = tblClientes.getValueAt(filaSeleccionada, 3);
-            Object fechanac = tblClientes.getValueAt(filaSeleccionada, 4);
-            Object telefono = tblClientes.getValueAt(filaSeleccionada, 5);
-            Object correo = tblClientes.getValueAt(filaSeleccionada, 6);
-            
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date fecha;
-            int year = 0;
-            int month = 0;
-            int day =0;
-            
-            try {
-                fecha = sdf.parse(fechanac.toString());
-
-                // Extraer año, mes y día de la fecha
-                year = fecha.getYear() + 1900;
-                month = fecha.getMonth() + 1;
-                day = fecha.getDate();
-
-            } catch (ParseException e) {
-                JOptionPane.showMessageDialog(null, "Error de Parse en la fecha: "+ e.getMessage());
-            }
-            
-            tfNombres.setText(nombre.toString());
-            tfApellidos.setText(apellidos.toString());
-            tfCalleYNumero.setText(calleynumero.toString());
-            tfCorreo.setText(correo.toString());
-            tfDia.setText(Integer.toString(day));
-            tfMes.setText(Integer.toString(month));
-            tfAnio.setText(Integer.toString(year));
-            tfNumTel.setText(telefono.toString());
-            cmbColonia.setSelectedItem(findIndexByName(cmbColonia, colonia.toString()));
-            
-            
-            tfNombres.disable();
-            tfApellidos.disable();
-            tfCalleYNumero.disable();
-            tfCorreo.disable();
-            tfDia.disable();
-            tfMes.disable();
-            tfAnio.disable();
-            cmbColonia.disable();
-            tfNumTel.disable();
-            btnAgrgarColonia.disable();
-            
-            seleccionado=1;
+            actualizarListaActual();
         }
     }//GEN-LAST:event_tblListaVestidosMouseClicked
 

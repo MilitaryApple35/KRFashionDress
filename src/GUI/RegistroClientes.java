@@ -418,7 +418,7 @@ public class RegistroClientes extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre(s)", "Apellidos", "Telefono", "Calle y numero", "Colonia", "NSS", "RFC"
+                "Nombre(s)", "Apellidos", "Calle y numero", "Colonia", "Fecha de Nacimiento", "Telefono", "Correo"
             }
         ));
         tblClientes.addMouseListener(new java.awt.event.MouseAdapter() {
