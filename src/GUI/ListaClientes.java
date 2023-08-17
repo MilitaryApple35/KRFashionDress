@@ -8,8 +8,11 @@ import Codigo.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -18,6 +21,11 @@ import javax.swing.table.DefaultTableModel;
 public class ListaClientes extends javax.swing.JFrame {
     Conexion cc=new Conexion();
     Connection con= cc.conexion();
+    DefaultTableModel table_clientes = new DefaultTableModel();
+    TableRowSorter<TableModel> trs;
+    ResultSet rs;
+    String[] Titulos = {"ID", "NOMBRE", "CALLE Y NUMERO", "COLONIA", "FECHA DE NACIMIENTO", "TELEFONO(S)", "CORREO(S)"};
+    String[][] M_Clientes;
     /**
      * Creates new form ListaClientes
      */
@@ -39,8 +47,14 @@ public class ListaClientes extends javax.swing.JFrame {
     public void llenarTabla(){
         DefaultTableModel modelo = new DefaultTableModel();
         ResultSet res = null;
+        int contador = 0;
         try {
+            Statement st_cont = con.createStatement();
+            ResultSet rs_cont = st_cont.executeQuery("SELECT COUNT(*) FROM Clientes");
             String mostrarClientesSQL = "call mostrarClientes()";
+            if(rs_cont.next()){
+                contador = rs_cont.getInt(1);
+            }
             PreparedStatement psMostrarClientes = con.prepareStatement(mostrarClientesSQL);
             res = psMostrarClientes.executeQuery();
             modelo.setColumnIdentifiers(new Object[]{"Nombres","Apellidos", "Calle y Numero", "Colonia", "Teléfono", "Correo"});
@@ -52,7 +66,7 @@ public class ListaClientes extends javax.swing.JFrame {
             while (res.next()){
                 modelo.addRow(new Object[]{res.getString("nombreCli"), res.getString("apellidosCli"), res.getString("calleNumeroCli"), res.getString("colonia"), res.getString("Telefono(s)"), res.getString("Correo(s)")});
             }
-            tblClientes.setModel(modelo);
+            tableClientes.setModel(modelo);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
         }
@@ -77,12 +91,12 @@ public class ListaClientes extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblClientes = new javax.swing.JTable();
+        tableClientes = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        txtfBuscarPor = new javax.swing.JTextField();
+        txfBusqueda = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        cmbBuscarPor = new javax.swing.JComboBox();
 
         btnSalir.setText("SALIR");
 
@@ -139,7 +153,7 @@ public class ListaClientes extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        tblClientes.setModel(new javax.swing.table.DefaultTableModel(
+        tableClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -150,7 +164,7 @@ public class ListaClientes extends javax.swing.JFrame {
                 "Nombre", "Apellidos", "Num. Teléfonico", "Fecha de Nacimiento", "Calle y Numero", "Colonia"
             }
         ));
-        jScrollPane1.setViewportView(tblClientes);
+        jScrollPane1.setViewportView(tableClientes);
 
         jButton1.setBackground(new java.awt.Color(240, 0, 0));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -187,20 +201,26 @@ public class ListaClientes extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
-        txtfBuscarPor.addActionListener(new java.awt.event.ActionListener() {
+        txfBusqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfBuscarPorActionPerformed(evt);
+                txfBusquedaActionPerformed(evt);
+            }
+        });
+        txfBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txfBusquedaKeyReleased(evt);
             }
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel3.setText("Buscar por: ");
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox1.setToolTipText("");
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        cmbBuscarPor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cmbBuscarPor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nombre", "Telefono" }));
+        cmbBuscarPor.setToolTipText("");
+        cmbBuscarPor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cmbBuscarPorActionPerformed(evt);
             }
         });
 
@@ -212,9 +232,9 @@ public class ListaClientes extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
-                .addComponent(txtfBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txfBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(64, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -222,9 +242,9 @@ public class ListaClientes extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(txtfBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txfBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
@@ -277,13 +297,47 @@ public class ListaClientes extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void txtfBuscarPorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfBuscarPorActionPerformed
+    private void txfBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfBusquedaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtfBuscarPorActionPerformed
+    }//GEN-LAST:event_txfBusquedaActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void cmbBuscarPorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBuscarPorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_cmbBuscarPorActionPerformed
+
+    private void txfBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfBusquedaKeyReleased
+        // TODO add your handling code here:
+        String aux = "" + txfBusqueda.getText();
+        String busquedaPor = cmbBuscarPor.getSelectedItem().toString();
+        int valor = 0;
+        int cont = 0;
+        DefaultTableModel modelo = new DefaultTableModel();
+        ResultSet res = null;
+        try {
+            Statement st_cont = con.createStatement();
+            ResultSet rs = st_cont.executeQuery("call contadorClientes(" + busquedaPor + "," + aux +")");
+            if(rs.next()){
+                valor = rs.getInt(1);
+            }
+            M_Clientes = new String[valor][7];
+            rs = st_cont.executeQuery("call buscarCliente(" + busquedaPor + "," + aux +")");
+            while(rs.next()){
+                M_Clientes[cont][0] = rs.getString("nombreCli");
+                M_Clientes[cont][1] = rs.getString("apellidoCli");
+                M_Clientes[cont][2] = rs.getString("calleNumCli");
+                M_Clientes[cont][3] = rs.getString("colonia");
+                M_Clientes[cont][4] = rs.getString("fechaNacCli");
+                M_Clientes[cont][5] = rs.getString("Telefonos(s)");
+                M_Clientes[cont][6] = rs.getString("Correos(s)");
+                cont++;
+            }
+            table_clientes = new DefaultTableModel(M_Clientes, Titulos);
+            tableClientes.setModel(table_clientes);
+            tableClientes.setRowSorter(trs);
+        }catch (Exception e){
+            
+        }
+    }//GEN-LAST:event_txfBusquedaKeyReleased
 
     /**
      * @param args the command line arguments
@@ -322,8 +376,8 @@ public class ListaClientes extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ListaClientes;
     private javax.swing.JButton btnSalir;
+    public static javax.swing.JComboBox cmbBuscarPor;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -333,8 +387,8 @@ public class ListaClientes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jspTablaClientes;
-    private javax.swing.JTable tblClientes;
+    public static javax.swing.JTable tableClientes;
     private javax.swing.JTable tblListaClientes;
-    private javax.swing.JTextField txtfBuscarPor;
+    public static javax.swing.JTextField txfBusqueda;
     // End of variables declaration//GEN-END:variables
 }
