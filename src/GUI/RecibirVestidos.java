@@ -79,7 +79,7 @@ public class RecibirVestidos extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        tblCatalogo.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        tblCatalogo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         tblCatalogo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -99,6 +99,7 @@ public class RecibirVestidos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblCatalogo.setRowHeight(24);
         jScrollPane3.setViewportView(tblCatalogo);
 
         jPanel3.setBackground(new java.awt.Color(164, 55, 123));

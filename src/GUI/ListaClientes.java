@@ -163,6 +163,7 @@ public class ListaClientes extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
+        tblClientes.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -174,6 +175,7 @@ public class ListaClientes extends javax.swing.JFrame {
                 "Nombre", "Apellidos", "Num. Teléfonico", "Fecha de Nacimiento", "Calle y Numero", "Colonia"
             }
         ));
+        tblClientes.setRowHeight(24);
         jScrollPane1.setViewportView(tblClientes);
 
         jButton1.setBackground(new java.awt.Color(240, 0, 0));
@@ -343,7 +345,7 @@ public class ListaClientes extends javax.swing.JFrame {
             while (res.next()){
                 modelo.addRow(new Object[]{res.getString("nombreCli"), res.getString("apellidosCli"), res.getString("calleNumeroCli"), res.getString("colonia"), res.getString("Telefono(s)"), res.getString("Correo(s)")});
             }
-            tableClientes.setModel(modelo);
+            tblClientes.setModel(modelo);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
         }

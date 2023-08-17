@@ -420,6 +420,7 @@ public class RegistroClientes extends javax.swing.JFrame {
             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        tblClientes.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -431,6 +432,7 @@ public class RegistroClientes extends javax.swing.JFrame {
                 "Nombre(s)", "Apellidos", "Calle y numero", "Colonia", "Fecha de Nacimiento", "Telefono", "Correo"
             }
         ));
+        tblClientes.setRowHeight(24);
         tblClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblClientesMouseClicked(evt);
