@@ -242,7 +242,7 @@ public class TerminarRenta extends javax.swing.JFrame {
             PreparedStatement ppst;
             try {
                 ppst = con.prepareStatement(SQL);
-                if(getIdVestido(tblCatalogo.getValueAt(filaSeleccionada, 0).toString())!=-1){
+                if(Integer.parseInt(tblCatalogo.getValueAt(filaSeleccionada, 0).toString())!=-1){
                         ppst.setInt(1, Integer.parseInt(tblCatalogo.getValueAt(filaSeleccionada, 0).toString()));
                         ppst.executeQuery();
                         llenarTabla();
