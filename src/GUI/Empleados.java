@@ -4,6 +4,8 @@
  */
 package GUI;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author Adrián Ortiz
@@ -15,6 +17,7 @@ public class Empleados extends javax.swing.JFrame {
      */
     public Empleados() {
         initComponents();
+        fullscreen();
     }
     private int privileges;
 
@@ -26,6 +29,13 @@ public class Empleados extends javax.swing.JFrame {
         this.privileges = privileges;
     }
 
+    public void fullscreen(){
+        super.dispose();
+        super.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        super.setUndecorated(!super.isUndecorated());
+        super.setVisible(true);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

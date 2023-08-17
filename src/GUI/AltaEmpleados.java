@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,16 +25,21 @@ import javax.swing.JOptionPane;
  */
 public class AltaEmpleados extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AltaEmpleados
-     */
+    Conexion cc = new Conexion();
+    Connection con = cc.conexion();
+    
     public AltaEmpleados() {
         initComponents();
+        fullscreen();
         llenarColonias();
     }
     
-    Conexion cc = new Conexion();
-    Connection con = cc.conexion();
+    public void fullscreen(){
+        super.dispose();
+        super.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        super.setUndecorated(!super.isUndecorated());
+        super.setVisible(true);
+    }
     
     private int privileges;
 
@@ -587,7 +593,7 @@ public class AltaEmpleados extends javax.swing.JFrame {
                 ppst.setString(3, tfCalleyNum.getText());
                 try {
                     String idColoniaSQL="call buscarIdColonia(?);";
-                    PreparedStatement stmt=con.prepareStatement(idColoniaSQL);
+                    PreparedStatement stmt = con.prepareStatement(idColoniaSQL);
                     ResultSet rs;
                     stmt.setString(1, cmbColonia.getSelectedItem().toString());
                     rs = stmt.executeQuery();

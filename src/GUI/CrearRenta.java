@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,6 +26,7 @@ public class CrearRenta extends javax.swing.JFrame {
      */
     public CrearRenta() {
         initComponents();
+        fullscreen();
         llenarTabla();
     }
     private float total;
@@ -76,6 +78,13 @@ public class CrearRenta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
         }
         return -1;
+    }
+    
+    public void fullscreen(){
+        super.dispose();
+        super.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        super.setUndecorated(!super.isUndecorated());
+        super.setVisible(true);
     }
     
     public void llenarTabla(){

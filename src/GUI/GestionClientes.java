@@ -4,6 +4,8 @@
  */
 package GUI;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author Adrián Ortiz
@@ -15,6 +17,7 @@ public class GestionClientes extends javax.swing.JFrame {
      */
     public GestionClientes() {
         initComponents();
+        fullscreen();
     }
     
     private int privileges;
@@ -25,6 +28,13 @@ public class GestionClientes extends javax.swing.JFrame {
 
     public void setPrivileges(int privileges) {
         this.privileges = privileges;
+    }
+    
+    public void fullscreen(){
+        super.dispose();
+        super.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        super.setUndecorated(!super.isUndecorated());
+        super.setVisible(true);
     }
 
     /**

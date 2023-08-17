@@ -8,6 +8,7 @@ import Codigo.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,7 +24,15 @@ public class ListaEmpleados extends javax.swing.JFrame {
      */
     public ListaEmpleados() {
         initComponents();
+        fullscreen();
         llenarTabla();
+    }
+    
+    public void fullscreen(){
+        super.dispose();
+        super.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        super.setUndecorated(!super.isUndecorated());
+        super.setVisible(true);
     }
     
     public void llenarTabla(){
@@ -33,13 +42,13 @@ public class ListaEmpleados extends javax.swing.JFrame {
             String SQL="call mostrarEmpleados()";
             PreparedStatement pst= con.prepareStatement(SQL);
             res= pst.executeQuery();
-            modelo.setColumnIdentifiers(new Object[]{"Nombres","Apellidos", "Calle y Numero", "Colonia", "NSS", "RFC","Fecha del Contrato","Telefono","Correo"});
+            modelo.setColumnIdentifiers(new Object[]{"Nombres","Apellidos", "Calle y Numero", "Colonia", "NSS", "RFC", "Fecha del Contrato", "Telefono", "Correo"});
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
         }
         try {
             while (res.next()){
-                modelo.addRow(new Object[]{res.getString("nombreEmp"), res.getString("apellidosEmp"), res.getString("calleNumeroEmp"), res.getString("Colonia"), res.getString("NSSEmp"), res.getString("RFCEmp"), res.getString("fechaContrato"), res.getString("telefonoEmp"), res.getString("correoEmp")});
+                modelo.addRow(new Object[]{res.getString("nombreEmp"), res.getString("apellidosEmp"), res.getString("calleNumeroEmp"), res.getString("Colonia"), res.getString("NSSEmp"), res.getString("RFCEmp"), res.getString("fechaContrato"), res.getString("Telefono(s)"), res.getString("Correo(s)")});
             }
             tblEmpleados.setModel(modelo);
         } catch (Exception e) {
@@ -76,9 +85,10 @@ public class ListaEmpleados extends javax.swing.JFrame {
         tblEmpleados = new javax.swing.JTable();
         btnSalir = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        txtfBuscarPor = new javax.swing.JTextField();
+        tfBuscarPor = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        cmbBuscarPor = new javax.swing.JComboBox();
+        btnBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -197,20 +207,30 @@ public class ListaEmpleados extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        txtfBuscarPor.addActionListener(new java.awt.event.ActionListener() {
+        tfBuscarPor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfBuscarPorActionPerformed(evt);
+                tfBuscarPorActionPerformed(evt);
             }
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel3.setText("Buscar por: ");
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox1.setToolTipText("");
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        cmbBuscarPor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cmbBuscarPor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nombre", "Telefono" }));
+        cmbBuscarPor.setToolTipText("");
+        cmbBuscarPor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cmbBuscarPorActionPerformed(evt);
+            }
+        });
+
+        btnBuscar.setBackground(new java.awt.Color(164, 55, 123));
+        btnBuscar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnBuscar.setText("BUSCAR");
+        btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBuscarMouseClicked(evt);
             }
         });
 
@@ -222,20 +242,24 @@ public class ListaEmpleados extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addComponent(txtfBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addComponent(cmbBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(tfBuscarPor, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtfBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(tfBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(cmbBuscarPor, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -276,13 +300,13 @@ public class ListaEmpleados extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtfBuscarPorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfBuscarPorActionPerformed
+    private void tfBuscarPorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBuscarPorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtfBuscarPorActionPerformed
+    }//GEN-LAST:event_tfBuscarPorActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void cmbBuscarPorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBuscarPorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_cmbBuscarPorActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         GestionEmpleados emple = new GestionEmpleados();
@@ -292,6 +316,28 @@ public class ListaEmpleados extends javax.swing.JFrame {
         emple.setPrivileges(privileges);
         this.setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
+        DefaultTableModel modelo = new DefaultTableModel();
+        ResultSet res = null;
+        try {
+            String SQL="call buscarEmpleado(?,?)";
+            PreparedStatement pst = con.prepareStatement(SQL);
+            pst.setString(1, cmbBuscarPor.getSelectedItem().toString());
+            pst.setString(2, tfBuscarPor.getText());
+            res = pst.executeQuery();
+            modelo.setColumnIdentifiers(new Object[]{"Nombres","Apellidos", "Calle y Numero", "Colonia", "NSS", "RFC","Fecha del Contrato","Telefono","Correo"});
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
+        }
+        try {
+            while (res.next()){
+                modelo.addRow(new Object[]{res.getString("nombreEmp"), res.getString("apellidosEmp"), res.getString("calleNumeroEmp"), res.getString("Colonia"), res.getString("NSSEmp"), res.getString("RFCEmp"), res.getString("fechaContrato"), res.getString("Telefono(s)"), res.getString("Correo(s)")});
+            }
+            tblEmpleados.setModel(modelo);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btnBuscarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -328,8 +374,9 @@ public class ListaEmpleados extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox cmbBuscarPor;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -341,6 +388,6 @@ public class ListaEmpleados extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblEmpleados;
-    private javax.swing.JTextField txtfBuscarPor;
+    private javax.swing.JTextField tfBuscarPor;
     // End of variables declaration//GEN-END:variables
 }

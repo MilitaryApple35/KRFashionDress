@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import sun.misc.Compare;
@@ -34,9 +35,18 @@ public class RegistroClientes extends javax.swing.JFrame {
      */
     public RegistroClientes() {
         initComponents();
+        fullscreen();
         llenarColonias();
         llenarTabla();
     }
+    
+    public void fullscreen(){
+        super.dispose();
+        super.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        super.setUndecorated(!super.isUndecorated());
+        super.setVisible(true);
+    }
+    
     private int idCliente;
     private int seleccionado=0;
     private int privileges;

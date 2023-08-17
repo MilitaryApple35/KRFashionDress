@@ -53,7 +53,7 @@ public class GestionReportes extends javax.swing.JFrame {
         btnRentasGeneral = new javax.swing.JButton();
         btnRentasMes = new javax.swing.JButton();
         btnRentasEmpleado = new javax.swing.JButton();
-        btnRentasMes1 = new javax.swing.JButton();
+        btnVestidoMasRentado = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -96,13 +96,13 @@ public class GestionReportes extends javax.swing.JFrame {
             }
         });
 
-        btnRentasMes1.setBackground(new java.awt.Color(164, 55, 123));
-        btnRentasMes1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnRentasMes1.setForeground(new java.awt.Color(255, 255, 255));
-        btnRentasMes1.setText("Reporte de vestido mas rentado");
-        btnRentasMes1.addActionListener(new java.awt.event.ActionListener() {
+        btnVestidoMasRentado.setBackground(new java.awt.Color(164, 55, 123));
+        btnVestidoMasRentado.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnVestidoMasRentado.setForeground(new java.awt.Color(255, 255, 255));
+        btnVestidoMasRentado.setText("Reporte de vestido mas rentado");
+        btnVestidoMasRentado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRentasMes1ActionPerformed(evt);
+                btnVestidoMasRentadoActionPerformed(evt);
             }
         });
 
@@ -116,7 +116,7 @@ public class GestionReportes extends javax.swing.JFrame {
                     .addComponent(btnRentasEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
                     .addComponent(btnRentasGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnRentasMes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRentasMes1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(btnVestidoMasRentado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,7 +128,7 @@ public class GestionReportes extends javax.swing.JFrame {
                 .addGap(65, 65, 65)
                 .addComponent(btnRentasMes, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                .addComponent(btnRentasMes1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnVestidoMasRentado, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40))
         );
 
@@ -169,22 +169,22 @@ public class GestionReportes extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(695, 695, 695))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(695, 695, 695))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(755, 755, 755))))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(783, 783, 783)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(25, 25, 25)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,9 +194,9 @@ public class GestionReportes extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73))
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -225,11 +225,21 @@ public class GestionReportes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRentasGeneralActionPerformed
 
     private void btnRentasMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRentasMesActionPerformed
-        
+        ReportesMes reporteMes = new ReportesMes();
+        reporteMes.setLayout(null);
+        reporteMes.setLocationRelativeTo(null);
+        reporteMes.setVisible(true);
+        reporteMes.setPrivileges(privileges);
+        this.setVisible(false);
     }//GEN-LAST:event_btnRentasMesActionPerformed
 
     private void btnRentasEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRentasEmpleadoActionPerformed
-        
+        ReportesEmpleado reporteEmpleado = new ReportesEmpleado();
+        reporteEmpleado.setLayout(null);
+        reporteEmpleado.setLocationRelativeTo(null);
+        reporteEmpleado.setVisible(true);
+        reporteEmpleado.setPrivileges(privileges);
+        this.setVisible(false);
     }//GEN-LAST:event_btnRentasEmpleadoActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -251,13 +261,15 @@ public class GestionReportes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void btnRentasMes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRentasMes1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRentasMes1ActionPerformed
+    private void btnVestidoMasRentadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVestidoMasRentadoActionPerformed
+        ReportesVestidoMasRentado vesMasRen = new ReportesVestidoMasRentado();
+        vesMasRen.setLayout(null);
+        vesMasRen.setLocationRelativeTo(null);
+        vesMasRen.setVisible(true);
+        vesMasRen.setPrivileges(privileges);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnVestidoMasRentadoActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -293,8 +305,8 @@ public class GestionReportes extends javax.swing.JFrame {
     private javax.swing.JButton btnRentasEmpleado;
     private javax.swing.JButton btnRentasGeneral;
     private javax.swing.JButton btnRentasMes;
-    private javax.swing.JButton btnRentasMes1;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JButton btnVestidoMasRentado;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
