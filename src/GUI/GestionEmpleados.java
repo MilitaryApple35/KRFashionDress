@@ -20,6 +20,24 @@ public class GestionEmpleados extends javax.swing.JFrame {
         fullscreen();
     }
     private int privileges;
+    private String user;
+    private String password;
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public int getPrivileges() {
         return privileges;
@@ -210,6 +228,8 @@ public class GestionEmpleados extends javax.swing.JFrame {
             emp.setLocationRelativeTo(null);
             emp.setVisible(true);
             emp.setPrivileges(privileges);
+            emp.setUser(user);
+            emp.setPassword(password);
             this.setVisible(false);
         }
         else if(getPrivileges()==2){
@@ -218,6 +238,8 @@ public class GestionEmpleados extends javax.swing.JFrame {
             ger.setLocationRelativeTo(null);
             ger.setVisible(true);
             ger.setPrivileges(privileges);
+            ger.setUser(user);
+            ger.setPassword(password);
             this.setVisible(false);
         }
     }//GEN-LAST:event_btnSalirActionPerformed
@@ -228,6 +250,8 @@ public class GestionEmpleados extends javax.swing.JFrame {
         altemp.setLocationRelativeTo(null);
         altemp.setVisible(true);
         altemp.setPrivileges(privileges);
+        altemp.setUser(user);
+        altemp.setPassword(password);
         this.setVisible(false);
     }//GEN-LAST:event_btnAltaEmpleadosActionPerformed
 
@@ -237,6 +261,8 @@ public class GestionEmpleados extends javax.swing.JFrame {
         bajemp.setLocationRelativeTo(null);
         bajemp.setVisible(true);
         bajemp.setPrivileges(privileges);
+        bajemp.setUser(user);
+        bajemp.setPassword(password);
         this.setVisible(false);
     }//GEN-LAST:event_btnBajaEmpleadosActionPerformed
 
@@ -246,6 +272,8 @@ public class GestionEmpleados extends javax.swing.JFrame {
         lisemp.setLocationRelativeTo(null);
         lisemp.setVisible(true);
         lisemp.setPrivileges(privileges);
+        lisemp.setUser(user);
+        lisemp.setPassword(password);
         this.setVisible(false);
     }//GEN-LAST:event_btnListaEmpleadosActionPerformed
 

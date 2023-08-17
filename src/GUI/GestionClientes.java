@@ -21,6 +21,24 @@ public class GestionClientes extends javax.swing.JFrame {
     }
     
     private int privileges;
+    private String user;
+    private String password;
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public int getPrivileges() {
         return privileges;
@@ -171,6 +189,8 @@ public class GestionClientes extends javax.swing.JFrame {
         altClien.setLocationRelativeTo(null);
         altClien.setVisible(true);
         altClien.setPrivileges(privileges);
+        altClien.setUser(user);
+        altClien.setPassword(password);
         this.setVisible(false);
     }//GEN-LAST:event_btnAltaActionPerformed
 
@@ -181,6 +201,8 @@ public class GestionClientes extends javax.swing.JFrame {
             emp.setLocationRelativeTo(null);
             emp.setVisible(true);
             emp.setPrivileges(privileges);
+            emp.setUser(user);
+            emp.setPassword(password);
             this.setVisible(false);
         }
         else if(getPrivileges()==2){
@@ -189,6 +211,8 @@ public class GestionClientes extends javax.swing.JFrame {
             ger.setLocationRelativeTo(null);
             ger.setVisible(true);
             ger.setPrivileges(privileges);
+            ger.setUser(user);
+            ger.setPassword(password);
             this.setVisible(false);
         }
     }//GEN-LAST:event_btnSalirActionPerformed

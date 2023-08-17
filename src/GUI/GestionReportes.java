@@ -30,6 +30,24 @@ public class GestionReportes extends javax.swing.JFrame {
     }
     
     private int privileges;
+    private String user;
+    private String password;
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public int getPrivileges() {
         return privileges;
@@ -221,6 +239,8 @@ public class GestionReportes extends javax.swing.JFrame {
         reportes.setLocationRelativeTo(null);
         reportes.setVisible(true);
         reportes.setPrivileges(privileges);
+        reportes.setUser(user);
+        reportes.setPassword(password);
         this.setVisible(false);
     }//GEN-LAST:event_btnRentasGeneralActionPerformed
 
@@ -230,6 +250,8 @@ public class GestionReportes extends javax.swing.JFrame {
         reporteMes.setLocationRelativeTo(null);
         reporteMes.setVisible(true);
         reporteMes.setPrivileges(privileges);
+        reporteMes.setUser(user);
+        reporteMes.setPassword(password);
         this.setVisible(false);
     }//GEN-LAST:event_btnRentasMesActionPerformed
 
@@ -239,6 +261,8 @@ public class GestionReportes extends javax.swing.JFrame {
         reporteEmpleado.setLocationRelativeTo(null);
         reporteEmpleado.setVisible(true);
         reporteEmpleado.setPrivileges(privileges);
+        reporteEmpleado.setUser(user);
+        reporteEmpleado.setPassword(password);
         this.setVisible(false);
     }//GEN-LAST:event_btnRentasEmpleadoActionPerformed
 
@@ -249,6 +273,8 @@ public class GestionReportes extends javax.swing.JFrame {
             emp.setLocationRelativeTo(null);
             emp.setVisible(true);
             emp.setPrivileges(privileges);
+            emp.setUser(user);
+            emp.setPassword(password);
             this.setVisible(false);
         }
         else if(getPrivileges()==2){
@@ -257,6 +283,8 @@ public class GestionReportes extends javax.swing.JFrame {
             ger.setLocationRelativeTo(null);
             ger.setVisible(true);
             ger.setPrivileges(privileges);
+            ger.setUser(user);
+            ger.setPassword(password);
             this.setVisible(false);
         }
     }//GEN-LAST:event_btnSalirActionPerformed
@@ -267,6 +295,8 @@ public class GestionReportes extends javax.swing.JFrame {
         vesMasRen.setLocationRelativeTo(null);
         vesMasRen.setVisible(true);
         vesMasRen.setPrivileges(privileges);
+        vesMasRen.setUser(user);
+        vesMasRen.setPassword(password);
         this.setVisible(false);
     }//GEN-LAST:event_btnVestidoMasRentadoActionPerformed
 

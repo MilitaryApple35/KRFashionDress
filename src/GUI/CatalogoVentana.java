@@ -36,6 +36,24 @@ public class CatalogoVentana extends javax.swing.JFrame {
     }
     
     private int privileges;
+    private String user;
+    private String password;
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public void llenarTabla(){
         DefaultTableModel modelo = new DefaultTableModel();
@@ -257,6 +275,8 @@ public class CatalogoVentana extends javax.swing.JFrame {
         altves.setLocationRelativeTo(null);
         altves.setPrivileges(privileges);
         altves.setVisible(true);
+        altves.setUser(user);
+        altves.setPassword(password);
         this.setVisible(false);
     }//GEN-LAST:event_btnAltaVestidosActionPerformed
 
@@ -270,6 +290,7 @@ public class CatalogoVentana extends javax.swing.JFrame {
             emp.setLayout(null);
             emp.setLocationRelativeTo(null);
             emp.setVisible(true);
+            emp.setPrivileges(privileges);
             this.setVisible(false);
         }
         else if(getPrivileges()==2){

@@ -28,6 +28,24 @@ public class BajaEmpleados extends javax.swing.JFrame {
     Connection con= cc.conexion();
     
     private int privileges;
+    private String user;
+    private String password;
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public int getPrivileges() {
         return privileges;
@@ -209,6 +227,8 @@ public class BajaEmpleados extends javax.swing.JFrame {
         emple.setLocationRelativeTo(null);
         emple.setVisible(true);
         emple.setPrivileges(privileges);
+        emple.setUser(user);
+        emple.setPassword(password);
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -228,6 +248,9 @@ public class BajaEmpleados extends javax.swing.JFrame {
             emp.setLayout(null);
             emp.setLocationRelativeTo(null);
             emp.setVisible(true);
+            emp.setPrivileges(privileges);
+            emp.setUser(user);
+            emp.setPassword(password);
             this.setVisible(false);
         }
         else if(getPrivileges()==2){
@@ -236,8 +259,10 @@ public class BajaEmpleados extends javax.swing.JFrame {
             ger.setLocationRelativeTo(null);
             ger.setVisible(true);
             ger.setPrivileges(privileges);
+            ger.setUser(user);
+            ger.setPassword(password);
             this.setVisible(false);
-    }
+        }
     }//GEN-LAST:event_btnBajaActionPerformed
 
     /**

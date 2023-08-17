@@ -34,6 +34,24 @@ public class ReportesMes extends javax.swing.JFrame {
     }
 
     private int privileges;
+    private String user;
+    private String password;
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public int getPrivileges() {
         return privileges;
@@ -254,6 +272,8 @@ public class ReportesMes extends javax.swing.JFrame {
         gesReportes.setLocationRelativeTo(null);
         gesReportes.setVisible(true);
         gesReportes.setPrivileges(privileges);
+        gesReportes.setUser(user);
+        gesReportes.setPassword(password);
         this.setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
 
