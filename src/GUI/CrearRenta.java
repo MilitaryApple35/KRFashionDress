@@ -415,7 +415,7 @@ public class CrearRenta extends javax.swing.JFrame {
         lbListaVestidos.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbListaVestidos.setText("Lista Vestidos");
 
-        tblListaVestidos.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        tblListaVestidos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tblListaVestidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
