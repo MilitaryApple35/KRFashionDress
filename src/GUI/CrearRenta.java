@@ -604,6 +604,7 @@ public class CrearRenta extends javax.swing.JFrame {
                 ppst.setInt(2, getIdEmpleado());
                 Date fecha = new Date();
                 String fechaRenta = Integer.toString(fecha.getYear()).concat("-".concat(Integer.toString(fecha.getMonth()).concat("-".concat(Integer.toString(fecha.getDay())))));
+                JOptionPane.showMessageDialog(null, fechaRenta);
                 ppst.setString(3, fechaRenta);
                 ppst.setString(4, fechaEntrega);
                 ppst.setString(5, fechaRegreso);
@@ -615,15 +616,20 @@ public class CrearRenta extends javax.swing.JFrame {
                 }
                 ppst.setInt(7, 0);
                 int y=1;
-                String anSQL="call altaDetallesRenta(?,?)";
-                PreparedStatement pst= con.prepareStatement(anSQL);
-                while(y<tblListaActual.getRowCount()){
-                    if(getIdVestido(tblListaActual.getValueAt(y, 0).toString())==-1){
-                        int a = 1/0;
+                try {
+                    String anSQL="call altaDetallesRenta(?,?)";
+                    PreparedStatement pst= con.prepareStatement(anSQL);
+                    while(y<tblListaActual.getRowCount()){
+                        if(getIdVestido(tblListaActual.getValueAt(y, 0).toString())==-1){
+                            int a = 1/0;
+                        }
+                        pst.setInt(1,getIdVestido(tblListaActual.getValueAt(y, 0).toString()));
+                        pst.setString(2, tblListaAnotaciones.getValueAt(y, 0).toString());
+                        y++;
                     }
-                    pst.setInt(1,getIdVestido(tblListaActual.getValueAt(y, 0).toString()));
-                    pst.setString(2, tblListaAnotaciones.getValueAt(y, 0).toString());
-                    y++;
+                    
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Error en la alta " + e.getMessage());
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error en la alta " + e.getMessage());
